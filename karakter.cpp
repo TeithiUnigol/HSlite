@@ -66,3 +66,8 @@ void Karakter::halal()
     this->maxHp = 0;
 }
 
+
+double Karakter::elet(){
+    return hp;
+    
+}

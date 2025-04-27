@@ -37,7 +37,7 @@ public:
     /// A minion (hacsak nem halott) vissza is tud támadni.
     /// @param sebzes A minionra kifejtett sebzés mértéke
     /// @param tamado A karakter, aki megtámadta az adott miniont.
-    void sebzodik(double sebzes,Karakter* tamado);
+    void sebzodik(double sebzes,Karakter* tamado) override;
     /// @brief Karakter megtámadása
     ///Megtámadja a kiválasztott karaktert
     /// @param celpont A célpont
@@ -54,6 +54,8 @@ public:
     /// @brief A minion reaktiválása
     /// A minion minden újraaktiválásnál elveszíti a védelmét is.
     void reaktiv();
+
+    double minionVedelem();
 };
 
 #endif

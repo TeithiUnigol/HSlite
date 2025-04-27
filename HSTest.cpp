@@ -9,7 +9,7 @@
 
 int main(){
     GTINIT(std::cout);
-    
+    std::cout << "\n=== Kartya tesztek ===\n" << std::endl;
     Kartya kartya("Tuzgolyo",3,'f');
     TEST(Kartya,Konstruktorok){
         std::stringstream strs;
@@ -30,6 +30,7 @@ int main(){
         m.ikonKiir(strs3);
         EXPECT_STREQ("0 ", strs3.str().c_str());
     }ENDM
+    std::cout << "\n=== Karakter tesztek ===\n" << std::endl;
     TEST(Karakter,Kijatszas){
         Karakter karakter("kobold",2,'k',10,10,true);
         int mana = 3;
@@ -72,6 +73,33 @@ int main(){
         EXPECT_FALSE(m.getAktiv());
         m.reaktiv();
         EXPECT_TRUE(m.getAktiv());
+    }ENDM
+    std::cout << "\n=== Minion tesztek ===\n" << std::endl;
+    TEST(Minion,visszatamadas){
+        Karakter karakterK("kobold",2,'k',10,10,true);
+        Karakter karakterL("lovag",4,'l',20,20,true);
+        Minion kobold(karakterK,3);
+        Minion lovag(karakterL,20);
+        kobold.tamadas(&lovag);
+        std::stringstream strs;
+        kobold.nevKiir(strs);
+        EXPECT_STREQ("", strs.str().c_str());
+        
+    }ENDM
+    TEST(Minion,vedelem){
+        Karakter karakterK("kobold",2,'k',10,10,true);
+        Karakter karakterL("lovag",4,'l',20,20,true);
+        Minion kobold(karakterK,3);
+        Minion lovag(karakterL,20);
+        kobold.vedelemValt(20);
+        EXPECT_EQ(20,kobold.minionVedelem());
+        kobold.tamadas(&lovag);
+        EXPECT_EQ(0,kobold.minionVedelem());
+        std::stringstream strs;
+        kobold.nevKiir(strs);
+        EXPECT_STREQ("kobold", strs.str().c_str());
+
+        
     }ENDM
     return 0;
 }

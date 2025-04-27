@@ -38,7 +38,7 @@ public:
   /// A karakterre meghatározott mértékű sebzést okoz. A minion védelemmel csökkentheti a sebződést, de a boss nem.
   /// @param sebzes a sebzés mértéke
   /// @param tamado a támadó
-  virtual void sebzodik(double sebzes, Karakter *tamado);
+  virtual void sebzodik(double sebzes,Karakter* tamado);
   /// @brief Védelem változtatása
   /// A védelem maximális értéke nincsen korlátozva, de negatívba nem mehet
   /// @param d a védelem mértékét megváltoztatásának mértéke
@@ -60,5 +60,6 @@ public:
   /// Ha elfogyott az élete az adott karakternek, üres karakterré válik.
   void halal();
 
+  double elet();
 };
 #endif
