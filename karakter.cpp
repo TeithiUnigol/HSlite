@@ -2,7 +2,7 @@
 
 Karakter::Karakter() : Kartya(), hp(0), maxHp(0), aktiv(false) {}
 
-Karakter::Karakter(Karakter &v) {}
+Karakter::Karakter(Karakter &v):hp(v.hp),maxHp(v.maxHp),aktiv(v.aktiv) {}
 
 Karakter::Karakter(const char *nev, int mana, char ikon, double hp, double maxhp, bool aktiv)
     : Kartya(nev, mana, ikon), hp(maxhp), maxHp(maxhp), aktiv(true) {}

@@ -5,6 +5,7 @@
 #include "kartya.h"
 #include "karakter.h"
 #include "minion.h"
+#include "boss.h"
 #include <iostream>
 
 int main(){
@@ -86,20 +87,43 @@ int main(){
         EXPECT_STREQ("", strs.str().c_str());
         
     }ENDM
-    TEST(Minion,vedelem){
+    TEST(Minion,vedelem&vedelemValt){
         Karakter karakterK("kobold",2,'k',10,10,true);
         Karakter karakterL("lovag",4,'l',20,20,true);
         Minion kobold(karakterK,3);
         Minion lovag(karakterL,20);
         kobold.vedelemValt(20);
         EXPECT_EQ(20,kobold.minionVedelem());
+        kobold.sebzodik(10,nullptr);
+        EXPECT_EQ(10,kobold.minionVedelem());
+        kobold.vedelemValt(20);
+        lovag.tamadas(&kobold);
+        EXPECT_EQ(10,kobold.minionVedelem());
         kobold.tamadas(&lovag);
         EXPECT_EQ(0,kobold.minionVedelem());
+    }ENDM
+
+    std::cout << "\n=== Boss tesztek ===\n" << std::endl;
+    TEST(Boss,konstruktor){
+        Karakter karakterL("Hos Lovag",0,'L',1,1,true);
+        Boss hosLovag(karakterL,2000);
+        std::stringstream strs;
+        hosLovag.nevKiir(strs);
+        hosLovag.ikonKiir(strs);
+        EXPECT_STREQ("Hos LovagL", strs.str().c_str());
+    }ENDM
+    TEST(Boss,special){
+        Karakter karakterK("kobold",2,'k',10,10,true);
+        Karakter karakterL("Hos Lovag",0,'L',1,1,true);
+        Minion kobold(karakterK,3);
+        Boss hosLovag(karakterL,2000);
+        hosLovag.special(kobold);
         std::stringstream strs;
         kobold.nevKiir(strs);
-        EXPECT_STREQ("kobold", strs.str().c_str());
+        EXPECT_STREQ("", strs.str().c_str());
+        hosLovag.nevKiir(strs);
+        EXPECT_STREQ("Hos Lovag", strs.str().c_str());
 
-        
     }ENDM
     return 0;
 }

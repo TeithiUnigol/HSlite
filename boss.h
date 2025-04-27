@@ -11,21 +11,22 @@
 #ifndef BOSS_H
 #define BOSS_H
 #include "karakter.h"
-#include "varazslat.h"
 
 class Boss:public Karakter{
   double specialSebzes;
 public:
     /// @brief Alap konstruktor
     Boss();
-    /// @brief 
+    /// @brief Boss konstruktora karakter és speciális megadásával
     /// @param karakter 
-    Boss(Karakter& karakter,double special);
+    Boss(Karakter &karakter,double special);
 
     /// @brief Speciális támadás
     /// A megtámadott minion nem tud visszatámadni 
     /// @param k A célpont
     void special(Karakter& k);
+
+    std::string getName(){return this->nev;}
 };
 
 #endif
