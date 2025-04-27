@@ -3,6 +3,8 @@
 
 // #include <time.h>
 
+KartyaTarolo::KartyaTarolo() : tomb(nullptr), kapacitas(0), meret(0) {}
+
 KartyaTarolo::KartyaTarolo(size_t kapacitas) : kapacitas(kapacitas), meret(0)
 {
     tomb = new Kartya *[kapacitas];
@@ -14,8 +16,14 @@ KartyaTarolo::KartyaTarolo(size_t kapacitas) : kapacitas(kapacitas), meret(0)
     // srand(time(0));
 }
 
-KartyaTarolo::KartyaTarolo(const KartyaTarolo&){
-    
+KartyaTarolo::KartyaTarolo(const KartyaTarolo &t) : kapacitas(t.kapacitas), meret(t.meret)
+{
+    tomb = new Kartya *[kapacitas];
+
+    for (size_t i = 0; i < meret; ++i)
+    {
+        tomb[i] = new Kartya(*t.tomb[i]);
+    }
 }
 
 void KartyaTarolo::randomBeszur(Kartya *kartya)
@@ -39,7 +47,7 @@ void KartyaTarolo::randomBeszur(Kartya *kartya)
     ++meret;
 }
 
-void KartyaTarolo::berak(Kartya *kartya,size_t index)
+void KartyaTarolo::berak(Kartya *kartya, size_t index)
 {
     if (meret >= kapacitas)
     {
@@ -53,16 +61,17 @@ Kartya *KartyaTarolo::kihuz(size_t index)
 {
     Kartya *kartya = tomb[index];
     tomb[index] = nullptr;
-    --meret;    
+    --meret;
     return kartya;
 }
 
-size_t KartyaTarolo::getMeret()const
+size_t KartyaTarolo::getMeret() const
 {
     return meret;
 }
 
-size_t KartyaTarolo::getKapacitas()const{
+size_t KartyaTarolo::getKapacitas() const
+{
     return kapacitas;
 }
 Kartya *KartyaTarolo::operator[](size_t index)

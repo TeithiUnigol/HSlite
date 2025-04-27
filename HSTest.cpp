@@ -121,6 +121,7 @@ int main(){
         std::stringstream strs;
         kobold.nevKiir(strs);
         EXPECT_STREQ("", strs.str().c_str());
+        strs.clear();
         hosLovag.nevKiir(strs);
         EXPECT_STREQ("Hos Lovag", strs.str().c_str());
 

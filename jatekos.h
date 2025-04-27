@@ -2,8 +2,13 @@
   *  @brief 
   *
   *  A két játékos adatait tároló osztály.
-  *  Ő felel a 
-  *
+  *  Ő felel a játékosok személyes kártyáiért.
+  *  A játéktáblán két játékos helyezkedik el, szimmetrikusan.
+  *  Minden játékosnak van egy húzópaklija,
+  *  egy minionokat tároló paklija, amiben a lehelyezett minionok vannak.
+  *  A csomag az amiből az osztály felépíti a húzőpaklit.
+  *  Minden körben meghatározott mennyiségű mana áll rendelkezésére a játékosoknak. Ez minden körben egyel nő.
+  * 
   *  @author Albitz Csanád
   *  @date 2025-04-20
 */
@@ -45,6 +50,13 @@ public:
     /// @param csomag 
     /// @param maxMana 
     Jatekos(Boss boss,size_t MinionPakliMeret,size_t kezMeret,KartyaTarolo csomag,int maxMana);
+    /// @brief Játékos másoló konstruktor
+    /// @param j másolandó
+    Jatekos(const Jatekos& j);
+
+    /// @brief Kézben levő kártyák feltöltése a húzópaklibóly
+    void kezfeltolt();
+
     /// @brief Új kör indítása
     /// újra aktiválja a minionokat
     void ujKor();
@@ -56,6 +68,5 @@ public:
     //TODO dolgok, amikkel a kurzor megkapja az infokat
     bool Kijatszas(Kartya* k1,Kartya* k2);
 
-    ~Jatekos();
 };
 #endif

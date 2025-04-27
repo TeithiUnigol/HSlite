@@ -20,6 +20,9 @@ public:
     /// @brief Boss konstruktora karakter és speciális megadásával
     /// @param karakter 
     Boss(Karakter &karakter,double special);
+    /// @brief Boss másoló konstruktor
+    /// @param boss  másolandó
+    Boss(Boss &boss);
 
     /// @brief Speciális támadás
     /// A megtámadott minion nem tud visszatámadni 

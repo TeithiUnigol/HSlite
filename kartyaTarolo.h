@@ -17,12 +17,14 @@ class KartyaTarolo{
     size_t kapacitas;
     size_t meret;
 public:
+    /// @brief Tároló alapkonstruktora
+    KartyaTarolo();
     /// @brief Kártya tároló kapacítás szerinti konstruktora.
     /// @param kapacitas Az a méret amekkorára szükség lesz.
     KartyaTarolo(size_t kapacitas);
     /// @brief Kártyatároló másolókonstruktora
     /// @param  a másolandó tároló referenciája
-    KartyaTarolo(const KartyaTarolo&);
+    KartyaTarolo(const KartyaTarolo& t);
     /// @brief Feltöltés
     ///A kártyapakli összekeveréséért felel.
     /// @param Kartya A behelyezendő kártya
