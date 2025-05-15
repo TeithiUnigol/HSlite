@@ -1,0 +1,115 @@
+\doxysubsection{Kurzor osztályreferencia}
+\hypertarget{class_kurzor}{}\label{class_kurzor}\index{Kurzor@{Kurzor}}
+\doxysubsubsubsection*{Publikus tagfüggvények}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_kurzor_af573cb9ed67bc981e76571bdc759fcd2}\label{class_kurzor_af573cb9ed67bc981e76571bdc759fcd2} 
+{\bfseries Kurzor} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{class_kurzor}{Kurzor} alapkonstruktor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kurzor_aaf76059bd4d3ccece58a459faa94ff93}{Kurzor}} (const \mbox{\hyperlink{class_jatekos}{Jatekos}} \&p1, const \mbox{\hyperlink{class_jatekos}{Jatekos}} \&p2, int jatekos, int fazis)
+\begin{DoxyCompactList}\small\item\em \doxylink{class_kurzor}{Kurzor} konstruktor adattagokkal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kurzor_a308eeb1dca858e81b223f2f110a8560d}{lepes}} (irany ir)
+\begin{DoxyCompactList}\small\item\em Lépés kezelése A feladata vezérelni a fazis1\+Lepes és fazis2\+Lepes függvényt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kurzor_ab012d623097ca291813569e5cd4bef16}{fazis1\+Lepes}} (irany ir)
+\begin{DoxyCompactList}\small\item\em Első fázis mozgás Ekkor történik akártyák kijátszása a kézből. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kurzor_a7e239da07123258fa8ac90b07bb5fbe4}{fazis2\+Lepes}} (irany ir)
+\begin{DoxyCompactList}\small\item\em Második fázis mozgás Ekkor történik a minionokkal illetve a bossal való támadás. \end{DoxyCompactList}\item 
+\Hypertarget{class_kurzor_ab8d80c19b5bc74125b1bd81bf63523a6}\label{class_kurzor_ab8d80c19b5bc74125b1bd81bf63523a6} 
+void {\bfseries kivalaszt} ()
+\begin{DoxyCompactList}\small\item\em Kiválaszt Akkor hívódik meg, amikor a felhasználó arra a kártyára mozgatta a kurzort, amelyiket ki akarja választani. \end{DoxyCompactList}\item 
+\Hypertarget{class_kurzor_a867ac3ecb5a85cdcef10bff6e478cbb7}\label{class_kurzor_a867ac3ecb5a85cdcef10bff6e478cbb7} 
+void {\bfseries kov\+Fazis} ()
+\begin{DoxyCompactList}\small\item\em Következő fázis Akkor hívódik meg, amikor a felhasználó már nem kíván több dolgot csinálni az aktuális fázisban. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_jatekos}{Jatekos}} \& \mbox{\hyperlink{class_kurzor_a2dd1a2431a7b54c4a49ed5b3ed77fce5}{akt\+Jatekos}} ()
+\begin{DoxyCompactList}\small\item\em Aktuális játékos getter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Konstruktorok és destruktorok dokumentációja}
+\Hypertarget{class_kurzor_aaf76059bd4d3ccece58a459faa94ff93}\index{Kurzor@{Kurzor}!Kurzor@{Kurzor}}
+\index{Kurzor@{Kurzor}!Kurzor@{Kurzor}}
+\doxyparagraph{\texorpdfstring{Kurzor()}{Kurzor()}}
+{\footnotesize\ttfamily \label{class_kurzor_aaf76059bd4d3ccece58a459faa94ff93} 
+Kurzor\+::\+Kurzor (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_jatekos}{Jatekos}} \&}]{p1}{, }\item[{const \mbox{\hyperlink{class_jatekos}{Jatekos}} \&}]{p2}{, }\item[{int}]{jatekos}{, }\item[{int}]{fazis}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_kurzor}{Kurzor} konstruktor adattagokkal. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em p1} & egyes számú játékos \\
+\hline
+{\em p2} & kettes számú játékos \\
+\hline
+{\em jatekos} & melyik játékos van éppen körön \\
+\hline
+{\em fazis} & a játékos melyik fázisban van \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsubsection{Tagfüggvények dokumentációja}
+\Hypertarget{class_kurzor_a2dd1a2431a7b54c4a49ed5b3ed77fce5}\index{Kurzor@{Kurzor}!aktJatekos@{aktJatekos}}
+\index{aktJatekos@{aktJatekos}!Kurzor@{Kurzor}}
+\doxyparagraph{\texorpdfstring{aktJatekos()}{aktJatekos()}}
+{\footnotesize\ttfamily \label{class_kurzor_a2dd1a2431a7b54c4a49ed5b3ed77fce5} 
+\mbox{\hyperlink{class_jatekos}{Jatekos}} \& Kurzor\+::akt\+Jatekos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Aktuális játékos getter. 
+
+\begin{DoxyReturn}{Visszatérési érték}
+Aktuális játékos referencia 
+\end{DoxyReturn}
+\Hypertarget{class_kurzor_ab012d623097ca291813569e5cd4bef16}\index{Kurzor@{Kurzor}!fazis1Lepes@{fazis1Lepes}}
+\index{fazis1Lepes@{fazis1Lepes}!Kurzor@{Kurzor}}
+\doxyparagraph{\texorpdfstring{fazis1Lepes()}{fazis1Lepes()}}
+{\footnotesize\ttfamily \label{class_kurzor_ab012d623097ca291813569e5cd4bef16} 
+void Kurzor\+::fazis1\+Lepes (\begin{DoxyParamCaption}\item[{irany}]{ir}{}\end{DoxyParamCaption})}
+
+
+
+Első fázis mozgás Ekkor történik akártyák kijátszása a kézből. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em ir} & inputnak kapott lépés irány \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_kurzor_a7e239da07123258fa8ac90b07bb5fbe4}\index{Kurzor@{Kurzor}!fazis2Lepes@{fazis2Lepes}}
+\index{fazis2Lepes@{fazis2Lepes}!Kurzor@{Kurzor}}
+\doxyparagraph{\texorpdfstring{fazis2Lepes()}{fazis2Lepes()}}
+{\footnotesize\ttfamily \label{class_kurzor_a7e239da07123258fa8ac90b07bb5fbe4} 
+void Kurzor\+::fazis2\+Lepes (\begin{DoxyParamCaption}\item[{irany}]{ir}{}\end{DoxyParamCaption})}
+
+
+
+Második fázis mozgás Ekkor történik a minionokkal illetve a bossal való támadás. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em ir} & inputnak kapott lépés irány ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_kurzor_a308eeb1dca858e81b223f2f110a8560d}\index{Kurzor@{Kurzor}!lepes@{lepes}}
+\index{lepes@{lepes}!Kurzor@{Kurzor}}
+\doxyparagraph{\texorpdfstring{lepes()}{lepes()}}
+{\footnotesize\ttfamily \label{class_kurzor_a308eeb1dca858e81b223f2f110a8560d} 
+void Kurzor\+::lepes (\begin{DoxyParamCaption}\item[{irany}]{ir}{}\end{DoxyParamCaption})}
+
+
+
+Lépés kezelése A feladata vezérelni a fazis1\+Lepes és fazis2\+Lepes függvényt. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em ir} & inputnak kapott lépés irány \\
+\hline
+\end{DoxyParams}
+
+
+Ez a dokumentáció az osztályról a következő fájl alapján készült\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{kurzor_8h}{kurzor.\+h}}\end{DoxyCompactItemize}

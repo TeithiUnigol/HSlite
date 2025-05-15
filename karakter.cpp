@@ -2,14 +2,13 @@
 
 Karakter::Karakter() : Kartya(), hp(0), maxHp(0), aktiv(false) {}
 
-Karakter::Karakter(Karakter &v):Kartya(v),hp(v.hp),maxHp(v.maxHp),aktiv(v.aktiv) {}
+Karakter::Karakter(const Karakter &v):Kartya(v),hp(v.hp),maxHp(v.maxHp),aktiv(v.aktiv) {}
 
 Karakter::Karakter(const char *nev, int mana, char ikon, double hp, double maxhp, bool aktiv)
     : Kartya(nev, mana, ikon), hp(maxhp), maxHp(maxhp), aktiv(true) {}
 
-void Karakter::vedelemValt(double d) {}
 
-void Karakter::sebzodik(double sebzes, Karakter *tamado)
+void Karakter::sebzodik(double sebzes, Kartya *tamado)
 {
     hp -= sebzes;
     if (hp <= 0)
@@ -59,8 +58,7 @@ Karakter &Karakter::operator=(const Karakter &karakter)
 
 void Karakter::halal()
 {
-    Kartya null;
-    Kartya::operator=(null);
+    ures();
     this->aktiv = false;
     this->hp = 0;
     this->maxHp = 0;
@@ -71,3 +69,4 @@ double Karakter::elet(){
     return hp;
     
 }
+

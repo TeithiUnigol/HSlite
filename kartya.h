@@ -36,7 +36,7 @@ public:
     Kartya(const char *nev, int mana, char ikon);
     /// @brief Másoló konstruktor
     /// @param k A másolandó objektum
-    Kartya(Kartya &k);
+    Kartya(const Kartya &k);
     /// @brief Kártya kijátszása
     /// @param mana A jelenleg rendelkezésre álló mana mennyisége. 
     ///@param kiv A kiválasztott célpont kártya, amire kifejti hatását. 
@@ -56,6 +56,19 @@ public:
     /// @brief Ikon kiírása
     /// @param os Az output stream ahova kiírja
     void ikonKiir(std::ostream& os) const;
+
+    virtual void sebzodik(double sebzes,Kartya* tamado);
+    virtual void vedelemValt(double d);
+    virtual bool regen(int hp);
+
+    /// @brief Tartalom ürítése
+    void ures();
+
+    /// @brief Minion-e
+  /// @return igaz, ha a karakter minion
+  virtual bool isMinion();
+    /// @brief Kártya destruktor
+    virtual ~Kartya();
 
 };
 #endif

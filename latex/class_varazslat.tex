@@ -1,0 +1,144 @@
+\doxysubsection{Varazslat osztályreferencia}
+\hypertarget{class_varazslat}{}\label{class_varazslat}\index{Varazslat@{Varazslat}}
+
+
+A Varazslat osztály származási diagramja\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=137pt]{class_varazslat__inherit__graph}
+\end{center}
+\end{figure}
+
+
+A Varazslat osztály együttműködési diagramja\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=137pt]{class_varazslat__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsubsection*{Publikus tagfüggvények}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_varazslat_a173140fa9b34ef01aba3d228f6ee83be}\label{class_varazslat_a173140fa9b34ef01aba3d228f6ee83be} 
+{\bfseries Varazslat} ()
+\begin{DoxyCompactList}\small\item\em Alap konstruktor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_varazslat_ad3a5bebe93f359b55a95460300ca7ada}{Varazslat}} (\mbox{\hyperlink{class_varazslat}{Varazslat}} \&v)
+\begin{DoxyCompactList}\small\item\em Másoló konstruktor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_varazslat_ac1e82e2cd86e87454d2b67a7b3544d31}{Varazslat}} (const char \texorpdfstring{$\ast$}{*}nev, int mana, char ikon, double sebzes, double gyogyitas, double vedelem)
+\begin{DoxyCompactList}\small\item\em Konstruktor adattagokkal. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_varazslat_af1c18223df7e323662194ddae72f0796}{kijatszas}} (int \texorpdfstring{$\ast$}{*}mana, \mbox{\hyperlink{class_karakter}{Karakter}} \&kiv)
+\begin{DoxyCompactList}\small\item\em kijátszás \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxyparagraph*{Publikus tagfüggvények a(z) \mbox{\hyperlink{class_kartya}{Kartya}} osztályból származnak}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Kartya} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{class_kartya}{Kartya} alap konstruktora. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya_a5f26593920257c35fa6049704b619bfc}{Kartya}} (const char \texorpdfstring{$\ast$}{*}nev, int mana, char ikon)
+\begin{DoxyCompactList}\small\item\em Konstruktor adattagokkal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya_ad6b569fe68ad07897987975f630fdacf}{Kartya}} (const \mbox{\hyperlink{class_kartya}{Kartya}} \&k)
+\begin{DoxyCompactList}\small\item\em Másoló konstruktor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_kartya_a5807d7734c8bae5c50c6facf2bfe9dcc}{kijatszas}} (int \texorpdfstring{$\ast$}{*}mana, \mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*}kiv)
+\begin{DoxyCompactList}\small\item\em Kártya kijátszása. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya}{Kartya}} \& \mbox{\hyperlink{class_kartya_a297a605f903fd6c76c168426275bfa7f}{operator=}} (const \mbox{\hyperlink{class_kartya}{Kartya}} \&kartya)
+\begin{DoxyCompactList}\small\item\em Értékadó operátor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kartya_ab9e716b6e8a7aa4f0132849980b01ced}{mana\+Kiir}} (std\+::ostream \&os) const
+\begin{DoxyCompactList}\small\item\em Mana kiírása. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kartya_a5784fa423ccc2e6c8ca7e6af261a6c36}{nev\+Kiir}} (std\+::ostream \&os) const
+\begin{DoxyCompactList}\small\item\em Név kiírása. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kartya_a8aab38cef9357b791fe657941bc8f9c4}{ikon\+Kiir}} (std\+::ostream \&os) const
+\begin{DoxyCompactList}\small\item\em Ikon kiírása. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Kartya} ()
+\begin{DoxyCompactList}\small\item\em Kártya destruktor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsection*{További örökölt tagok}
+\doxyparagraph*{Védett attribútumok a(z) \mbox{\hyperlink{class_kartya}{Kartya}} osztályból származnak}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string {\bfseries nev}
+\item 
+int {\bfseries mana\+Koltseg}
+\item 
+char {\bfseries ikon}
+\end{DoxyCompactItemize}
+\doxyparagraph*{Statikus védett attribútumok a(z) \mbox{\hyperlink{class_kartya}{Kartya}} osztályból származnak}
+\begin{DoxyCompactItemize}
+\item 
+static const int {\bfseries max\+Nev\+Meret}
+\item 
+static const int {\bfseries max\+Mana\+Meret}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Konstruktorok és destruktorok dokumentációja}
+\Hypertarget{class_varazslat_ad3a5bebe93f359b55a95460300ca7ada}\index{Varazslat@{Varazslat}!Varazslat@{Varazslat}}
+\index{Varazslat@{Varazslat}!Varazslat@{Varazslat}}
+\doxyparagraph{\texorpdfstring{Varazslat()}{Varazslat()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_varazslat_ad3a5bebe93f359b55a95460300ca7ada} 
+Varazslat\+::\+Varazslat (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_varazslat}{Varazslat}} \&}]{v}{}\end{DoxyParamCaption})}
+
+
+
+Másoló konstruktor. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em v} & másolandó objektum \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_varazslat_ac1e82e2cd86e87454d2b67a7b3544d31}\index{Varazslat@{Varazslat}!Varazslat@{Varazslat}}
+\index{Varazslat@{Varazslat}!Varazslat@{Varazslat}}
+\doxyparagraph{\texorpdfstring{Varazslat()}{Varazslat()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_varazslat_ac1e82e2cd86e87454d2b67a7b3544d31} 
+Varazslat\+::\+Varazslat (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{nev}{, }\item[{int}]{mana}{, }\item[{char}]{ikon}{, }\item[{double}]{sebzes}{, }\item[{double}]{gyogyitas}{, }\item[{double}]{vedelem}{}\end{DoxyParamCaption})}
+
+
+
+Konstruktor adattagokkal. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em nev} & Varázslat neve \\
+\hline
+{\em mana} & Varázslat manaköltsége \\
+\hline
+{\em ikon} & Varázslat ikonja \\
+\hline
+{\em sebzes} & Varázslat sebzése \\
+\hline
+{\em gyogyitas} & Varázslat gyógyítása \\
+\hline
+{\em vedelem} & Varázslat védelem növelése \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsubsection{Tagfüggvények dokumentációja}
+\Hypertarget{class_varazslat_af1c18223df7e323662194ddae72f0796}\index{Varazslat@{Varazslat}!kijatszas@{kijatszas}}
+\index{kijatszas@{kijatszas}!Varazslat@{Varazslat}}
+\doxyparagraph{\texorpdfstring{kijatszas()}{kijatszas()}}
+{\footnotesize\ttfamily \label{class_varazslat_af1c18223df7e323662194ddae72f0796} 
+bool Varazslat\+::kijatszas (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{mana}{, }\item[{\mbox{\hyperlink{class_karakter}{Karakter}} \&}]{kiv}{}\end{DoxyParamCaption})}
+
+
+
+kijátszás 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em mana} & A rendelkezésre álló mana mennyisége \\
+\hline
+{\em kiv} & a célpont \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Visszatérési érték}
+skeres volt-\/e a kijátszás ~\newline
+ 
+\end{DoxyReturn}
+
+
+Ez a dokumentáció az osztályról a következő fájl alapján készült\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{varazslat_8h}{varazslat.\+h}}\end{DoxyCompactItemize}

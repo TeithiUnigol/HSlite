@@ -1,0 +1,51 @@
+\doxysubsection{jatekos.\+h fájlreferencia}
+\hypertarget{jatekos_8h}{}\label{jatekos_8h}\index{jatekos.h@{jatekos.h}}
+
+
+A két játékos adatait tároló osztály. Ő felel a játékosok személyes kártyáiért. A játéktáblán két játékos helyezkedik el, szimmetrikusan. Minden játékosnak van egy húzópaklija, egy minionokat tároló paklija, amiben a lehelyezett minionok vannak. A csomag az amiből az osztály felépíti a húzőpaklit. Minden körben meghatározott mennyiségű mana áll rendelkezésére a játékosoknak. Ez minden körben egyel nő.  
+
+
+{\ttfamily \#include "{}kartya.\+h"{}}\newline
+{\ttfamily \#include "{}boss.\+h"{}}\newline
+{\ttfamily \#include "{}kartya\+Tarolo.\+h"{}}\newline
+A jatekos.\+h definíciós fájl függési gráfja\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{jatekos_8h__incl}
+\end{center}
+\end{figure}
+Ez az ábra azt mutatja, hogy mely fájlok ágyazzák be közvetve vagy közvetlenül ezt a fájlt\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=136pt]{jatekos_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsubsection*{Osztályok}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_jatekos}{Jatekos}}
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Enumerációk}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{jatekos_8h_a3e6ad8b3f60f351198be9f37de6c546b}\label{jatekos_8h_a3e6ad8b3f60f351198be9f37de6c546b} 
+enum class \mbox{\hyperlink{jatekos_8h_a3e6ad8b3f60f351198be9f37de6c546b}{Tarolo\+Tipus}} \{ {\bfseries Kez}
+, {\bfseries Huzo}
+, {\bfseries Minionok}
+ \}
+\begin{DoxyCompactList}\small\item\em A tároló kiválasztásában segít. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Részletes leírás}
+A két játékos adatait tároló osztály. Ő felel a játékosok személyes kártyáiért. A játéktáblán két játékos helyezkedik el, szimmetrikusan. Minden játékosnak van egy húzópaklija, egy minionokat tároló paklija, amiben a lehelyezett minionok vannak. A csomag az amiből az osztály felépíti a húzőpaklit. Minden körben meghatározott mennyiségű mana áll rendelkezésére a játékosoknak. Ez minden körben egyel nő. 
+
+\begin{DoxyAuthor}{Szerző}
+Albitz Csanád 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Dátum}
+2025-\/04-\/20 
+\end{DoxyDate}

@@ -1,5 +1,5 @@
 /** @file varazslat.h
-  *  @brief Varázylatok
+  *  @brief Varázslat osztály
   *
   *  Kartya egy alosztálya. Célja az egyszeri hatású mágiák definiálása. 
   *  
@@ -35,7 +35,7 @@ public:
     /// @param mana A rendelkezésre álló mana mennyisége
     /// @param kiv a célpont
     /// @return skeres volt-e a kijátszás 
-    bool kijatszas(int* mana,Karakter& kiv);
+    bool kijatszas(int* mana,Kartya& kiv);
 };
 
 #endif

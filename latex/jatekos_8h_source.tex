@@ -1,0 +1,48 @@
+\doxysubsection{jatekos.\+h}
+\hypertarget{jatekos_8h_source}{}\label{jatekos_8h_source}\mbox{\hyperlink{jatekos_8h}{Ugrás a fájl dokumentációjához.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#ifndef\ JATEKOS\_H}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ JATEKOS\_H}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{kartya_8h}{kartya.h}}"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{boss_8h}{boss.h}}"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{kartya_tarolo_8h}{kartyaTarolo.h}}"{}}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{jatekos_8h_a3e6ad8b3f60f351198be9f37de6c546b}{TaroloTipus}}\ \{}
+\DoxyCodeLine{00025\ \ \ Kez,}
+\DoxyCodeLine{00026\ \ \ Huzo,}
+\DoxyCodeLine{00027\ \ \ Minionok}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_jatekos}{Jatekos}}\{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{int}\ maxMana;}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ mana;}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{class_boss}{Boss}}\ boss;}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_kartya_tarolo}{KartyaTarolo}}\ kez;}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{class_kartya_tarolo}{KartyaTarolo}}\ huzo;}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{class_kartya_tarolo}{KartyaTarolo}}\ minionok;}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_kartya_tarolo}{KartyaTarolo}}\ csomag;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{class_jatekos_a083ba53453a5a9da0aaffa5ed8c7359e}{Jatekos}}();}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{class_jatekos_a1012403acb199316851bb3692a0e1bba}{Jatekos}}(\mbox{\hyperlink{class_boss}{Boss}}\ boss,\mbox{\hyperlink{class_kartya_tarolo}{KartyaTarolo}}\ huzoPakli,\mbox{\hyperlink{class_kartya_tarolo}{KartyaTarolo}}\ kezPakli,\mbox{\hyperlink{class_kartya_tarolo}{KartyaTarolo}}\ MinionPakli,\mbox{\hyperlink{class_kartya_tarolo}{KartyaTarolo}}\ csomag,\textcolor{keywordtype}{int}\ maxMana);}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{class_jatekos_a74b9e6348a50ec3145ee627e3db9b4a3}{Jatekos}}(\mbox{\hyperlink{class_boss}{Boss}}\ boss,\textcolor{keywordtype}{size\_t}\ MinionPakliMeret,\textcolor{keywordtype}{size\_t}\ kezMeret,\mbox{\hyperlink{class_kartya_tarolo}{KartyaTarolo}}\ csomag,\textcolor{keywordtype}{int}\ maxMana);}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{class_jatekos_ac8498945f8e2c20ce931f7f7a930f1b4}{Jatekos}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_jatekos}{Jatekos}}\&\ j);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_jatekos_a0c6a2e07a00937dab8c74caabd942840}{kezfeltolt}}();}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_jatekos_a53279f5d9df0655921444af841d8fb05}{ujKor}}();}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_jatekos_a84cf4a8f65f41050cd726826b9ca57f7}{huzopakliKever}}();}
+\DoxyCodeLine{00078\ \ \ \ \ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_jatekos_a6d7933b20896de8c0bbac45e451bf974}{Kijatszas}}(\mbox{\hyperlink{class_kartya}{Kartya}}*\ k1,\mbox{\hyperlink{class_kartya}{Kartya}}*\ k2);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00087\ \ \ \mbox{\hyperlink{class_boss}{Boss}}\&\ \mbox{\hyperlink{class_jatekos_a94cf6eb7f42c2afae263dae03ce2f62c}{Getboss}}();}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00092\ \ \ \mbox{\hyperlink{class_kartya_tarolo}{KartyaTarolo}}\&\ \mbox{\hyperlink{class_jatekos_adeb7cfe3416e2d0d92f5f7d2e2ae1f18}{getTarolo}}(\mbox{\hyperlink{jatekos_8h_a3e6ad8b3f60f351198be9f37de6c546b}{TaroloTipus}}\ tipus);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \};}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

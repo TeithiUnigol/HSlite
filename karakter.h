@@ -1,7 +1,7 @@
-/** @file kartya.h
+/** @file karakter.h
  *  @brief Karakterek
  *
- *  A kaarakterek definíciója.
+ *  A karakterek definíciója.
  *  Ez egy absztrakt osztály, mely elősegíti a minion és boss definiálását.
  *
  *  @author Albitz Csanád
@@ -24,7 +24,7 @@ public:
   Karakter();
   /// @brief Karakter másoló konstruktor
   /// @param v a másolandó karakter
-  Karakter(Karakter &v);
+  Karakter(const Karakter &v);
   /// @brief Karakter konstruktor adatokkal
   /// @param nev karakter neve
   /// @param mana karakter kijátszásához szükséges manaszint (egy bossbál ez elhanyagolható,
@@ -38,11 +38,7 @@ public:
   /// A karakterre meghatározott mértékű sebzést okoz. A minion védelemmel csökkentheti a sebződést, de a boss nem.
   /// @param sebzes a sebzés mértéke
   /// @param tamado a támadó
-  virtual void sebzodik(double sebzes,Karakter* tamado);
-  /// @brief Védelem változtatása
-  /// A védelem maximális értéke nincsen korlátozva, de negatívba nem mehet
-  /// @param d a védelem mértékét megváltoztatásának mértéke
-  virtual void vedelemValt(double d);
+  virtual void sebzodik(double sebzes,Kartya* tamado);
   /// @brief gyógyítás
   /// @param hp gyógyítás mértéke
   /// @return
@@ -57,9 +53,16 @@ public:
   /// @param karakter Amelyik karakter adatait másolja
   /// @return Aktuális objektum referencia
   Karakter &operator=(const Karakter &karakter);
+  /// @brief Halál
   /// Ha elfogyott az élete az adott karakternek, üres karakterré válik.
   void halal();
-
+  
+  /// @brief Élet lekérdezése
+  /// pusztán a teszteléshez szükséges
+  /// @return S karakter élete.
   double elet();
+
+
+  
 };
 #endif

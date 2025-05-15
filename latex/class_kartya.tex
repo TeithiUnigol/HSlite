@@ -1,0 +1,189 @@
+\doxysubsection{Kartya osztályreferencia}
+\hypertarget{class_kartya}{}\label{class_kartya}\index{Kartya@{Kartya}}
+
+
+A Kartya osztály származási diagramja\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{class_kartya__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsubsection*{Publikus tagfüggvények}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_kartya_a0a09fee602207e846f4e720119255472}\label{class_kartya_a0a09fee602207e846f4e720119255472} 
+{\bfseries Kartya} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{class_kartya}{Kartya} alap konstruktora. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya_a5f26593920257c35fa6049704b619bfc}{Kartya}} (const char \texorpdfstring{$\ast$}{*}nev, int mana, char ikon)
+\begin{DoxyCompactList}\small\item\em Konstruktor adattagokkal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya_ad6b569fe68ad07897987975f630fdacf}{Kartya}} (const \mbox{\hyperlink{class_kartya}{Kartya}} \&k)
+\begin{DoxyCompactList}\small\item\em Másoló konstruktor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_kartya_a5807d7734c8bae5c50c6facf2bfe9dcc}{kijatszas}} (int \texorpdfstring{$\ast$}{*}mana, \mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*}kiv)
+\begin{DoxyCompactList}\small\item\em Kártya kijátszása. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya}{Kartya}} \& \mbox{\hyperlink{class_kartya_a297a605f903fd6c76c168426275bfa7f}{operator=}} (const \mbox{\hyperlink{class_kartya}{Kartya}} \&kartya)
+\begin{DoxyCompactList}\small\item\em Értékadó operátor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kartya_ab9e716b6e8a7aa4f0132849980b01ced}{mana\+Kiir}} (std\+::ostream \&os) const
+\begin{DoxyCompactList}\small\item\em Mana kiírása. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kartya_a5784fa423ccc2e6c8ca7e6af261a6c36}{nev\+Kiir}} (std\+::ostream \&os) const
+\begin{DoxyCompactList}\small\item\em Név kiírása. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kartya_a8aab38cef9357b791fe657941bc8f9c4}{ikon\+Kiir}} (std\+::ostream \&os) const
+\begin{DoxyCompactList}\small\item\em Ikon kiírása. \end{DoxyCompactList}\item 
+\Hypertarget{class_kartya_a65d3f1ba82b3e862e9234b19bbfeafa7}\label{class_kartya_a65d3f1ba82b3e862e9234b19bbfeafa7} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Kartya} ()
+\begin{DoxyCompactList}\small\item\em Kártya destruktor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Védett attribútumok}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_kartya_a1074e40d39c3817e9e5a7fd792c32df5}\label{class_kartya_a1074e40d39c3817e9e5a7fd792c32df5} 
+std\+::string {\bfseries nev}
+\item 
+\Hypertarget{class_kartya_aee9ff272313626445ee3532b784fc801}\label{class_kartya_aee9ff272313626445ee3532b784fc801} 
+int {\bfseries mana\+Koltseg}
+\item 
+\Hypertarget{class_kartya_acefaaf3980077f7c6e6c2996005d4fb9}\label{class_kartya_acefaaf3980077f7c6e6c2996005d4fb9} 
+char {\bfseries ikon}
+\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Statikus védett attribútumok}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_kartya_ac98e8e43d9a87a37e3f9250b4db2d155}\label{class_kartya_ac98e8e43d9a87a37e3f9250b4db2d155} 
+static const int {\bfseries max\+Nev\+Meret}
+\item 
+\Hypertarget{class_kartya_a4aed391a2be034b519d85cbd99db89d0}\label{class_kartya_a4aed391a2be034b519d85cbd99db89d0} 
+static const int {\bfseries max\+Mana\+Meret}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Konstruktorok és destruktorok dokumentációja}
+\Hypertarget{class_kartya_a5f26593920257c35fa6049704b619bfc}\index{Kartya@{Kartya}!Kartya@{Kartya}}
+\index{Kartya@{Kartya}!Kartya@{Kartya}}
+\doxyparagraph{\texorpdfstring{Kartya()}{Kartya()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_kartya_a5f26593920257c35fa6049704b619bfc} 
+Kartya\+::\+Kartya (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{nev}{, }\item[{int}]{mana}{, }\item[{char}]{ikon}{}\end{DoxyParamCaption})}
+
+
+
+Konstruktor adattagokkal. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em nev} & A kártya neve \\
+\hline
+{\em mana} & A kártya kijátszásának manaköltsége \\
+\hline
+{\em ikon} & A karakter megjelenítése során megjelenő ikon \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_kartya_ad6b569fe68ad07897987975f630fdacf}\index{Kartya@{Kartya}!Kartya@{Kartya}}
+\index{Kartya@{Kartya}!Kartya@{Kartya}}
+\doxyparagraph{\texorpdfstring{Kartya()}{Kartya()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_kartya_ad6b569fe68ad07897987975f630fdacf} 
+Kartya\+::\+Kartya (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_kartya}{Kartya}} \&}]{k}{}\end{DoxyParamCaption})}
+
+
+
+Másoló konstruktor. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em k} & A másolandó objektum \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsubsection{Tagfüggvények dokumentációja}
+\Hypertarget{class_kartya_a8aab38cef9357b791fe657941bc8f9c4}\index{Kartya@{Kartya}!ikonKiir@{ikonKiir}}
+\index{ikonKiir@{ikonKiir}!Kartya@{Kartya}}
+\doxyparagraph{\texorpdfstring{ikonKiir()}{ikonKiir()}}
+{\footnotesize\ttfamily \label{class_kartya_a8aab38cef9357b791fe657941bc8f9c4} 
+void Kartya\+::ikon\+Kiir (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os}{}\end{DoxyParamCaption}) const}
+
+
+
+Ikon kiírása. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em os} & Az output stream ahova kiírja \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_kartya_a5807d7734c8bae5c50c6facf2bfe9dcc}\index{Kartya@{Kartya}!kijatszas@{kijatszas}}
+\index{kijatszas@{kijatszas}!Kartya@{Kartya}}
+\doxyparagraph{\texorpdfstring{kijatszas()}{kijatszas()}}
+{\footnotesize\ttfamily \label{class_kartya_a5807d7734c8bae5c50c6facf2bfe9dcc} 
+virtual bool Kartya\+::kijatszas (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{mana}{, }\item[{\mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*}}]{kiv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Kártya kijátszása. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em mana} & A jelenleg rendelkezésre álló mana mennyisége. ~\newline
+ \\
+\hline
+{\em kiv} & A kiválasztott célpont kártya, amire kifejti hatását. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Visszatérési érték}
+Kijátszható-\/e a rendelkezésre álló manából. 
+\end{DoxyReturn}
+
+
+Újraimplementáló leszármazottak\+: \mbox{\hyperlink{class_minion_ae2300e862e1102fe7c161bdb3a6d3e78}{Minion}}.
+
+\Hypertarget{class_kartya_ab9e716b6e8a7aa4f0132849980b01ced}\index{Kartya@{Kartya}!manaKiir@{manaKiir}}
+\index{manaKiir@{manaKiir}!Kartya@{Kartya}}
+\doxyparagraph{\texorpdfstring{manaKiir()}{manaKiir()}}
+{\footnotesize\ttfamily \label{class_kartya_ab9e716b6e8a7aa4f0132849980b01ced} 
+void Kartya\+::mana\+Kiir (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os}{}\end{DoxyParamCaption}) const}
+
+
+
+Mana kiírása. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em os} & Az output stream ahova kiírja \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_kartya_a5784fa423ccc2e6c8ca7e6af261a6c36}\index{Kartya@{Kartya}!nevKiir@{nevKiir}}
+\index{nevKiir@{nevKiir}!Kartya@{Kartya}}
+\doxyparagraph{\texorpdfstring{nevKiir()}{nevKiir()}}
+{\footnotesize\ttfamily \label{class_kartya_a5784fa423ccc2e6c8ca7e6af261a6c36} 
+void Kartya\+::nev\+Kiir (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os}{}\end{DoxyParamCaption}) const}
+
+
+
+Név kiírása. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em os} & Az output stream ahova kiírja \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_kartya_a297a605f903fd6c76c168426275bfa7f}\index{Kartya@{Kartya}!operator=@{operator=}}
+\index{operator=@{operator=}!Kartya@{Kartya}}
+\doxyparagraph{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{class_kartya_a297a605f903fd6c76c168426275bfa7f} 
+\mbox{\hyperlink{class_kartya}{Kartya}} \& Kartya\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_kartya}{Kartya}} \&}]{kartya}{}\end{DoxyParamCaption})}
+
+
+
+Értékadó operátor. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em kartya} & Amelyik kártya adatait másolja \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Visszatérési érték}
+Aktuális objektum referencia 
+\end{DoxyReturn}
+
+
+Ez a dokumentáció az osztályról a következő fájl alapján készült\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{kartya_8h}{kartya.\+h}}\end{DoxyCompactItemize}

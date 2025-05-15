@@ -17,7 +17,7 @@ Minion& Minion::operator=(const Minion &minion){
 }
 
 
-void Minion::sebzodik(double sebzes, Karakter *tamado)
+void Minion::sebzodik(double sebzes, Kartya *tamado)
 {
     if (this->vedelem>=sebzes)
     {
@@ -35,7 +35,7 @@ void Minion::sebzodik(double sebzes, Karakter *tamado)
     {
         halal();
     }
-    else if (tamado != nullptr)
+    else if (tamado != nullptr&&tamado->isMinion())
     {
         tamado->sebzodik(this->ero, nullptr);
     }
@@ -62,18 +62,17 @@ bool Minion::kijatszas(int* mana,Kartya* kiv){
     return false;
 }
 
-#include <iostream>
 void Minion::tamadas(Karakter* celpont){
     if (this->aktiv)
     {   
-        Minion* celpontMinion = dynamic_cast<Minion*>(celpont);
+        /*Minion* celpontMinion = dynamic_cast<Minion*>(celpont);
         if (celpontMinion != nullptr) {
             celpontMinion->sebzodik(ero, this);
-        } else {
+        } else {*/
 
             celpont->sebzodik(ero, this);
-        }
-        this->aktiv = false;
+        /*}
+        this->aktiv = false;*/
     }
 }
 
@@ -90,4 +89,8 @@ double Minion::minionVedelem(){
 
 double Minion::minionhp(){
     return this->hp;
+}
+
+bool Minion::isMinion(){
+    return true;
 }

@@ -2,7 +2,7 @@
  *  @brief Minion osztály
  *
  *  Minionok viselkedését írja le.
- *  A miniionok az asztalon elhelyezkedő (vagy még kártyaként jelenlevő) karakterek.
+ *  A minionok az asztalon elhelyezkedő (vagy még kártyaként jelenlevő) karakterek.
  *
  *  @author Albitz Csanád
  *  @date 2025-04-20
@@ -39,7 +39,7 @@ public:
   /// A minion (hacsak nem halott) vissza is tud támadni.
   /// @param sebzes A minionra kifejtett sebzés mértéke
   /// @param tamado A karakter, aki megtámadta az adott miniont.
-  void sebzodik(double sebzes, Karakter *tamado) override;
+  void sebzodik(double sebzes, Kartya *tamado) override;
   /// @brief Karakter megtámadása
   /// Megtámadja a kiválasztott karaktert
   /// @param celpont A célpont
@@ -66,6 +66,9 @@ public:
   /// Tesztekzez használt getter
   ///  @return minion élete
   double minionhp();
+  /// @brief Karakterből származó minion lekérő
+  /// @return true, mivel minion
+  bool isMinion();
 };
 
 #endif

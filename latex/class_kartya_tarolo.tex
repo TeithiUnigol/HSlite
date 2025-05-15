@@ -1,0 +1,166 @@
+\doxysubsection{Kartya\+Tarolo osztályreferencia}
+\hypertarget{class_kartya_tarolo}{}\label{class_kartya_tarolo}\index{KartyaTarolo@{KartyaTarolo}}
+\doxysubsubsubsection*{Publikus tagfüggvények}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_kartya_tarolo_afd3fc9e0bdaa863dda4aa1fa7ef04c9e}\label{class_kartya_tarolo_afd3fc9e0bdaa863dda4aa1fa7ef04c9e} 
+{\bfseries Kartya\+Tarolo} ()
+\begin{DoxyCompactList}\small\item\em Tároló alapkonstruktora. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya_tarolo_a5b1dad202c6a0575215366b67f3a29fc}{Kartya\+Tarolo}} (size\+\_\+t kapacitas)
+\begin{DoxyCompactList}\small\item\em Kártya tároló kapacítás szerinti konstruktora. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya_tarolo_a78f147895ba06f2b12923c5e1dd808a4}{Kartya\+Tarolo}} (const \mbox{\hyperlink{class_kartya_tarolo}{Kartya\+Tarolo}} \&t)
+\begin{DoxyCompactList}\small\item\em Kártyatároló másolókonstruktora. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kartya_tarolo_afbb54c28092cb103af74e70e9e4da2cd}{random\+Beszur}} (\mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*}kartya)
+\begin{DoxyCompactList}\small\item\em Feltöltés A kártyapakli összekeveréséért felel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kartya_tarolo_a8708547b9c771475fbffd67978a3a3c4}{berak}} (\mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*}kartya, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Soros feltöltés Csak sorba feltöltött tároló esetén működik (pl fájlbetöltésnél) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_kartya_tarolo_aa2159b793a3e52368cf2b7cc74380f56}{kihuz}} (size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Kihúzás megadott indexről. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{class_kartya_tarolo_a40911611ecd252e0cdc05916529ced7d}{get\+Meret}} () const
+\begin{DoxyCompactList}\small\item\em Tárolóban levő tényleges elemek számának lekérése. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{class_kartya_tarolo_aa9969e7cc988523de5fe3e3fe5ce93f6}{get\+Kapacitas}} () const
+\begin{DoxyCompactList}\small\item\em Tároló kapacításának lekérése. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_kartya_tarolo_a7f3c3d44995175a8a36c4046409e5c66}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Indexelő operátor. \end{DoxyCompactList}\item 
+\Hypertarget{class_kartya_tarolo_a5c6a7248c9c02d2ff13e74df36ac3a02}\label{class_kartya_tarolo_a5c6a7248c9c02d2ff13e74df36ac3a02} 
+void {\bfseries kiurites} ()
+\begin{DoxyCompactList}\small\item\em Tároló ürítése. \end{DoxyCompactList}\item 
+\Hypertarget{class_kartya_tarolo_a46a64fcaa7bccb13e01b1988354fad74}\label{class_kartya_tarolo_a46a64fcaa7bccb13e01b1988354fad74} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Kartya\+Tarolo} ()
+\begin{DoxyCompactList}\small\item\em Tároló destruktora. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Konstruktorok és destruktorok dokumentációja}
+\Hypertarget{class_kartya_tarolo_a5b1dad202c6a0575215366b67f3a29fc}\index{KartyaTarolo@{KartyaTarolo}!KartyaTarolo@{KartyaTarolo}}
+\index{KartyaTarolo@{KartyaTarolo}!KartyaTarolo@{KartyaTarolo}}
+\doxyparagraph{\texorpdfstring{KartyaTarolo()}{KartyaTarolo()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_kartya_tarolo_a5b1dad202c6a0575215366b67f3a29fc} 
+Kartya\+Tarolo\+::\+Kartya\+Tarolo (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{kapacitas}{}\end{DoxyParamCaption})}
+
+
+
+Kártya tároló kapacítás szerinti konstruktora. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em kapacitas} & Az a méret amekkorára szükség lesz. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_kartya_tarolo_a78f147895ba06f2b12923c5e1dd808a4}\index{KartyaTarolo@{KartyaTarolo}!KartyaTarolo@{KartyaTarolo}}
+\index{KartyaTarolo@{KartyaTarolo}!KartyaTarolo@{KartyaTarolo}}
+\doxyparagraph{\texorpdfstring{KartyaTarolo()}{KartyaTarolo()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_kartya_tarolo_a78f147895ba06f2b12923c5e1dd808a4} 
+Kartya\+Tarolo\+::\+Kartya\+Tarolo (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_kartya_tarolo}{Kartya\+Tarolo}} \&}]{t}{}\end{DoxyParamCaption})}
+
+
+
+Kártyatároló másolókonstruktora. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em a} & másolandó tároló referenciája \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsubsection{Tagfüggvények dokumentációja}
+\Hypertarget{class_kartya_tarolo_a8708547b9c771475fbffd67978a3a3c4}\index{KartyaTarolo@{KartyaTarolo}!berak@{berak}}
+\index{berak@{berak}!KartyaTarolo@{KartyaTarolo}}
+\doxyparagraph{\texorpdfstring{berak()}{berak()}}
+{\footnotesize\ttfamily \label{class_kartya_tarolo_a8708547b9c771475fbffd67978a3a3c4} 
+void Kartya\+Tarolo\+::berak (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*}}]{kartya}{, }\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Soros feltöltés Csak sorba feltöltött tároló esetén működik (pl fájlbetöltésnél) 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em kartya} & A következő elem \\
+\hline
+{\em index} & A hely ahova berakja az adott elemet \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_kartya_tarolo_aa9969e7cc988523de5fe3e3fe5ce93f6}\index{KartyaTarolo@{KartyaTarolo}!getKapacitas@{getKapacitas}}
+\index{getKapacitas@{getKapacitas}!KartyaTarolo@{KartyaTarolo}}
+\doxyparagraph{\texorpdfstring{getKapacitas()}{getKapacitas()}}
+{\footnotesize\ttfamily \label{class_kartya_tarolo_aa9969e7cc988523de5fe3e3fe5ce93f6} 
+size\+\_\+t Kartya\+Tarolo\+::get\+Kapacitas (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Tároló kapacításának lekérése. 
+
+\begin{DoxyReturn}{Visszatérési érték}
+Tároló kapacítása 
+\end{DoxyReturn}
+\Hypertarget{class_kartya_tarolo_a40911611ecd252e0cdc05916529ced7d}\index{KartyaTarolo@{KartyaTarolo}!getMeret@{getMeret}}
+\index{getMeret@{getMeret}!KartyaTarolo@{KartyaTarolo}}
+\doxyparagraph{\texorpdfstring{getMeret()}{getMeret()}}
+{\footnotesize\ttfamily \label{class_kartya_tarolo_a40911611ecd252e0cdc05916529ced7d} 
+size\+\_\+t Kartya\+Tarolo\+::get\+Meret (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Tárolóban levő tényleges elemek számának lekérése. 
+
+\begin{DoxyReturn}{Visszatérési érték}
+Ezeknek a száma 
+\end{DoxyReturn}
+\Hypertarget{class_kartya_tarolo_aa2159b793a3e52368cf2b7cc74380f56}\index{KartyaTarolo@{KartyaTarolo}!kihuz@{kihuz}}
+\index{kihuz@{kihuz}!KartyaTarolo@{KartyaTarolo}}
+\doxyparagraph{\texorpdfstring{kihuz()}{kihuz()}}
+{\footnotesize\ttfamily \label{class_kartya_tarolo_aa2159b793a3e52368cf2b7cc74380f56} 
+\mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*} Kartya\+Tarolo\+::kihuz (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Kihúzás megadott indexről. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em index} & A megadott index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Visszatérési érték}
+A kihúzott kártya adatai. 
+\end{DoxyReturn}
+\Hypertarget{class_kartya_tarolo_a7f3c3d44995175a8a36c4046409e5c66}\index{KartyaTarolo@{KartyaTarolo}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!KartyaTarolo@{KartyaTarolo}}
+\doxyparagraph{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{class_kartya_tarolo_a7f3c3d44995175a8a36c4046409e5c66} 
+\mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*} Kartya\+Tarolo\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Indexelő operátor. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em index} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Visszatérési érték}
+~\newline
+ 
+\end{DoxyReturn}
+\Hypertarget{class_kartya_tarolo_afbb54c28092cb103af74e70e9e4da2cd}\index{KartyaTarolo@{KartyaTarolo}!randomBeszur@{randomBeszur}}
+\index{randomBeszur@{randomBeszur}!KartyaTarolo@{KartyaTarolo}}
+\doxyparagraph{\texorpdfstring{randomBeszur()}{randomBeszur()}}
+{\footnotesize\ttfamily \label{class_kartya_tarolo_afbb54c28092cb103af74e70e9e4da2cd} 
+void Kartya\+Tarolo\+::random\+Beszur (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*}}]{kartya}{}\end{DoxyParamCaption})}
+
+
+
+Feltöltés A kártyapakli összekeveréséért felel. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em \doxylink{class_kartya}{Kartya}} & A behelyezendő kártya \\
+\hline
+\end{DoxyParams}
+
+
+Ez a dokumentáció az osztályról a következő fájl alapján készült\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{kartya_tarolo_8h}{kartya\+Tarolo.\+h}}\end{DoxyCompactItemize}

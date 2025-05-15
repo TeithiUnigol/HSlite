@@ -1,0 +1,175 @@
+\doxysubsection{Boss osztályreferencia}
+\hypertarget{class_boss}{}\label{class_boss}\index{Boss@{Boss}}
+
+
+A Boss osztály származási diagramja\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=133pt]{class_boss__inherit__graph}
+\end{center}
+\end{figure}
+
+
+A Boss osztály együttműködési diagramja\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=133pt]{class_boss__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsubsection*{Publikus tagfüggvények}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_boss_af287739a9fe8cb9501795656d34f3018}\label{class_boss_af287739a9fe8cb9501795656d34f3018} 
+{\bfseries Boss} ()
+\begin{DoxyCompactList}\small\item\em Alap konstruktor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_boss_ad3c5b14341b9322db8a4624be884239b}{Boss}} (\mbox{\hyperlink{class_karakter}{Karakter}} \&karakter, double \mbox{\hyperlink{class_boss_ac2b035583745e4ab748f7a3110653b0d}{special}})
+\begin{DoxyCompactList}\small\item\em \doxylink{class_boss}{Boss} konstruktora karakter és speciális megadásával. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_boss_a51f4b7e53eb4b6fee786e89bb82b0f2b}{Boss}} (const \mbox{\hyperlink{class_boss}{Boss}} \&boss)
+\begin{DoxyCompactList}\small\item\em \doxylink{class_boss}{Boss} másoló konstruktor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_boss_ac2b035583745e4ab748f7a3110653b0d}{special}} (\mbox{\hyperlink{class_karakter}{Karakter}} \&k)
+\begin{DoxyCompactList}\small\item\em Speciális támadás A megtámadott minion nem tud visszatámadni. \end{DoxyCompactList}\item 
+\Hypertarget{class_boss_a6d84be874956ebb12b02f7177d0ef2b3}\label{class_boss_a6d84be874956ebb12b02f7177d0ef2b3} 
+std\+::string {\bfseries get\+Name} ()
+\end{DoxyCompactItemize}
+\doxyparagraph*{Publikus tagfüggvények a(z) \mbox{\hyperlink{class_karakter}{Karakter}} osztályból származnak}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Karakter} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{class_karakter}{Karakter} alap konstruktora. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_karakter_a11effed4ad5413002014539e58251139}{Karakter}} (const \mbox{\hyperlink{class_karakter}{Karakter}} \&v)
+\begin{DoxyCompactList}\small\item\em \doxylink{class_karakter}{Karakter} másoló konstruktor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_karakter_ac1cbf3d821e65d1880898b76ce2d4775}{Karakter}} (const char \texorpdfstring{$\ast$}{*}nev, int mana, char ikon, double hp, double maxhp, bool aktiv)
+\begin{DoxyCompactList}\small\item\em \doxylink{class_karakter}{Karakter} konstruktor adatokkal. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_karakter_a56e7c643987b8cd734c69b73338adde9}{sebzodik}} (double sebzes, \mbox{\hyperlink{class_karakter}{Karakter}} \texorpdfstring{$\ast$}{*}tamado)
+\begin{DoxyCompactList}\small\item\em Támadás A karakterre meghatározott mértékű sebzést okoz. A minion védelemmel csökkentheti a sebződést, de a boss nem. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_karakter_a8a8eb1ea0325097f867977a3d7f00e41}{vedelem\+Valt}} (double d)
+\begin{DoxyCompactList}\small\item\em Védelem változtatása A védelem maximális értéke nincsen korlátozva, de negatívba nem mehet. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_karakter_aebe5d666b12343169be1f01620eee944}{regen}} (int hp)
+\begin{DoxyCompactList}\small\item\em gyógyítás \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_karakter_a618edff6397ed888ab0de18974e2ed82}{get\+Aktiv}} ()
+\begin{DoxyCompactList}\small\item\em Aktív lekérése. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_karakter_a9e4558e5a8f6205d232529c068e86fcb}{reaktiv}} ()
+\begin{DoxyCompactList}\small\item\em Újra aktiválás Újra aktívra állítja a karaktert. Ezt minden kör végén meghívódik. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_karakter}{Karakter}} \& \mbox{\hyperlink{class_karakter_a4bd57b252e6e53ab2f1b25b76fe937bf}{operator=}} (const \mbox{\hyperlink{class_karakter}{Karakter}} \&karakter)
+\begin{DoxyCompactList}\small\item\em Értékadó operátor. \end{DoxyCompactList}\item 
+void {\bfseries halal} ()
+\begin{DoxyCompactList}\small\item\em Halál Ha elfogyott az élete az adott karakternek, üres karakterré válik. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_karakter_aa22fb422c51cb3f561f174c261b0cfd3}{elet}} ()
+\begin{DoxyCompactList}\small\item\em Élet lekérdezése pusztán a teszteléshez szükséges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxyparagraph*{Publikus tagfüggvények a(z) \mbox{\hyperlink{class_kartya}{Kartya}} osztályból származnak}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Kartya} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{class_kartya}{Kartya} alap konstruktora. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya_a5f26593920257c35fa6049704b619bfc}{Kartya}} (const char \texorpdfstring{$\ast$}{*}nev, int mana, char ikon)
+\begin{DoxyCompactList}\small\item\em Konstruktor adattagokkal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya_ad6b569fe68ad07897987975f630fdacf}{Kartya}} (const \mbox{\hyperlink{class_kartya}{Kartya}} \&k)
+\begin{DoxyCompactList}\small\item\em Másoló konstruktor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_kartya_a5807d7734c8bae5c50c6facf2bfe9dcc}{kijatszas}} (int \texorpdfstring{$\ast$}{*}mana, \mbox{\hyperlink{class_kartya}{Kartya}} \texorpdfstring{$\ast$}{*}kiv)
+\begin{DoxyCompactList}\small\item\em Kártya kijátszása. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_kartya}{Kartya}} \& \mbox{\hyperlink{class_kartya_a297a605f903fd6c76c168426275bfa7f}{operator=}} (const \mbox{\hyperlink{class_kartya}{Kartya}} \&kartya)
+\begin{DoxyCompactList}\small\item\em Értékadó operátor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kartya_ab9e716b6e8a7aa4f0132849980b01ced}{mana\+Kiir}} (std\+::ostream \&os) const
+\begin{DoxyCompactList}\small\item\em Mana kiírása. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kartya_a5784fa423ccc2e6c8ca7e6af261a6c36}{nev\+Kiir}} (std\+::ostream \&os) const
+\begin{DoxyCompactList}\small\item\em Név kiírása. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_kartya_a8aab38cef9357b791fe657941bc8f9c4}{ikon\+Kiir}} (std\+::ostream \&os) const
+\begin{DoxyCompactList}\small\item\em Ikon kiírása. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Kartya} ()
+\begin{DoxyCompactList}\small\item\em Kártya destruktor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsection*{További örökölt tagok}
+\doxyparagraph*{Védett attribútumok a(z) \mbox{\hyperlink{class_karakter}{Karakter}} osztályból származnak}
+\begin{DoxyCompactItemize}
+\item 
+double {\bfseries hp}
+\item 
+double {\bfseries max\+Hp}
+\item 
+bool {\bfseries aktiv}
+\end{DoxyCompactItemize}
+\doxyparagraph*{Védett attribútumok a(z) \mbox{\hyperlink{class_kartya}{Kartya}} osztályból származnak}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string {\bfseries nev}
+\item 
+int {\bfseries mana\+Koltseg}
+\item 
+char {\bfseries ikon}
+\end{DoxyCompactItemize}
+\doxyparagraph*{Statikus védett attribútumok a(z) \mbox{\hyperlink{class_kartya}{Kartya}} osztályból származnak}
+\begin{DoxyCompactItemize}
+\item 
+static const int {\bfseries max\+Nev\+Meret}
+\item 
+static const int {\bfseries max\+Mana\+Meret}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Konstruktorok és destruktorok dokumentációja}
+\Hypertarget{class_boss_ad3c5b14341b9322db8a4624be884239b}\index{Boss@{Boss}!Boss@{Boss}}
+\index{Boss@{Boss}!Boss@{Boss}}
+\doxyparagraph{\texorpdfstring{Boss()}{Boss()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_boss_ad3c5b14341b9322db8a4624be884239b} 
+Boss\+::\+Boss (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_karakter}{Karakter}} \&}]{karakter}{, }\item[{double}]{special}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_boss}{Boss} konstruktora karakter és speciális megadásával. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em karakter} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_boss_a51f4b7e53eb4b6fee786e89bb82b0f2b}\index{Boss@{Boss}!Boss@{Boss}}
+\index{Boss@{Boss}!Boss@{Boss}}
+\doxyparagraph{\texorpdfstring{Boss()}{Boss()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_boss_a51f4b7e53eb4b6fee786e89bb82b0f2b} 
+Boss\+::\+Boss (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_boss}{Boss}} \&}]{boss}{}\end{DoxyParamCaption})}
+
+
+
+\doxylink{class_boss}{Boss} másoló konstruktor. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em boss} & másolandó \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsubsection{Tagfüggvények dokumentációja}
+\Hypertarget{class_boss_ac2b035583745e4ab748f7a3110653b0d}\index{Boss@{Boss}!special@{special}}
+\index{special@{special}!Boss@{Boss}}
+\doxyparagraph{\texorpdfstring{special()}{special()}}
+{\footnotesize\ttfamily \label{class_boss_ac2b035583745e4ab748f7a3110653b0d} 
+void Boss\+::special (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_karakter}{Karakter}} \&}]{k}{}\end{DoxyParamCaption})}
+
+
+
+Speciális támadás A megtámadott minion nem tud visszatámadni. 
+
+
+\begin{DoxyParams}{Paraméterek}
+{\em k} & A célpont \\
+\hline
+\end{DoxyParams}
+A függvény hívási gráfja\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{class_boss_ac2b035583745e4ab748f7a3110653b0d_cgraph}
+\end{center}
+\end{figure}
+
+
+Ez a dokumentáció az osztályról a következő fájlok alapján készült\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{boss_8h}{boss.\+h}}\item 
+boss.\+cpp\end{DoxyCompactItemize}
