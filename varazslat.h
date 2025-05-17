@@ -42,7 +42,6 @@ public:
   void betoltes(std::istream &is) override;
   void tartalomkiir(int xBehuz, int Ykezd, bool inKez) override;
   Kartya *clone() override;
-  void tartalomkiir(int xBehuz, int Ykezd, bool inKez)override;
 };
 
 #endif

@@ -1,5 +1,3 @@
-
-
 #include "memtrace.h"
 #include "gtest_lite.h"
 #include "kartya.h"
@@ -13,9 +11,10 @@
 #include "GameManager.h"
 #include <iostream>
 
+//#define CPORTA
 int main()
 {
-    #ifdef CPORTA
+#ifdef CPORTA
     GTINIT(std::cout);
 
     std::cout << "\n=== Kartya tesztek ===\n"
@@ -278,7 +277,6 @@ int main()
     {
         csomag1.berak(&kobold, i1++);
     }
-#endif
     /*size_t kezmeret = 5;
     Jatekos jteszt(hosLovag, 5, kezmeret, csomag1, 3);
     std::cout << "\n=== Jatekos tesztek ===\n"<< std::endl;
@@ -295,14 +293,15 @@ int main()
         EXPECT_EQ(kezmeret, jteszt.getTarolo(TaroloTipus::Kez).getMeret());
         }
         ENDM*/
+#endif
 
 #ifndef CPORTA
 
-    GameManager gm(50, 15, 2, "pakli.txt", "jatek.txt");
-    gm.loadPakli();
+GameManager gm(50, 15, 5, 2, "pakli.txt", "jatek.txt");
+//gm.MenuSelect();
+gm.loadPakli();
+gm.printGame();
 
-    econio_clrscr();
-    gm.bossKartya(0, 1);
 #endif
 
     return 0;

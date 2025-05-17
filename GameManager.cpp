@@ -63,25 +63,32 @@ Jatekos *GameManager::JatekosKivalaszt(int j)
     }
 }
 
-GameManager::GameManager(size_t screenW, size_t blokkW,size_t blokkH, size_t separatorS, std::string pakliforras, std::string GameForras)
-    : screenW(screenW), blokkW(blokkW),blokkH(blokkH), separatorS(separatorS) {}
-GameManager::GameManager(const Jatekos &jat1, const Jatekos &jat2, size_t screenW, size_t blokkW,size_t blokkH, size_t separatorS)
-    : j1(jat1), j2(jat2), kurz(&j1, &j2), screenW(screenW), blokkW(blokkW),blokkH(blokkH), separatorS(separatorS) {}
+GameManager::GameManager(size_t screenW, size_t blokkW, size_t blokkH, size_t separatorS, std::string pakliforras, std::string GameForras)
+    : screenW(screenW), blokkW(blokkW), blokkH(blokkH), separatorS(separatorS) {}
+GameManager::GameManager(const Jatekos &jat1, const Jatekos &jat2, size_t screenW, size_t blokkW, size_t blokkH, size_t separatorS)
+    : j1(jat1), j2(jat2), kurz(&j1, &j2), screenW(screenW), blokkW(blokkW), blokkH(blokkH), separatorS(separatorS) {}
 
 //------------UI rész--------------
+// TODO
+void GameManager::MenuSelect()
+{
+    econio_clrscr();
+    econio_rawmode();
+    changeBG(black);
+    changeTxt(white);
+    cout << "                       _         _                       __ _ _       \n  /\\  /\\___  __ _ _ __| |__  ___| |_ ___  _ __   ___    / /(_) |_ ___ \n / /_/ / _ \\/ _` | '__| '_ \\/ __| __/ _ \\| '_ \\ / _ \\  / / | | __/ _ \\\n/ __  /  __/ (_| | |  | | | \\__ \\ || (_) | | | |  __/ / /__| | ||  __/\n\\/ /_/ \\___|\\__,_|_|  |_| |_|___/\\__\\___/|_| |_|\\___| \\____/_|\\__\\___|\n                                                                      ";
+    // bool selected1 = true;
+}
 void GameManager::bossKartya(int jatekos, int startY)
 {
     int fal = (screenW - blokkW) / 2;
     int y = startY;
-    changeBG(black);
-    changeTxt(white);
-    econio_clrscr();
-    printUresKartya(fal,3,startY);
+
+    printUresKartya(fal, 3, startY);
     Boss &b = JatekosKivalaszt(jatekos)->Getboss();
     econio_gotoxy((screenW / 2) - 1, ++y);
     b.ikonKiir(cout);
 
-    
     size_t nevM = b.nevMeret();
     if (nevM < (blokkW - 2))
     {
@@ -105,7 +112,7 @@ void GameManager::bossKartya(int jatekos, int startY)
     }
     else
     {
-        econio_gotoxy(fal, y+3);
+        econio_gotoxy(fal, y + 3);
         if (kurz.getMov().szint == jatekos * 3)
         {
             changeBG(green);
@@ -123,22 +130,73 @@ void GameManager::bossKartya(int jatekos, int startY)
         changeBG(black);
     }
     ++y;
-    
 }
 
-void GameManager::printUresKartya(int xBehuz, int yMeret,int yKezd)
+void GameManager::printUresKartya(int xBehuz, int yMeret, int yKezd)
 {
     int y = yKezd;
     felsoVonal(xBehuz, y++);
-    belsoFal(xBehuz,y++);
+    belsoFal(xBehuz, y++);
+    belsoFal(xBehuz, y++);
     felsoVonal(xBehuz, y++);
-    for (size_t i = 0; i < yMeret; i++)
+    for (int i = 0; i < yMeret; i++)
     {
-        belsoFal(xBehuz,y++);
+        belsoFal(xBehuz, y++);
     }
     felsoVonal(xBehuz, y++);
 }
 
+void GameManager::KartyaKiir(int xBehuz, int yKezd, Kartya *k, bool inkez)
+{
+    int y = yKezd;
+
+    printUresKartya(xBehuz, 3, yKezd);
+    econio_gotoxy((screenW / 2) - 1, ++y);
+    k->ikonKiir(cout);
+
+    size_t nevM = k->nevMeret();
+    if (nevM < (blokkW - 2))
+    {
+        econio_gotoxy(xBehuz + (blokkW - nevM) / 2, ++y);
+        if (kurz.getMov().szint == jatekos * 3)
+        {
+            changeBG(green);
+        }
+        else if (kurz.getSel1().szint == jatekos * 3)
+        {
+            changeBG(yellow);
+        }
+        if (k->getAktiv())
+        {
+            changeTxt(gray);
+        }
+        k->nevKiir(std::cout, blokkW - 2);
+        changeTxt(white);
+        changeBG(black);
+        econio_gotoxy(xBehuz + blokkW - 1, y++);
+    }
+    else
+    {
+        econio_gotoxy(xBehuz, y + 3);
+        if (kurz.getMov().szint == jatekos * 3)
+        {
+            changeBG(green);
+        }
+        else if (kurz.getSel1().szint == jatekos * 3)
+        {
+            changeBG(yellow);
+        }
+        if (!k->getAktiv())
+        {
+            changeTxt(gray);
+        }
+        k->nevKiir(std::cout, blokkW - 2);
+        changeTxt(white);
+        changeBG(black);
+    }
+    ++y;
+    k->tartalomkiir(xBehuz + 1, y, inkez);
+}
 void GameManager::felsoVonal(int xBehuz, int yKezd)
 {
     econio_gotoxy(xBehuz, yKezd);
@@ -155,46 +213,7 @@ void GameManager::belsoFal(int behuzasX, int yKezd)
     cout << "|";
 }
 /*
-
-void GameManager::taroloVonal(size_t fal, size_t cap)
-{
-    for (size_t i = 0; i < fal; i++)
-    {
-        cout << " ";
-    }
-    for (size_t i = 0; i < cap; i++)
-    {
-        for (size_t i = 0; i < blokkW; i++)
-        {
-            cout << "-";
-        }
-        if (i != cap - 1)
-        {
-            for (size_t i = 0; i < separatorS; i++)
-            {
-                cout << " ";
-            }
-        }
-    }
-    for (size_t i = 0; i < fal; i++)
-    {
-        cout << " ";
-    }
-}
-
-void GameManager::bossSzel(size_t s1, size_t s2)
-{
-
-    for (size_t i = 0; i < s1; i++)
-    {
-        cout << " ";
-    }
-    cout << "|";
-    for (size_t i = 0; i < s2; i++)
-    {
-        cout << " ";
-    }
-}
+Korábbi próbálkozás, majd econiora váltottam
 void GameManager::printBoss(int jatekos)
 {
     changeBG(black);
@@ -272,19 +291,15 @@ void GameManager::printBoss(int jatekos)
     cout << std::endl;
 }
 */
-void printPakli(KartyaTarolo pakli);
+// TODO
+void GameManager::printTarolo(KartyaTarolo &tarolo)
+{
+    // int fal = (screenW-tarolo.getKapacitas()*blokkW);
+}
 
-void GameManager::printKartyak(KartyaTarolo &k)
-{
-}
-void GameManager::printMinion(KartyaTarolo &m)
-{
-    size_t meret = m.getKapacitas();
-    size_t fal = (screenW - (blokkW * meret + separatorS * (meret - 1))) / 2;
-    //taroloVonal(fal, meret);
-}
 void GameManager::printGame()
 {
+    int y = 0;
     changeBG(black);
     changeTxt(white);
     econio_clrscr();
@@ -292,23 +307,44 @@ void GameManager::printGame()
     {
         changeBG(green);
     }
-    econio_gotoxy(0,0);
+    econio_gotoxy(0, y++);
     cout << "Jatekos 1";
     changeBG(black);
-    econio_gotoxy(0,1);
-    cout << "Mana: " << j1.getMana() << std::endl;
+    econio_gotoxy(0, y++);
+    cout << "Mana: " << j1.getMana();
 
-    bossKartya(0,2);
-    cout << j1.getTarolo(TaroloTipus::Minionok).getKapacitas() << std::endl;
-    // printMinion(j1->getTarolo(TaroloTipus::Minionok));
+    KartyaKiir((screenW - blokkW) / 2, y, &j1.Getboss(), false);
+    y += 3 + 2 + blokkH;
+
+    // cout << j1.getTarolo(TaroloTipus::Minionok).getKapacitas() << std::endl;
+    //  printMinion(j1->getTarolo(TaroloTipus::Minionok));
+    // TODO
+    // KartyaKiir(2,y,j1.getTarolo(TaroloTipus::Kez)[0],true);
+    printUresKartya(2, blokkH, y);
+    y += 3 + 2 + blokkH;
+    printUresKartya(2, blokkH, y);
+    y += 3 + 2 + blokkH;
+    // KartyaKiir(2,y,j1.getTarolo(TaroloTipus::Minionok)[0],false);
+
+    econio_gotoxy(0, y++);
     for (size_t i = 0; i < screenW; i++)
     {
         cout << "-";
     }
-    cout << std::endl;
+    // TODO
+    // KartyaKiir(2,y,j2.getTarolo(TaroloTipus::Minionok)[0],false);
+    // KartyaKiir(2,y,j2.getTarolo(TaroloTipus::Kez)[0],true);
+    printUresKartya(2, blokkH, y);
+    y += 3 + 2 + blokkH;
+    printUresKartya(2, blokkH, y);
+    y += 3 + 2 + blokkH;
 
-    //printBoss(1);
-    cout << "Mana: " << j2.getMana() << std::endl;
+    KartyaKiir((screenW - blokkW) / 2, y, &j2.Getboss(), false);
+    y += 3 + 2 + blokkH;
+    econio_gotoxy(0, y++);
+    cout << "Mana: " << j2.getMana();
+    econio_gotoxy(0, y++);
+
     if (jatekos == 1)
     {
         changeBG(green);
@@ -464,7 +500,6 @@ void GameManager::loadPakli()
     std::string tipus;
     File >> tipus;
 
-    cout << tipus;
     if (tipus == "J1")
     {
         size_t csomagmeret;
@@ -511,6 +546,54 @@ void GameManager::loadPakli()
     {
         throw "Helytelen bemenetfile";
     }
+
+    if (tipus == "J2")
+    {
+        size_t csomagmeret;
+        size_t minionokMeret;
+        size_t kezMeret;
+        int mana;
+        size_t csomagindex = 0;
+        if (!(File >> csomagmeret >> minionokMeret >> kezMeret >> mana))
+        {
+            throw "Helytelen bemenetfile";
+        }
+        KartyaTarolo kt(csomagmeret);
+
+        Boss tempBoss;
+
+        while (File >> tipus && tipus != "END")
+        {
+            if (tipus == "MINION")
+            {
+                Minion *m = new Minion();
+                m->betoltes(File);
+                kt.berak(m, csomagindex);
+                ++csomagindex;
+                delete m;
+            }
+            else if (tipus == "BOSS")
+            {
+                tempBoss.betoltes(File);
+            }
+            else if (tipus == "VARAZSLAT")
+            {
+                Varazslat *v = new Varazslat();
+                v->betoltes(File);
+                kt.berak(v, csomagindex);
+                ++csomagindex;
+
+                delete v;
+            }
+        }
+        Jatekos tempJatekos2(tempBoss, minionokMeret, kezMeret, kt, mana);
+        j2 = tempJatekos2;
+    }
+    else
+    {
+        throw "Helytelen bemenetfile";
+    }
+    
 
     File.close();
 }

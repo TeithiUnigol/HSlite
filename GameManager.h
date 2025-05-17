@@ -85,9 +85,12 @@ class GameManager
     //------------UI rész--------------
     public:
     void bossKartya(int jatekos,int startY);
+    void MenuSelect();
     
     
     private:
+    void KartyaKiir(int xBehuz, int yKezd,Kartya* k,bool inkez);
+    void printTarolo(KartyaTarolo& tarolo);
     bool endGameScreen(int gyoz);
     void felsoVonal(int xBehuz,int yKezd);
     void belsoFal(int behuzasX,int yKezd);
@@ -116,8 +119,8 @@ class GameManager
     void loadPakli();
     void saveGame();
     void loadGame();
-
-
+    
+    
     ~GameManager();
 };
 
