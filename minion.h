@@ -73,6 +73,8 @@ public:
   /// @return true, mivel minion
   bool isMinion();
   void mentes(std::ostream& os) override;
+  void betoltes(std::istream &is) override;
+  virtual void tartalomkiir(int xBehuz,int Ykezd,bool inKez);
   Kartya* clone() override;
 };
 

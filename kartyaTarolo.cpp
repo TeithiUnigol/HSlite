@@ -1,8 +1,8 @@
 #include "kartyaTarolo.h"
 #include <random>
 
-// #include <time.h>
-
+#include <time.h>
+#define CPORTA
 KartyaTarolo::KartyaTarolo() : tomb(nullptr), kapacitas(0), meret(0) {}
 
 KartyaTarolo::KartyaTarolo(size_t kapacitas) : kapacitas(kapacitas), meret(0)
@@ -12,9 +12,8 @@ KartyaTarolo::KartyaTarolo(size_t kapacitas) : kapacitas(kapacitas), meret(0)
     {
         tomb[i] = nullptr;
     }
-    //TODO kitörölni a végén
     #ifndef CPORTA
-        //srand(time(0));
+        srand(time(0));
     #endif
 }
 
@@ -26,6 +25,28 @@ KartyaTarolo::KartyaTarolo(const KartyaTarolo &t) : kapacitas(t.kapacitas), mere
     {
         tomb[i] = t.tomb[i]->clone();
     }
+}
+
+KartyaTarolo& KartyaTarolo::operator=(const KartyaTarolo& rhs) {
+    if (this != &rhs) {
+        kiurites();
+
+        delete[] tomb;
+        kapacitas = rhs.kapacitas;
+        meret = rhs.meret;
+
+        tomb = new Kartya*[kapacitas];
+        for (size_t i = 0; i < kapacitas; ++i) {
+            tomb[i] = nullptr;
+        }
+
+        for (size_t i = 0; i < kapacitas; ++i) {
+            if (rhs.tomb[i]) {
+                tomb[i] = rhs.tomb[i]->clone();
+            }
+        }
+    }
+    return *this;
 }
 
 void KartyaTarolo::randomBeszur(Kartya *kartya)

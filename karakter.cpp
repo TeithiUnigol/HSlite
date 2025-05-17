@@ -70,7 +70,23 @@ int Karakter::getElet()const{
 }
 
 void Karakter::mentes(std::ostream& os){
-    os << "KARAKTER " << nev << " " << manaKoltseg << " " << ikon << " " << hp <<" " << maxHp << " " << aktiv <<std::endl;
+    os << "KARAKTER \"" << nev << "\" " << manaKoltseg << " " << ikon << " " << hp <<" " << maxHp << " " << aktiv <<std::endl;
+}
+
+void Karakter::betoltes(std::istream& is){
+    Kartya::betoltes(is);
+    is >> hp >> maxHp >> aktiv;
+
+    if (!is) {
+        throw std::runtime_error("Helytelen bemenetfile");
+    }
+}
+
+void Karakter::tartalomkiir(int xBehuz,int Ykezd,bool inKez){
+    int y = Ykezd;
+    if(inKez){econio_gotoxy(xBehuz,y++);std::cout << "Man: " << manaKoltseg;}
+    econio_gotoxy(xBehuz,y++);
+    std::cout<<"HP: "<<hp;
 }
 
 Kartya* Karakter::clone() {

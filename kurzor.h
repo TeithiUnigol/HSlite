@@ -73,6 +73,9 @@ public:
     /// @brief sel1 gettere
     /// @return sel1
     mozgo& getSel1();
+    /// @brief Kijátszás
+    /// @param j Ajtív játékos
+    /// @param fazis fázis
 private:
     /// A privát segédfüggvények
 

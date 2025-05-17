@@ -38,15 +38,14 @@ public:
   /// @brief Speciális támadás
   /// A megtámadott minion nem tud visszatámadni
   /// @param k A célpont
-  void special(Karakter &k);
+  bool kijatszas(int* mana,Kartya* kiv)override;
 
+  void mentes(std::ostream &os) override;
+  void betoltes(std::istream &is) override;
 
-  int getSpecial() const;
-void mentes(std::ostream& os) override;
+void tartalomkiir(int xBehuz,int Ykezd,bool inKez);
 
-
-  std::string getName() { return this->nev; }
-  Kartya* clone() override;
+  Kartya *clone() override;
 };
 
 #endif

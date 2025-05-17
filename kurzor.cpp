@@ -243,6 +243,7 @@ void Kurzor::gorgeto(T &gorgetendo, bool poz, T maxT)
     }
 }
 
+
 mozgo& Kurzor::getMov()
 {
     return mov_a;

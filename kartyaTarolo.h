@@ -25,6 +25,9 @@ public:
     /// @brief Kártyatároló másolókonstruktora
     /// @param  a másolandó tároló referenciája
     KartyaTarolo(const KartyaTarolo& t);
+    /// @brief Értékadó operátor
+    /// @param rhs forrás
+    KartyaTarolo& operator=(const KartyaTarolo& rhs);
     /// @brief Feltöltés
     ///A kártyapakli összekeveréséért felel.
     /// @param Kartya A behelyezendő kártya

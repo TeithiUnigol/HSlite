@@ -58,6 +58,9 @@ public:
   void halal();
   
   virtual void mentes(std::ostream& os) override;
+  virtual void betoltes(std::istream& is)override;
+
+  virtual void tartalomkiir(int xBehuz,int Ykezd,bool inKez)override;
 
   Kartya* clone() override;
 

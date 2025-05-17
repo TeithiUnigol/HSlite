@@ -15,8 +15,7 @@
 
 int main()
 {
-    // #ifdef CPORTA
-    // #endif
+    #ifdef CPORTA
     GTINIT(std::cout);
 
     std::cout << "\n=== Kartya tesztek ===\n"
@@ -215,7 +214,9 @@ int main()
     }
     ENDM
 
-            std::cout<< "\n=== Tarolo tesztek ===\n"<< std::endl;
+            std::cout
+        << "\n=== Tarolo tesztek ===\n"
+        << std::endl;
     TEST(KartyaTarolo, konstruktor)
     {
         KartyaTarolo T(4);
@@ -262,7 +263,6 @@ int main()
     Varazslat nyilz("nyilzapor", 2, 's', 10, 0, 0);
 
     KartyaTarolo csomag1(20);
-    KartyaTarolo csomag2(20);
     size_t i1 = 0;
     // Ez majd fájlból ovasással lesz megoldva
     csomag1.berak(&sari, i1++);
@@ -278,50 +278,32 @@ int main()
     {
         csomag1.berak(&kobold, i1++);
     }
-    i1 = 0;
-    csomag2.berak(&sariOlo, i1++);
-    for (size_t i = 0; i < 2; i++)
-    {
-        csomag2.berak(&gyogy, i1++);
-    }
-    for (size_t i = 0; i < 2; i++)
-    {
-        csomag2.berak(&nyilz, i1++);
-    }
-    for (size_t i = 0; i < 5; i++)
-    {
-        csomag2.berak(&gyalog, i1++);
-    }
-
-    Jatekos j1(sotetLovag, 5, 5, csomag1, 3);
-
-    Jatekos j2(hosLovag, 5, 5, csomag2, 3);
-
-    GameManager gm(&j1, &j2, 50, 15, 2);
-
-    size_t kezmeret = 5;
-    Jatekos jteszt(hosLovag, 5, kezmeret, csomag2, 3);
+#endif
+    /*size_t kezmeret = 5;
+    Jatekos jteszt(hosLovag, 5, kezmeret, csomag1, 3);
     std::cout << "\n=== Jatekos tesztek ===\n"<< std::endl;
     TEST(Jatekos, konstruktor)
     {
         EXPECT_EQ(3, jteszt.getMana());
         EXPECT_EQ(30, jteszt.Getboss().getElet());
-    }
-    ENDM
+        }
+        ENDM*/
     /*TEST(Jatekos, kezfeltolt&meret&kapacitas)
     {
         EXPECT_EQ(0, jteszt.getTarolo(TaroloTipus::Kez).getMeret());
         jteszt.kezfeltolt();
         EXPECT_EQ(kezmeret, jteszt.getTarolo(TaroloTipus::Kez).getMeret());
-    }
-    ENDM*/
-    econio_clrscr();
-    gm.bossKartya(0,1);
-    // gm.printGame();
+        }
+        ENDM*/
 
 #ifndef CPORTA
-    
+
+    GameManager gm(50, 15, 2, "pakli.txt", "jatek.txt");
+    gm.loadPakli();
+
+    econio_clrscr();
+    gm.bossKartya(0, 1);
 #endif
 
-        return 0;
+    return 0;
 }

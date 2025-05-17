@@ -65,6 +65,9 @@ public:
     /// @param j másolandó
     Jatekos(const Jatekos& j);
 
+    /// @brief Játékos értékadó operátora
+    Jatekos& operator=(const Jatekos& forras);
+
     /// @brief Kézben levő kártyák feltöltése a húzópakliból
     void kezfeltolt();
 
@@ -94,6 +97,7 @@ public:
   int getMana()const;
 
   void mentes(std::ostream& os);
+
 
 };
 #endif

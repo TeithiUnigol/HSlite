@@ -76,7 +76,15 @@ void Minion::tamadas(Karakter* celpont){
 }
 
 void Minion::mentes(std::ostream& os){
-    os << "MINION " << nev << " " << manaKoltseg << " " << ikon << " " << hp <<" " << maxHp << " " << aktiv << " " << ero<< " " << vedelem <<std::endl;
+    os << "MINION \"" << nev << "\" " << manaKoltseg << " " << ikon << " " << hp <<" " << maxHp << " " << aktiv << " " << ero<< " " << vedelem <<std::endl;
+}
+void Minion::betoltes(std::istream& is){
+    Karakter::betoltes(is);
+    is >> ero>>vedelem;
+
+    if (!is) {
+        throw std::runtime_error("Helytelen bemenetfile");
+    }
 }
 
 void Minion::reaktiv()
@@ -96,6 +104,18 @@ int Minion::minionhp(){
 
 bool Minion::isMinion(){
     return true;
+}
+
+void Minion::tartalomkiir(int xBehuz,int Ykezd,bool inKez){
+    int y = Ykezd;
+    if(inKez){econio_gotoxy(xBehuz,y++);std::cout << "Man: " << manaKoltseg;}
+    econio_gotoxy(xBehuz,y++);
+    std::cout<<"HP: "<<hp;
+    econio_gotoxy(xBehuz,y++);
+    std::cout<<"ERO: "<<ero;
+    econio_gotoxy(xBehuz,y++);
+    std::cout<<"VED: "<<vedelem;
+
 }
 
 Kartya* Minion::clone() {
