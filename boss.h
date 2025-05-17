@@ -44,6 +44,7 @@ public:
   int getSpecial() const;
 void mentes(std::ostream& os) override;
 
+
   std::string getName() { return this->nev; }
   Kartya* clone() override;
 };

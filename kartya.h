@@ -12,6 +12,18 @@
 
 #include <string>
 #include <iostream>
+#include "econio.h"
+
+
+typedef enum colors
+{
+    white,
+    black,
+    red,
+    green,
+    gray,
+    yellow
+} colors;
 
 
 class Kartya
@@ -79,6 +91,11 @@ public:
   /// @brief Kiírást segíti
   virtual bool getAktiv();
   size_t manaKarakterszam();
+
+
+  void changeBG(colors color);
+  void changeTxt(colors color);
+  virtual void printKartya(int screenW,int blokkW,int startX,int startY);
 
   /// @brief Mentés
   /// @param os A megadott folyam, ahova menteni szeretnénk.

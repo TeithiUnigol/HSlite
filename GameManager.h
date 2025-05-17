@@ -24,16 +24,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <cmath>
 
-typedef enum colors
-{
-    white,
-    black,
-    red,
-    green,
-    gray
-} colors;
 
 typedef enum menuState
 {
@@ -42,8 +33,10 @@ typedef enum menuState
     quit
 } menuState;
 
+
+
 /// @brief Game Manager
-/// A grafika kezeléséért, mentéséért felelős. Összeköti a játéklogikát a felhasználói bemenetekkel és kimenetekkel.
+/// Az UI kezeléséért, adatok mentésének vezérléséért felelős. Összeköti a játéklogikát a felhasználói bemenetekkel és kimenetekkel.
 class GameManager
 {
 private:
@@ -65,12 +58,15 @@ private:
     const size_t separatorS;
 
     //------------Segédfüggvények--------------
-    void changeBG(colors color);
-    void changeTxt(colors color);
     Jatekos *JatekosKivalaszt(int j);
     size_t intHossz(int n);
 
     //------------UI rész--------------
+    public:
+    void bossKartya(int jatekos,int startY);
+
+
+    private:
     void bossvonal();
     void taroloVonal(size_t fal, size_t cap);
     void bossSzel(size_t s1, size_t s2);

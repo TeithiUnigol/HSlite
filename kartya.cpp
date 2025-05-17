@@ -85,6 +85,17 @@ bool Kartya::getAktiv(){
     return true;
 }
 
+void Kartya::printKartya(int screenW,int blokkW,int startX,int startY){
+    int y = startY;
+    econio_gotoxy(startX,y);
+    changeBG(black);
+    changeTxt(white);
+    for (size_t i = 0; i < blokkW; ++i)
+    {
+        cout << "-";
+    }
+}
+
 void Kartya::mentes(std::ostream& os){
     os << "KARTYA " << nev << " " << manaKoltseg << " " << ikon << std::endl;
 }

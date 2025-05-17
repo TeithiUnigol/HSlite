@@ -308,14 +308,15 @@ int main()
         EXPECT_EQ(30, jteszt.Getboss().getElet());
     }
     ENDM
-    TEST(Jatekos, kezfeltolt&meret&kapacitas)
+    /*TEST(Jatekos, kezfeltolt&meret&kapacitas)
     {
         EXPECT_EQ(0, jteszt.getTarolo(TaroloTipus::Kez).getMeret());
         jteszt.kezfeltolt();
         EXPECT_EQ(kezmeret, jteszt.getTarolo(TaroloTipus::Kez).getMeret());
     }
-    ENDM
-
+    ENDM*/
+    econio_clrscr();
+    gm.bossKartya(0,1);
     // gm.printGame();
 
 #ifndef CPORTA

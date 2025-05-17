@@ -20,6 +20,9 @@ void GameManager::changeBG(colors color)
     case gray:
         econio_textbackground(COL_LIGHTGRAY);
         break;
+    case yellow:
+        econio_textbackground(COL_YELLOW);
+        break;
     }
 }
 
@@ -41,6 +44,9 @@ void GameManager::changeTxt(colors color)
         break;
     case gray:
         econio_textcolor(COL_LIGHTGRAY);
+        break;
+        case yellow:
+        econio_textcolor(COL_YELLOW);
         break;
     }
 }
@@ -75,6 +81,75 @@ GameManager::GameManager(Jatekos *jat1, Jatekos *jat2, size_t screenW, size_t bl
     : j1(jat1), j2(jat2), kurz(j1, j2), screenW(screenW), blokkW(blokkW), separatorS(separatorS) {}
 
 //------------UI rész--------------
+void GameManager::bossKartya(int jatekos,int startY){
+    int fal = (screenW - blokkW) / 2;
+    int y = startY;
+    econio_gotoxy(fal,y);
+    changeBG(black);
+    changeTxt(white);
+    for (size_t i = 0; i < blokkW; ++i)
+    {
+        cout << "-";
+    }
+    econio_gotoxy(fal,++y);
+
+    Boss& b = JatekosKivalaszt(jatekos)->Getboss();
+
+    cout << "|";
+    econio_gotoxy((screenW/2)-1,y);
+    b.ikonKiir(cout);
+    econio_gotoxy(fal+blokkW-1,y);
+    cout << "|";
+
+    econio_gotoxy(fal,++y);
+    cout << "|";
+    size_t nevM = b.nevMeret();
+    if (nevM < (blokkW - 2))
+    {
+        econio_gotoxy(fal+(blokkW-nevM)/2,y);
+        if (kurz.getMov().szint == jatekos * 3)
+        {
+            changeBG(green);
+        }
+        else if (kurz.getSel1().szint==jatekos*3)
+        {
+            changeBG(yellow);
+        }
+        if (b.getAktiv())
+        {
+            changeTxt(gray);
+        }
+        b.nevKiir(std::cout, blokkW - 2);
+        changeTxt(white);
+        changeBG(black);
+        econio_gotoxy(fal+blokkW-1,y);
+    }
+    else
+    {
+        econio_gotoxy(fal,y);
+        if (kurz.getMov().szint == jatekos * 3)
+        {
+            changeBG(green);
+        }
+        if (b.getAktiv())
+        {
+            changeTxt(gray);
+        }
+        b.nevKiir(std::cout, blokkW - 2);
+        changeTxt(white);
+        changeBG(black);
+        econio_gotoxy(fal+blokkW-1,y);
+    }
+    cout << "|";
+    econio_gotoxy(fal,++y);
+    for (size_t i = 0; i < blokkW; ++i)
+    {
+        cout << "-";
+    }
+    econio_gotoxy(fal,++y);
+
+}
+
 void GameManager::bossvonal()
 {
     for (size_t i = 0; i < (screenW - blokkW) / 2; i++)
@@ -122,6 +197,7 @@ void GameManager::taroloVonal(size_t fal,size_t cap){
 
 void GameManager::bossSzel(size_t s1, size_t s2)
 {
+
     for (size_t i = 0; i < s1; i++)
     {
         cout << " ";
@@ -160,6 +236,10 @@ void GameManager::printBoss(int jatekos)
         if (kurz.getMov().szint == jatekos * 3)
         {
             changeBG(green);
+        }
+        else if (kurz.getSel1().szint==jatekos*3)
+        {
+            changeBG(yellow);
         }
         if (!aktJ->Getboss().getAktiv())
         {
