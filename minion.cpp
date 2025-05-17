@@ -2,9 +2,14 @@
 
 Minion::Minion() : Karakter(), ero(0), vedelem(0){}
 
-Minion::Minion(Karakter& k,double ero):Karakter(k),ero(ero),vedelem(0){}
+Minion::Minion(Karakter& k,int ero):Karakter(k),ero(ero),vedelem(0){}
 
 Minion::Minion(Minion& m):Karakter(m),ero(m.ero),vedelem(m.vedelem){}
+
+Minion::Minion(const char *nev, int mana, char ikon, int hp, int maxhp, bool aktiv, int ero,int vedelem):
+Karakter(nev,mana,ikon,hp,maxhp,aktiv),ero(ero),vedelem(vedelem){
+
+}
 
 Minion& Minion::operator=(const Minion &minion){
     if (this != &minion)
@@ -17,13 +22,13 @@ Minion& Minion::operator=(const Minion &minion){
 }
 
 
-void Minion::sebzodik(double sebzes, Kartya *tamado)
+void Minion::sebzodik(int sebzes, Kartya *tamado)
 {
     if (this->vedelem>=sebzes)
     {
         this->vedelem-=sebzes;
     }else if(this->vedelem>0){
-        double s = sebzes;
+        int s = sebzes;
         s-=this->vedelem;
         this->vedelem = 0;
         hp-=s;
@@ -41,7 +46,7 @@ void Minion::sebzodik(double sebzes, Kartya *tamado)
     }
 }
 
-void Minion::vedelemValt(double d)
+void Minion::vedelemValt(int d)
 {
     vedelem += d;
 
@@ -65,15 +70,13 @@ bool Minion::kijatszas(int* mana,Kartya* kiv){
 void Minion::tamadas(Karakter* celpont){
     if (this->aktiv)
     {   
-        /*Minion* celpontMinion = dynamic_cast<Minion*>(celpont);
-        if (celpontMinion != nullptr) {
-            celpontMinion->sebzodik(ero, this);
-        } else {*/
-
-            celpont->sebzodik(ero, this);
-        /*}
-        this->aktiv = false;*/
+        celpont->sebzodik(ero, this);
+       this->aktiv = false;
     }
+}
+
+void Minion::mentes(std::ostream& os){
+    os << "MINION " << nev << " " << manaKoltseg << " " << ikon << " " << hp <<" " << maxHp << " " << aktiv << " " << ero<< " " << vedelem <<std::endl;
 }
 
 void Minion::reaktiv()
@@ -83,14 +86,18 @@ void Minion::reaktiv()
 }
 
 
-double Minion::minionVedelem(){
+int Minion::minionVedelem(){
     return this->vedelem;
 }
 
-double Minion::minionhp(){
+int Minion::minionhp(){
     return this->hp;
 }
 
 bool Minion::isMinion(){
     return true;
+}
+
+Kartya* Minion::clone() {
+    return new Minion(*this);
 }

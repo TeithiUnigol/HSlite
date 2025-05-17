@@ -61,36 +61,29 @@ public:
     /// @brief Kurzor konstruktor adattagokkal
     /// @param p1 egyes számú játékos
     /// @param p2 kettes számú játékos
-    /// @param jatekos melyik játékos van éppen körön
-    /// @param fazis a játékos melyik fázisban van
     Kurzor(Jatekos* p1,  Jatekos* p2);
     /// @brief Lépés kezelése
     /// A feladata vezérelni a fazis1Lepes és fazis2Lepes függvényt
     /// @param ir inputnak kapott lépés irány
-    void lepes(irany ir,int fazis,int jatekos);
-    /// @brief Kiválaszt
-    /// Akkor hívódik meg, amikor a felhasználó arra a kártyára mozgatta a kurzort, amelyiket ki akarja választani.
-//void kivalaszt();
-    /// @brief Következő fázis
-    /// Akkor hívódik meg, amikor a felhasználó már nem kíván több dolgot csinálni az aktuális fázisban.
-//void kovFazis(int fazis);
+    void lepes(irany ir,int fazis,int jatekos,Jatekos* aktJ);
 
-    /// @brief Aktuális játékos getter
-    ///@param n negálás, hogy a ne aktív játékos is lekérhető legyen
-    /// @return Aktuális játékos referencia
-    Jatekos *aktJatekos(int akt);
-    //TODO
+    /// @brief Moz gettere
+    /// @return moz
+    mozgo& getMov();
+    /// @brief sel1 gettere
+    /// @return sel1
+    mozgo& getSel1();
 private:
     /// A privát segédfüggvények
 
     /// @brief Első fázis mozgás
     /// Ekkor történik akártyák kijátszása a kézből.
     /// @param ir inputnak kapott lépés irány
-    void fazis1Lepes(irany ir,int jatekos);
+    void fazis1Lepes(irany ir,int jatekos,Jatekos* aktJ);
     /// @brief Minion lerakás segédfüggvény
     /// Az 1. fázis lerakásának könnyebb átláthatósága érdekében
     /// @param ir
-    void MinionLerakas(irany ir, size_t &index,int jatekos);
+    void MinionLerakas(irany ir, size_t &index,int jatekos,Jatekos* aktJ);
     /// @brief Második fázis mozgás
     /// Ekkor történik a minionokkal illetve a bossal való támadás
     /// @param ir inputnak kapott lépés irány
@@ -108,6 +101,7 @@ private:
     /// @param maxT a határ
     template <typename T>
     void gorgeto(T &gorgetendo, bool poz, T maxT);
+    
 };
 
 #endif

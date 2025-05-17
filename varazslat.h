@@ -14,9 +14,9 @@
 #include "karakter.h"
 
 class Varazslat:public Kartya{
-    double sebzes;
-    double gyogyitas;
-    double vedelem;     
+    int sebzes;
+    int gyogyitas;
+    int vedelem;     
 public:
     /// @brief Alap konstruktor
     Varazslat();
@@ -30,12 +30,14 @@ public:
     /// @param sebzes Varázslat sebzése
     /// @param gyogyitas Varázslat gyógyítása
     /// @param vedelem Varázslat védelem növelése
-    Varazslat(const char *nev, int mana, char ikon,double sebzes,double gyogyitas,double vedelem);
+    Varazslat(const char *nev, int mana, char ikon,int sebzes,int gyogyitas,int vedelem);
     /// @brief kijátszás
     /// @param mana A rendelkezésre álló mana mennyisége
     /// @param kiv a célpont
     /// @return skeres volt-e a kijátszás 
-    bool kijatszas(int* mana,Kartya& kiv);
+    bool kijatszas(int* mana,Kartya* kiv);
+    void mentes(std::ostream& os) override;
+    Kartya* clone() override;
 };
 
 #endif

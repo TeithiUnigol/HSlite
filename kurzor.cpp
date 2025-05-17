@@ -1,35 +1,33 @@
 #include "kurzor.h"
-#include "boss.h"
-#include "kartyaTarolo.h"
 
-Kurzor::Kurzor() : p1(), p2(), sel1_a(), mov_a() {}
+Kurzor::Kurzor() : p1(), p2(), mov_a(),sel1_a() {}
 
-Kurzor::Kurzor(Jatekos* p1,Jatekos* p2)
-    : p1(p1), p2(p2), sel1_a(), mov_a()
+Kurzor::Kurzor(Jatekos *p1, Jatekos *p2)
+    : p1(p1), p2(p2), mov_a(),sel1_a()
 {
 }
 
-void Kurzor::lepes(irany ir,int fazis,int jatekos)
+void Kurzor::lepes(irany ir, int fazis, int jatekos,Jatekos* aktJ)
 {
     switch (fazis)
     {
     case 1:
-        fazis1Lepes(ir,jatekos);
+        fazis1Lepes(ir, jatekos,aktJ);
         break;
     case 2:
-        fazis2Lepes(ir,jatekos);
+        fazis2Lepes(ir, jatekos);
         break;
     default:
         break;
     }
 }
 
-void Kurzor::fazis1Lepes(irany ir,int jatekos)
+void Kurzor::fazis1Lepes(irany ir, int jatekos,Jatekos* aktJ)
 {
     if (sel1_a.pointer == nullptr)
     {
         // kártya kiválasztása a kézből
-        KartyaTarolo &kez = aktJatekos(jatekos)->getTarolo(TaroloTipus::Kez);
+        KartyaTarolo &kez = aktJ->getTarolo(TaroloTipus::Kez);
         switch (ir)
         {
         case jobbra:
@@ -53,7 +51,7 @@ void Kurzor::fazis1Lepes(irany ir,int jatekos)
         ///  Egy minion esetén nincs értelme a fel és le mozgásnak
         if (sel1_a.pointer->isMinion())
         {
-            MinionLerakas(ir, mov_a.index,jatekos);
+            MinionLerakas(ir, mov_a.index, jatekos,aktJ);
         }
         else // mágia
         {
@@ -85,9 +83,9 @@ void Kurzor::fazis1Lepes(irany ir,int jatekos)
     }
 }
 
-void Kurzor::MinionLerakas(irany ir, size_t &index,int jatekos)
+void Kurzor::MinionLerakas(irany ir, size_t &index, int jatekos,Jatekos* aktJ)
 {
-    KartyaTarolo &minionTomb = aktJatekos(jatekos)->getTarolo(TaroloTipus::Minionok);
+    KartyaTarolo &minionTomb = aktJ->getTarolo(TaroloTipus::Minionok);
     switch (ir)
     {
     case jobbra:
@@ -106,16 +104,26 @@ void Kurzor::MinionLerakas(irany ir, size_t &index,int jatekos)
 
 void Kurzor::SzintDekoder()
 {
+    Kartya* temp;
     switch (mov_a.szint)
     {
     case 0:
         mov_a.pointer = &p1->Getboss();
         break;
     case 1:
-        mov_a.pointer = p1->getTarolo(TaroloTipus::Minionok)[mov_a.index];
+        temp = p1->getTarolo(TaroloTipus::Minionok)[mov_a.index];
+        if (temp != nullptr)
+        {
+            mov_a.pointer = temp;
+        }
         break;
+        
     case 2:
-        mov_a.pointer = p2->getTarolo(TaroloTipus::Minionok)[mov_a.index];
+        temp = p2->getTarolo(TaroloTipus::Minionok)[mov_a.index];
+        if (temp != nullptr)
+        {
+            mov_a.pointer = temp;
+        }
         break;
     case 3:
         mov_a.pointer = &p2->Getboss();
@@ -127,7 +135,7 @@ void Kurzor::SzintDekoder()
 }
 
 // minionok és boss támadnak
-void Kurzor::fazis2Lepes(irany ir,int jatekos)
+void Kurzor::fazis2Lepes(irany ir, int jatekos)
 {
     size_t maxIndex = p1->getTarolo(TaroloTipus::Minionok).getKapacitas();
     if (sel1_a.pointer == nullptr)
@@ -135,23 +143,23 @@ void Kurzor::fazis2Lepes(irany ir,int jatekos)
         switch (ir)
         {
         case jobbra:
-            gorgeto(mov_a.index,true,maxIndex);
+            gorgeto(mov_a.index, true, maxIndex);
             SzintDekoder();
             break;
 
         case balra:
-            gorgeto(mov_a.index,false,maxIndex);
+            gorgeto(mov_a.index, false, maxIndex);
             SzintDekoder();
             break;
         case fel:
-            mov_a.szint -=2*jatekos;
-            gorgeto(mov_a.szint,true,1);
+            mov_a.szint -= 2 * jatekos;
+            gorgeto(mov_a.szint, true, 1);
             mov_a.szint += 2 * jatekos;
             SzintDekoder();
             break;
         case le:
-            mov_a.szint -=2*jatekos;
-            gorgeto(mov_a.szint,false,1);
+            mov_a.szint -= 2 * jatekos;
+            gorgeto(mov_a.szint, false, 1);
             mov_a.szint += 2 * jatekos;
             SzintDekoder();
             break;
@@ -164,12 +172,12 @@ void Kurzor::fazis2Lepes(irany ir,int jatekos)
         switch (ir)
         {
         case jobbra:
-            gorgeto(mov_a.index,true,maxIndex);
+            gorgeto(mov_a.index, true, maxIndex);
             SzintDekoder();
             break;
 
         case balra:
-            gorgeto(mov_a.index,false,maxIndex);
+            gorgeto(mov_a.index, false, maxIndex);
             SzintDekoder();
             break;
         case fel:
@@ -197,14 +205,14 @@ void Kurzor::fazis2Lepes(irany ir,int jatekos)
             }
 
             mov_a.szint -= 2 * jatekos;
-            gorgeto(mov_a.szint,true,1);
+            gorgeto(mov_a.szint, true, 1);
             mov_a.szint += 2 * jatekos;
 
             SzintDekoder();
             break;
         case le:
             mov_a.szint -= 2 * jatekos;
-            gorgeto(mov_a.szint,false,1);
+            gorgeto(mov_a.szint, false, 1);
             mov_a.szint += 2 * jatekos;
             SzintDekoder();
             break;
@@ -235,58 +243,12 @@ void Kurzor::gorgeto(T &gorgetendo, bool poz, T maxT)
     }
 }
 
-//EZ is GM-be
-/*
-void Kurzor::kivalaszt()
+mozgo& Kurzor::getMov()
 {
-    if (sel1_a.pointer == nullptr)
-    {
-        sel1_a.pointer = mov_a.pointer;
-    }
-    else
-    {
-        if (aktJatekos(true).Kijatszas(sel1_a.pointer, mov_a.pointer))
-        {
-            throw "";
-        }
-        
-        sel1_a.pointer = nullptr;
-        mov_a.pointer = nullptr;
-    }
+    return mov_a;
 }
 
-
-
-void Kurzor::kovFazis(int fazis)
+mozgo& Kurzor::getSel1()
 {
-    sel1_a.pointer = nullptr;
-    fazis += 1;
-    if (fazis == 3)
-    {
-        jatekos = (jatekos + 1) % 2;
-        if (jatekos == 0)
-        {
-            mov_a.szint = 0;
-            p1.ujKor();
-        }
-        else
-        {
-            mov_a.szint = 3;
-            p2.ujKor();
-        }
-    }
-}
-
-*/
-//Ez is GM-be
-Jatekos* Kurzor::aktJatekos(int akt)
-{
-    if (akt == 0)
-    {
-        return p1;
-    }
-    else
-    {
-        return p2;
-    }
+    return sel1_a;
 }

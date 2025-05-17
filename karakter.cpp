@@ -4,11 +4,11 @@ Karakter::Karakter() : Kartya(), hp(0), maxHp(0), aktiv(false) {}
 
 Karakter::Karakter(const Karakter &v):Kartya(v),hp(v.hp),maxHp(v.maxHp),aktiv(v.aktiv) {}
 
-Karakter::Karakter(const char *nev, int mana, char ikon, double hp, double maxhp, bool aktiv)
+Karakter::Karakter(const char *nev, int mana, char ikon, int hp, int maxhp, bool aktiv)
     : Kartya(nev, mana, ikon), hp(maxhp), maxHp(maxhp), aktiv(true) {}
 
 
-void Karakter::sebzodik(double sebzes, Kartya *tamado)
+void Karakter::sebzodik(int sebzes, Kartya *tamado)
 {
     hp -= sebzes;
     if (hp <= 0)
@@ -65,8 +65,14 @@ void Karakter::halal()
 }
 
 
-double Karakter::elet(){
+int Karakter::getElet()const{
     return hp;
-    
 }
 
+void Karakter::mentes(std::ostream& os){
+    os << "KARAKTER " << nev << " " << manaKoltseg << " " << ikon << " " << hp <<" " << maxHp << " " << aktiv <<std::endl;
+}
+
+Kartya* Karakter::clone() {
+    return new Karakter(*this);
+}

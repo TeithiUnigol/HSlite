@@ -22,6 +22,10 @@
 #include "kurzor.h"
 #include "varazslat.h"
 
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
 typedef enum colors
 {
     white,
@@ -48,19 +52,49 @@ private:
     int jatekos;
     int fazis;
 
-    Jatekos j1;
-    Jatekos j2;
+    Jatekos *j1;
+    Jatekos *j2;
     Kurzor kurz;
 
-    void printMinionDeck(size_t size, KartyaTarolo k);
+    /// @brief Kiíráshoz szükséges konstans adattagok
+    /// képernyő szélessége
+    const size_t screenW;
+    /// egy blokk szélessége
+    const size_t blokkW;
+    /// két blokk közti távolság
+    const size_t separatorS;
 
-    void printBoss(Boss b);
+    //------------Segédfüggvények--------------
+    void changeBG(colors color);
+    void changeTxt(colors color);
+    Jatekos *JatekosKivalaszt(int j);
+    size_t intHossz(int n);
 
+    //------------UI rész--------------
+    void bossvonal();
+    void taroloVonal(size_t fal, size_t cap);
+    void bossSzel(size_t s1, size_t s2);
+    void printBoss(int jatekos);
+    void printKartyak(KartyaTarolo &k);
+    void printMinion(KartyaTarolo &m);
 
-    void printPakli(KartyaTarolo pakli);
+    //------------Játéklogika--------------
+    /// @brief Kiválaszt
+    /// Akkor hívódik meg, amikor a felhasználó arra a kártyára mozgatta a kurzort, amelyiket ki akarja választani.
+    void kivalaszt();
+    /// @brief Következő fázis
+    /// Akkor hívódik meg, amikor a felhasználó már nem kíván több dolgot csinálni az aktuális fázisban.
+    void kovFazis(int fazis);
 
 public:
-    GameManager();
+    void printGame();
+    //------------Mentés logika--------------
+    void loadPakli(char *fileName);
+    void savePakli(char *fileName);
+
+    GameManager(size_t screenW, size_t blokkW, size_t separatorS);
+    GameManager(Jatekos *jat1, Jatekos *jat2, size_t screenW, size_t blokkW, size_t separatorS);
+
     ~GameManager();
 };
 

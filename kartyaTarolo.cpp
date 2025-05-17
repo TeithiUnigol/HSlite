@@ -12,8 +12,10 @@ KartyaTarolo::KartyaTarolo(size_t kapacitas) : kapacitas(kapacitas), meret(0)
     {
         tomb[i] = nullptr;
     }
-    // a teszthez nem kell
-    // srand(time(0));
+    //TODO kitörölni a végén
+    #ifndef CPORTA
+        //srand(time(0));
+    #endif
 }
 
 KartyaTarolo::KartyaTarolo(const KartyaTarolo &t) : kapacitas(t.kapacitas), meret(t.meret)
@@ -22,7 +24,7 @@ KartyaTarolo::KartyaTarolo(const KartyaTarolo &t) : kapacitas(t.kapacitas), mere
 
     for (size_t i = 0; i < meret; ++i)
     {
-        tomb[i] = new Kartya(*t.tomb[i]);
+        tomb[i] = t.tomb[i]->clone();
     }
 }
 
@@ -34,7 +36,7 @@ void KartyaTarolo::randomBeszur(Kartya *kartya)
     }
 
     size_t index = rand() % (kapacitas);
-    while (tomb[index] == nullptr)
+    while (tomb[index] != nullptr)
     {
         ++index;
         if (index == kapacitas)
@@ -42,7 +44,7 @@ void KartyaTarolo::randomBeszur(Kartya *kartya)
             index = 0;
         }
     }
-    tomb[index] = kartya;
+    tomb[index] = kartya->clone();
 
     ++meret;
 }
@@ -51,10 +53,12 @@ void KartyaTarolo::berak(Kartya *kartya, size_t index)
 {
     if (meret >= kapacitas)
     {
-        throw std::overflow_error("megtelt");
+        kiurites();
+        throw "megtelt";
+    }else{
+    tomb[index] = kartya->clone();
+    ++meret;    
     }
-    tomb[index] = kartya;
-    ++meret;
 }
 
 Kartya *KartyaTarolo::kihuz(size_t index)
@@ -76,7 +80,7 @@ size_t KartyaTarolo::getKapacitas() const
 }
 Kartya *KartyaTarolo::operator[](size_t index)
 {
-    if (index >= meret)
+    if (index >= kapacitas)
     {
         throw std::out_of_range("tulindex");
     }
@@ -85,9 +89,13 @@ Kartya *KartyaTarolo::operator[](size_t index)
 
 void KartyaTarolo::kiurites()
 {
-    for (size_t i = 0; i < meret; ++i)
+    for (size_t i = 0; i < kapacitas; ++i)
     {
-        delete tomb[i];
+        if (tomb[i]!=nullptr)
+        {
+            delete tomb[i];
+        }
+        
         tomb[i] = nullptr;
     }
     meret = 0;

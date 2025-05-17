@@ -13,13 +13,10 @@
 #include <string>
 #include <iostream>
 
+
 class Kartya
 {
-protected:
-    const static int maxNevMeret;
-    
-    const static int maxManaMeret;
-    
+protected:    
     std::string nev;
     
     int manaKoltseg;
@@ -50,15 +47,18 @@ public:
     /// @brief Mana kiírása
     /// @param os Az output stream ahova kiírja
     void manaKiir(std::ostream& os)const;
+
     /// @brief Név kiírása
     /// @param os Az output stream ahova kiírja
-    void nevKiir(std::ostream& os) const;
+    void nevKiir(std::ostream &os,size_t maxW) const;
     /// @brief Ikon kiírása
     /// @param os Az output stream ahova kiírja
     void ikonKiir(std::ostream& os) const;
 
-    virtual void sebzodik(double sebzes,Kartya* tamado);
-    virtual void vedelemValt(double d);
+    virtual int getElet()const;
+
+    virtual void sebzodik(int sebzes,Kartya* tamado);
+    virtual void vedelemValt(int d);
     virtual bool regen(int hp);
 
     /// @brief Tartalom ürítése
@@ -67,6 +67,23 @@ public:
     /// @brief Minion-e
   /// @return igaz, ha a karakter minion
   virtual bool isMinion();
+
+  /// @brief Másoló
+  /// @return másolat
+  virtual Kartya* clone();
+
+  /// @brief Név karakterszáma
+  size_t nevMeret();
+
+  #ifndef CPORTA
+  /// @brief Kiírást segíti
+  virtual bool getAktiv();
+  size_t manaKarakterszam();
+
+  /// @brief Mentés
+  /// @param os A megadott folyam, ahova menteni szeretnénk.
+  virtual void mentes(std::ostream& os);
+  #endif
     /// @brief Kártya destruktor
     virtual ~Kartya();
 

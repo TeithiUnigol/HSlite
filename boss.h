@@ -14,14 +14,14 @@
 
 class Boss : public Karakter
 {
-  double specialSebzes;
+  int specialSebzes;
 
 public:
   /// @brief Alap konstruktor
   Boss();
   /// @brief Boss konstruktora karakter és speciális megadásával
   /// @param karakter
-  Boss(Karakter &karakter, double special);
+  Boss(Karakter &karakter, int special);
   /// @brief Karakter konstruktor adatokkal
   /// @param nev karakter neve
   /// @param mana karakter kijátszásához szükséges manaszint (egy bossbál ez elhanyagolható,
@@ -30,7 +30,7 @@ public:
   ///@param hp
   /// @param maxhp
   /// @param aktiv
-  Boss(const char *nev, int mana, char ikon, double hp, double maxhp, bool aktiv, double special);
+  Boss(const char *nev, int mana, char ikon, int hp, int maxhp, bool aktiv, int special);
   /// @brief Boss másoló konstruktor
   /// @param boss  másolandó
   Boss(const Boss &boss);
@@ -40,7 +40,12 @@ public:
   /// @param k A célpont
   void special(Karakter &k);
 
+
+  int getSpecial() const;
+void mentes(std::ostream& os) override;
+
   std::string getName() { return this->nev; }
+  Kartya* clone() override;
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "GameManager.h"
 
-void changeBG(colors color)
+using std::cout;
+void GameManager::changeBG(colors color)
 {
     switch (color)
     {
@@ -22,7 +23,7 @@ void changeBG(colors color)
     }
 }
 
-void changeTxt(colors color)
+void GameManager::changeTxt(colors color)
 {
     switch (color)
     {
@@ -44,15 +45,273 @@ void changeTxt(colors color)
     }
 }
 
-void printMinionDeck(int size, KartyaTarolo k);
+size_t GameManager::intHossz(int n)
+{
+    if (n == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return floor(log10(n)) + 1;
+    }
+}
 
-void GameManager::printBoss(Boss b){
+Jatekos *GameManager::JatekosKivalaszt(int j)
+{
+    if (j == 0)
+    {
+        return j1;
+    }
+    else
+    {
+        return j2;
+    }
+}
+
+GameManager::GameManager(size_t screenW, size_t blokkW, size_t separatorS)
+    : screenW(screenW), blokkW(blokkW), separatorS(separatorS) {}
+GameManager::GameManager(Jatekos *jat1, Jatekos *jat2, size_t screenW, size_t blokkW, size_t separatorS)
+    : j1(jat1), j2(jat2), kurz(j1, j2), screenW(screenW), blokkW(blokkW), separatorS(separatorS) {}
+
+//------------UI rész--------------
+void GameManager::bossvonal()
+{
+    for (size_t i = 0; i < (screenW - blokkW) / 2; i++)
+    {
+        cout << " ";
+    }
+
+    for (size_t i = 0; i < blokkW; i++)
+    {
+        cout << "-";
+    }
+    for (size_t i = 0; i < (screenW - blokkW) / 2; i++)
+    {
+        cout << " ";
+    }
+    cout << std::endl;
+}
+
+void GameManager::taroloVonal(size_t fal,size_t cap){
+    for (size_t i = 0; i < fal; i++)
+    {
+        cout << " ";
+    }
+    for (size_t i = 0; i < cap; i++)
+    {
+        for (size_t i = 0; i < blokkW; i++)
+        {
+            cout << "-";
+        }
+        if (i!=cap-1)
+        {   
+            for (size_t i = 0; i < separatorS; i++)
+            {
+                cout << " ";
+            }
+        }
+    }
+    for (size_t i = 0; i < fal; i++)
+    {
+        cout << " ";
+    }
     
+    
+}
+
+void GameManager::bossSzel(size_t s1, size_t s2)
+{
+    for (size_t i = 0; i < s1; i++)
+    {
+        cout << " ";
+    }
+    cout << "|";
+    for (size_t i = 0; i < s2; i++)
+    {
+        cout << " ";
+    }
+}
+void GameManager::printBoss(int jatekos)
+{
+    changeBG(black);
+    changeTxt(white);
+    size_t fal = (screenW - blokkW) / 2;
+    size_t falBelso;
+
+    // kártya teteje
+    bossvonal();
+
+    Jatekos *aktJ = JatekosKivalaszt(jatekos);
+
+    // boss ikon kiírása
+    falBelso = (blokkW - 3) / 2;
+    bossSzel(fal, falBelso);
+    aktJ->Getboss().ikonKiir(std::cout);
+    bossSzel(falBelso, fal);
+    cout << std::endl;
+
+    size_t nevM = aktJ->Getboss().nevMeret();
+    // boss nevének kiírása
+
+    if (nevM < (blokkW - 2))
+    {
+        bossSzel(fal, (blokkW - nevM - 2) / 2);
+        if (kurz.getMov().szint == jatekos * 3)
+        {
+            changeBG(green);
+        }
+        if (!aktJ->Getboss().getAktiv())
+        {
+            changeTxt(gray);
+        }
+        aktJ->Getboss().nevKiir(std::cout, blokkW - 2);
+        changeTxt(white);
+        changeBG(black);
+        bossSzel((blokkW - nevM - 2) / 2, fal);
+    }
+    else
+    {
+        bossSzel(fal, 0);
+        if (kurz.getMov().szint == jatekos * 3)
+        {
+            changeBG(green);
+        }
+        if (!aktJ->Getboss().getAktiv())
+        {
+            changeTxt(gray);
+        }
+        aktJ->Getboss().nevKiir(std::cout, blokkW - 2);
+        changeTxt(white);
+        changeBG(black);
+        bossSzel(0, fal);
+    }
+    cout << std::endl;
+
+    falBelso = (blokkW - 3) / 2;
+    bossSzel(fal, 0);
+    int n = aktJ->Getboss().getElet();
+    cout << "Hp:" << n;
+    bossSzel(blokkW - 5 - intHossz(n), fal);
+    cout << std::endl;
+    bossvonal();
+    falBelso = (blokkW - 3) / 2;
+    bossSzel(fal, 0);
+    n = aktJ->Getboss().getSpecial();
+    cout << "Sp:" << n;
+    bossSzel(blokkW - 5 - intHossz(n), fal);
+    cout << std::endl;
+    bossvonal();
+    cout << std::endl;
 }
 
 void printPakli(KartyaTarolo pakli);
 
+void GameManager::printKartyak(KartyaTarolo &k)
+{
 
+}
+void GameManager::printMinion(KartyaTarolo &m)
+{
+    size_t meret = m.getKapacitas();
+    size_t fal = (screenW-(blokkW*meret+separatorS*(meret-1)))/2;
+    taroloVonal(fal,meret);
+}
+void GameManager::printGame()
+{
+    changeBG(black);
+    changeTxt(white);
+    econio_clrscr();
+    if (jatekos==0)
+    {
+        changeBG(green);
+    }
+    
+    cout<<"Jatekos 1\n";
+    changeBG(black);
+    
+    cout<<"Mana: "<<j1->getMana()<<std::endl;
+
+    printBoss(0);
+    cout<<j1->getTarolo(TaroloTipus::Minionok).getKapacitas()<<std::endl;
+    //printMinion(j1->getTarolo(TaroloTipus::Minionok));
+    for (size_t i = 0; i < screenW; i++)
+    {
+        cout<<"-";
+    }
+    cout<<std::endl;
+    
+    printBoss(1);
+    cout<<"Mana: "<<j2->getMana()<<std::endl;
+    if (jatekos==1)
+    {
+        changeBG(green);
+    }
+    
+    cout<<"Jatekos 2";
+    changeBG(black);
+
+}
+
+//------------Játéklogika--------------
+void GameManager::kivalaszt()
+{
+    if (kurz.getSel1().pointer == nullptr)
+    {
+        kurz.getSel1().pointer = kurz.getMov().pointer;
+    }
+    else
+    {
+        if (!JatekosKivalaszt(jatekos)->Kijatszas(kurz.getSel1().pointer, kurz.getMov().pointer))
+        {
+            econio_clrscr();
+            changeTxt(red);
+            cout << "helytelen";
+        }
+
+        kurz.getSel1().pointer = nullptr;
+        kurz.getMov().pointer = nullptr;
+    }
+}
+
+void GameManager::kovFazis(int fazis)
+{
+    kurz.getSel1().pointer = nullptr;
+    fazis += 1;
+    if (fazis == 3)
+    {
+        jatekos = (jatekos + 1) % 2;
+        if (jatekos == 0)
+        {
+            kurz.getMov().szint = 0;
+            j1->ujKor();
+        }
+        else
+        {
+            kurz.getMov().szint = 3;
+            j2->ujKor();
+        }
+    }
+}
+
+void GameManager::loadPakli(char *fileName)
+{
+    std::ofstream File("filename.txt");
+
+    File.close();
+}
+void GameManager::savePakli(char *fileName)
+{
+    std::ofstream File("filename.txt");
+
+    File.close();
+}
+
+GameManager::~GameManager()
+{
+    changeBG(black);
+    changeTxt(white);
+}
 
 /*
 econio_rawmode();

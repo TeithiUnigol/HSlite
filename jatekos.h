@@ -52,20 +52,20 @@ public:
     /// @param MinionPakli 
     /// @param csomag 
     /// @param maxMana 
-    Jatekos(Boss boss,KartyaTarolo huzoPakli,KartyaTarolo kezPakli,KartyaTarolo MinionPakli,KartyaTarolo csomag,int maxMana);
+    Jatekos(const Boss& boss,const KartyaTarolo& huzoPakli,const KartyaTarolo& kezPakli,const KartyaTarolo& MinionPakli,const KartyaTarolo& csomag,int maxMana,int mana);
     /// @brief Játékos konstruktor
-    /// Játék kezdetekor, használandó. Paraméterklnt a kötelező adatok vannak csak megadva.
+    /// Játék kezdetekor, használandó. Paraméterként a kötelező adatok vannak csak megadva.
     /// @param boss 
     /// @param MinionPakliMeret 
     /// @param kezMeret 
     /// @param csomag 
     /// @param maxMana 
-    Jatekos(Boss boss,size_t MinionPakliMeret,size_t kezMeret,KartyaTarolo csomag,int maxMana);
+    Jatekos(const Boss& boss,size_t MinionPakliMeret,size_t kezMeret,const KartyaTarolo& csom,int maxMana);
     /// @brief Játékos másoló konstruktor
     /// @param j másolandó
     Jatekos(const Jatekos& j);
 
-    /// @brief Kézben levő kártyák feltöltése a húzópaklibóly
+    /// @brief Kézben levő kártyák feltöltése a húzópakliból
     void kezfeltolt();
 
     /// @brief Új kör indítása
@@ -91,6 +91,9 @@ public:
   /// @return 
   KartyaTarolo& getTarolo(TaroloTipus tipus);
 
+  int getMana()const;
+
+  void mentes(std::ostream& os);
 
 };
 #endif

@@ -15,8 +15,8 @@
 class Karakter : public Kartya
 {
 protected:
-  double hp;
-  double maxHp;
+  int hp;
+  int maxHp;
   bool aktiv;
 
 public:
@@ -33,19 +33,19 @@ public:
   ///@param hp
   /// @param maxhp
   /// @param aktiv
-  Karakter(const char *nev, int mana, char ikon, double hp, double maxhp, bool aktiv);
+  Karakter(const char *nev, int mana, char ikon, int hp, int maxhp, bool aktiv);
   /// @brief Támadás
   /// A karakterre meghatározott mértékű sebzést okoz. A minion védelemmel csökkentheti a sebződést, de a boss nem.
   /// @param sebzes a sebzés mértéke
   /// @param tamado a támadó
-  virtual void sebzodik(double sebzes,Kartya* tamado);
+  virtual void sebzodik(int sebzes,Kartya* tamado);
   /// @brief gyógyítás
   /// @param hp gyógyítás mértéke
   /// @return
   bool regen(int hp);
   /// @brief Aktív lekérése
   /// @return aktív-e az állapot.
-  bool getAktiv();
+  bool getAktiv() override;
   ///@brief Újra aktiválás
   /// Újra aktívra állítja a karaktert. Ezt minden kör végén meghívódik
   virtual void reaktiv();
@@ -57,12 +57,13 @@ public:
   /// Ha elfogyott az élete az adott karakternek, üres karakterré válik.
   void halal();
   
-  /// @brief Élet lekérdezése
-  /// pusztán a teszteléshez szükséges
-  /// @return S karakter élete.
-  double elet();
+  virtual void mentes(std::ostream& os) override;
 
+  Kartya* clone() override;
 
+  /// @brief kiíráshoz szükséges élet lekérés
+  /// @return 
+  int getElet()const;
   
 };
 #endif

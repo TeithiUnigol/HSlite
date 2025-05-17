@@ -1,15 +1,15 @@
 #include "jatekos.h"
 #include "minion.h"
 
-Jatekos::Jatekos():maxMana(0),boss(),kez(0),huzo(0),minionok(0),csomag(0){}
+Jatekos::Jatekos():maxMana(0),mana(0),boss(),kez(0),huzo(0),minionok(0),csomag(0){}
 
-Jatekos::Jatekos(Boss boss,KartyaTarolo huzoPakli,KartyaTarolo kezPakli,KartyaTarolo MinionPakli,KartyaTarolo csomag,int maxMana):
-        maxMana(maxMana),boss(boss),kez(kezPakli),huzo(huzoPakli),minionok(MinionPakli),csomag(csomag){}
-Jatekos:: Jatekos(Boss boss,size_t MinionPakliMeret,size_t kezMeret,KartyaTarolo csomag,int maxMana):
-        maxMana(maxMana),boss(boss),kez(kezMeret),huzo(csomag.getKapacitas()),minionok(MinionPakliMeret),csomag(csomag){
+Jatekos::Jatekos(const Boss& boss,const KartyaTarolo& huzoPakli,const KartyaTarolo& kezPakli,const KartyaTarolo& MinionPakli,const KartyaTarolo& csomag,int maxMana,int mana):
+        maxMana(maxMana),mana(mana),boss(boss),kez(kezPakli),huzo(huzoPakli),minionok(MinionPakli),csomag(csomag){}
+Jatekos:: Jatekos(const Boss& boss,size_t MinionPakliMeret,size_t kezMeret,const KartyaTarolo& csom,int maxMana):
+        maxMana(maxMana),mana(maxMana),boss(boss),kez(kezMeret),huzo(csom.getKapacitas()),minionok(MinionPakliMeret),csomag(csom){
     huzopakliKever();
 }
-Jatekos::Jatekos(const Jatekos& j):maxMana(j.maxMana), boss(j.boss), kez(j.kez), huzo(j.huzo), minionok(j.minionok), csomag(j.csomag){}
+Jatekos::Jatekos(const Jatekos& j):maxMana(j.maxMana),mana(j.mana), boss(j.boss), kez(j.kez), huzo(j.huzo), minionok(j.minionok), csomag(j.csomag){}
 
 void Jatekos::kezfeltolt(){
     int index = 0;
@@ -22,10 +22,9 @@ void Jatekos::kezfeltolt(){
 
 
 void Jatekos::ujKor(){
+    boss.reaktiv();
     for (size_t i = 0; i < minionok.getKapacitas(); i++)
     {
-        //Másik ötlet: kartyaTarolo módosítása
-        
         Minion* M =dynamic_cast<Minion*>(minionok[i]);
         if (M!=nullptr)
         {
@@ -70,3 +69,11 @@ KartyaTarolo& Jatekos::getTarolo(TaroloTipus tipus) {
             throw "NincsIlyen";
     }
 }
+
+int Jatekos::getMana()const{
+    return mana;
+}
+
+ void Jatekos::mentes(std::ostream& os){
+
+ }

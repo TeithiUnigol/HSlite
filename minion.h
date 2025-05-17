@@ -15,8 +15,8 @@
 class Minion : public Karakter
 {
 private:
-  double ero;
-  double vedelem;
+  int ero;
+  int vedelem;
 
 public:
   /// @brief Minion alapkonstruktora
@@ -24,7 +24,10 @@ public:
   /// @brief Minion konstruktora karakter és erő megadásával
   /// @param k
   /// @param ero
-  Minion(Karakter &k, double ero);
+  Minion(Karakter &k, int ero);
+
+  ///@brief Konstruktor adattagokkal
+  Minion(const char *nev, int mana, char ikon, int hp, int maxhp, bool aktiv, int ero,int vedelem);
   /// @brief Minion konstruktora minion referenciával
   /// @param m
   Minion(Minion &m);
@@ -39,7 +42,7 @@ public:
   /// A minion (hacsak nem halott) vissza is tud támadni.
   /// @param sebzes A minionra kifejtett sebzés mértéke
   /// @param tamado A karakter, aki megtámadta az adott miniont.
-  void sebzodik(double sebzes, Kartya *tamado) override;
+  void sebzodik(int sebzes, Kartya *tamado) override;
   /// @brief Karakter megtámadása
   /// Megtámadja a kiválasztott karaktert
   /// @param celpont A célpont
@@ -48,7 +51,7 @@ public:
   /// A támadások esetén először a védelem csökken és csak aztán az élets
   /// @param d a védelem megváltoztatásának mértéke
   /// @return sikeres volt-e a védelem változtatása
-  void vedelemValt(double d);
+  void vedelemValt(int d);
   /// @brief Minion lehelyezése
   /// @param mana
   /// @param kiv Az az üres karakterlap, ahova
@@ -61,14 +64,16 @@ public:
   /// @brief Védelem getter
   /// Tesztekzez használt getter
   /// @return védelem
-  double minionVedelem();
+  int minionVedelem();
   /// @brief élet getter
   /// Tesztekzez használt getter
   ///  @return minion élete
-  double minionhp();
+  int minionhp();
   /// @brief Karakterből származó minion lekérő
   /// @return true, mivel minion
   bool isMinion();
+  void mentes(std::ostream& os) override;
+  Kartya* clone() override;
 };
 
 #endif
