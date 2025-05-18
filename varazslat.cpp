@@ -32,7 +32,6 @@ void Varazslat::betoltes(std::istream &is)
 {
     Kartya::betoltes(is);
     is >> sebzes >> gyogyitas >> vedelem;
-
     if (!is)
     {
         throw std::runtime_error("Helytelen bemenetfile");
@@ -46,9 +45,9 @@ void Varazslat::tartalomkiir(int xBehuz, int Ykezd, bool inKez)
     std::cout << "Man: " << manaKoltseg;
 
     econio_gotoxy(xBehuz, y++);
-    std::cout << "Seb: " << manaKoltseg;
+    std::cout << "Seb: " << sebzes;
     econio_gotoxy(xBehuz, y++);
-    std::cout << "+Hp: " << manaKoltseg;
+    std::cout << "+Hp: " << gyogyitas;
     econio_gotoxy(xBehuz, y++);
-    std::cout << "Ved: " << manaKoltseg;
+    std::cout << "Ved: " << vedelem;
 }

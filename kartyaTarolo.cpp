@@ -78,6 +78,7 @@ void KartyaTarolo::berak(Kartya *kartya, size_t index)
         throw "megtelt";
     }else{
     tomb[index] = kartya->clone();
+    //mivel klónozza, a forrás nem szabadul fel, amit viszont kihuzból kiszedtünk, így szivárogni fog
     ++meret;    
     }
 }

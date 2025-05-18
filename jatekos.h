@@ -98,6 +98,7 @@ public:
 
   void mentes(std::ostream& os);
 
+  ~Jatekos();
 
 };
 #endif

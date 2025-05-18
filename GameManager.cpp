@@ -88,7 +88,7 @@ void GameManager::MenuSelect()
     changeBG(black);
     cout << "Betoltes\n";
 
-    int kiv;
+    int kiv = 0;
     while (isKerdez)
     {
         if (econio_kbhit())
@@ -157,6 +157,7 @@ void GameManager::MenuSelect()
                 cout << "Uj Jatek\n";
                 changeBG(green);
                 cout << "Betoltes\n";
+                changeBG(black);
             }
         }
     }
@@ -236,12 +237,57 @@ void GameManager::KartyaKiir(int xBehuz, int yKezd, Kartya *k, bool inkez, bool 
 
     printUresKartya(xBehuz, blokkH, yKezd);
     econio_gotoxy(xBehuz + blokkW / 2, ++y);
-    k->ikonKiir(cout);
-
-    size_t nevM = k->nevMeret();
-    if (nevM < (blokkW - 2))
+    if (k != nullptr)
     {
-        econio_gotoxy(xBehuz + (blokkW - nevM) / 2, ++y);
+        k->ikonKiir(cout);
+
+        size_t nevM = k->nevMeret();
+        if (nevM < (blokkW - 2))
+        {
+            econio_gotoxy(xBehuz + (blokkW - nevM) / 2, ++y);
+            if (isMov)
+            {
+                changeBG(green);
+            }
+            else if (isSel)
+            {
+                changeBG(yellow);
+            }
+            if (!k->getAktiv())
+            {
+                changeTxt(gray);
+            }
+            k->nevKiir(std::cout, blokkW - 2);
+            changeTxt(white);
+            changeBG(black);
+            econio_gotoxy(xBehuz + blokkW - 1, y++);
+        }
+        else
+        {
+            econio_gotoxy(xBehuz + 1, ++y);
+            if (kurz.getMov().szint == jatekos * 3)
+            {
+                changeBG(green);
+            }
+            else if (kurz.getSel1().szint == jatekos * 3)
+            {
+                changeBG(yellow);
+            }
+            if (!k->getAktiv())
+            {
+                changeTxt(gray);
+            }
+            k->nevKiir(std::cout, blokkW - 2);
+            changeTxt(white);
+            changeBG(black);
+            ++y;
+        }
+        ++y;
+        k->tartalomkiir(xBehuz + 1, y, inkez);
+    }
+    else
+    {
+        econio_gotoxy(xBehuz + 1, ++y);
         if (isMov)
         {
             changeBG(green);
@@ -250,36 +296,13 @@ void GameManager::KartyaKiir(int xBehuz, int yKezd, Kartya *k, bool inkez, bool 
         {
             changeBG(yellow);
         }
-        if (!k->getAktiv())
+        for (size_t i = 0; i < blokkW - 2; i++)
         {
-            changeTxt(gray);
+            cout << " ";
         }
-        k->nevKiir(std::cout, blokkW - 2);
         changeTxt(white);
-        changeBG(black);
-        econio_gotoxy(xBehuz + blokkW - 1, y++);
+            changeBG(black);
     }
-    else
-    {
-        econio_gotoxy(xBehuz, y + 3);
-        if (kurz.getMov().szint == jatekos * 3)
-        {
-            changeBG(green);
-        }
-        else if (kurz.getSel1().szint == jatekos * 3)
-        {
-            changeBG(yellow);
-        }
-        if (!k->getAktiv())
-        {
-            changeTxt(gray);
-        }
-        k->nevKiir(std::cout, blokkW - 2);
-        changeTxt(white);
-        changeBG(black);
-    }
-    ++y;
-    k->tartalomkiir(xBehuz + 1, y, inkez);
 }
 void GameManager::felsoVonal(int xBehuz, int yKezd)
 {
@@ -381,58 +404,32 @@ void GameManager::printTarolo(int yKezd, int yMeret, KartyaTarolo &tarolo, bool 
     int fal = ((screenW - kap * blokkW - (kap - 1) * separatorS) / 2);
     for (size_t i = 0; i < kap; i++)
     {
-        if (tarolo[i] == nullptr)
+
+        if (fazis == 1 && isKez && melyikJatekose == jatekos)
         {
-            printUresKartya(fal, yMeret, yKezd);
+            if (kurz.getMov().index == i)
+            {
+                KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
+            }
+            else if (kurz.getSel1().index)
+            {
+                KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
+            }
+            else
+            {
+                KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
+            }
         }
-        else
+        else if (fazis == 1 && !isKez)
         {
-            if (fazis == 1 && isKez && melyikJatekose == jatekos)
-            {
-                if (kurz.getMov().index == i)
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
-                }
-                else if (kurz.getSel1().index)
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
-                }
-                else
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
-                }
-            }
-            else if (fazis == 1 && !isKez)
-            {
-                if (kurz.getSel1().pointer != nullptr)
-                {
-                    if (kurz.getMov().index == i && kurz.getMov().szint == melyikJatekose + 1)
-                    {
-                        KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
-                    }
-                    else
-                    {
-                        KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
-                    }
-                }
-                else
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
-                }
-            }
-            else if (fazis == 2 && !isKez)
+            if (kurz.getSel1().pointer != nullptr)
             {
                 if (kurz.getMov().index == i && kurz.getMov().szint == melyikJatekose + 1)
                 {
                     KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
                 }
-                else if (kurz.getSel1().index == i && kurz.getSel1().szint == melyikJatekose + 1)
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
-                }
                 else
                 {
-
                     KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
                 }
             }
@@ -440,6 +437,26 @@ void GameManager::printTarolo(int yKezd, int yMeret, KartyaTarolo &tarolo, bool 
             {
                 KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
             }
+        }
+        else if (fazis == 2 && !isKez)
+        {
+            if (kurz.getMov().index == i && kurz.getMov().szint == melyikJatekose + 1)
+            {
+                KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
+            }
+            else if (kurz.getSel1().index == i && kurz.getSel1().szint == melyikJatekose + 1)
+            {
+                KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
+            }
+            else
+            {
+
+                KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
+            }
+        }
+        else
+        {
+            KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
         }
         fal += blokkW + separatorS;
     }
@@ -461,7 +478,9 @@ void GameManager::printGame()
     econio_gotoxy(0, y++);
     cout << "Mana: " << j1.getMana();
 
-    KartyaKiir((screenW - blokkW) / 2, y, &j1.Getboss(), false, kurz.getSel1().szint == 0, kurz.getMov().szint == 0);
+    // KartyaKiir((screenW - blokkW) / 2, y, &j1.Getboss(), false, kurz.getSel1().szint == 0, kurz.getMov().szint == 0);
+    KartyaKiir((screenW - blokkW) / 2, y, &j1.Getboss(), false, false, false);
+
     y += 3 + 2 + blokkH;
 
     printTarolo(y, blokkH, j1.getTarolo(TaroloTipus::Kez), true, 0);
@@ -753,6 +772,7 @@ void GameManager::game()
     changeBG(black);
     changeTxt(white);
     econio_clrscr();
+    fazis = 1;
     printGame();
     isJatek = true;
     int input = 0;
@@ -771,22 +791,18 @@ void GameManager::game()
                 break;
             case -20:
             case 'w':
-                // up
                 kurz.lepes(irany::fel, fazis, jatekos, JatekosKivalaszt(jatekos));
                 break;
             case -22:
             case 'a':
-                // left
                 kurz.lepes(irany::balra, fazis, jatekos, JatekosKivalaszt(jatekos));
                 break;
             case -21:
             case 's':
-                // down
                 kurz.lepes(irany::le, fazis, jatekos, JatekosKivalaszt(jatekos));
                 break;
             case -23:
             case 'd':
-                // right
                 kurz.lepes(irany::jobbra, fazis, jatekos, JatekosKivalaszt(jatekos));
                 break;
             case 'l':

@@ -299,8 +299,6 @@ int main()
 
 GameManager gm(100, 15, 4, 4, "pakli.txt", "jatek.txt");
 gm.MenuSelect();
-/*gm.loadPakli();
-gm.printGame();*/
 
 #endif
 

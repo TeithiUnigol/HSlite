@@ -39,7 +39,9 @@ void Jatekos::kezfeltolt()
 
     while (kez.getMeret() != kez.getKapacitas() && huzo.getMeret() > 0)
     {
-        kez.berak(huzo.kihuz(huzo.getMeret() - 1), index);
+        Kartya* temp = huzo.kihuz(huzo.getMeret() - 1);
+        kez.berak(temp, index);
+        delete temp;
         ++index;
     }
 }
@@ -100,7 +102,7 @@ int Jatekos::getMana() const
     return mana;
 }
 
-// const Boss& boss,size_t MinionPakliMeret,size_t kezMeret,const KartyaTarolo& csom,int maxMana
+// Jatekos(const Boss& boss,const KartyaTarolo& huzoPakli,const KartyaTarolo& kezPakli,const KartyaTarolo& MinionPakli,const KartyaTarolo& csomag,int maxMana,int mana);
 void Jatekos::mentes(std::ostream &os)
 {
     os << csomag.getMeret() << " " << minionok.getKapacitas() << " " << kez.getKapacitas() << " " << mana << std::endl;
@@ -109,4 +111,9 @@ void Jatekos::mentes(std::ostream &os)
     {
         csomag[i]->mentes(os);
     }
+}
+Jatekos::~Jatekos()
+{
+    huzo.kiurites();
+    kez.kiurites();
 }
