@@ -664,7 +664,12 @@ void GameManager::savePakli()
 void GameManager::saveGame()
 {
     std::ofstream File(mentesFile);
+    File << "J1 ";
+    j2.mentes(File);
 
+    File << "J2 ";
+    j1.mentes(File);
+    File << "END";
     File.close();
 }
 void GameManager::loadGame()
@@ -791,7 +796,7 @@ void GameManager::game()
     printGame();
     isJatek = true;
     int input = 0;
-    
+
     while (isJatek)
     {
         if (econio_kbhit())
