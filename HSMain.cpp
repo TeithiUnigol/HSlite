@@ -297,10 +297,10 @@ int main()
 
 #ifndef CPORTA
 
-GameManager gm(50, 15, 5, 2, "pakli.txt", "jatek.txt");
-//gm.MenuSelect();
-gm.loadPakli();
-gm.printGame();
+GameManager gm(100, 15, 4, 4, "pakli.txt", "jatek.txt");
+gm.MenuSelect();
+/*gm.loadPakli();
+gm.printGame();*/
 
 #endif
 

@@ -84,13 +84,13 @@ class GameManager
     
     //------------UI rész--------------
     public:
-    void bossKartya(int jatekos,int startY);
+    //void bossKartya(int jatekos,int startY);
     void MenuSelect();
     
     
     private:
-    void KartyaKiir(int xBehuz, int yKezd,Kartya* k,bool inkez);
-    void printTarolo(KartyaTarolo& tarolo);
+    void KartyaKiir(int xBehuz, int yKezd,Kartya* k,bool inkez,bool isSel,bool isMov);
+    void printTarolo(int yKezd,int yMeret,KartyaTarolo& tarolo,bool isKez,int melyikJatekose);
     bool endGameScreen(int gyoz);
     void felsoVonal(int xBehuz,int yKezd);
     void belsoFal(int behuzasX,int yKezd);
@@ -98,8 +98,6 @@ class GameManager
     /// @param xBehuz mennyivel legyen beljebb
     /// @param yMeret Hány karakter hosszú legyen az adattagok sáv
     void printUresKartya(int xBehuz,int yMeret,int yKezd);
-    void printKartyak(KartyaTarolo &k);
-    void printMinion(KartyaTarolo &m);
     
     //------------Játéklogika--------------
     /// @brief Kiválaszt
@@ -112,10 +110,10 @@ class GameManager
     public:
     GameManager(size_t screenW, size_t blokkW,size_t blokkH, size_t separatorS,std::string pakliforras,std::string GameForras);
     GameManager(const Jatekos& jat1,const Jatekos &jat2, size_t screenW, size_t blokkW,size_t blokkH, size_t separatorS);
-    bool game();
+    void game();
     void printGame();
     //------------Mentés logika--------------
-    //void savePakli();
+    //void savePakli(); Csak a forrás pakli létrehozásához létezett
     void loadPakli();
     void saveGame();
     void loadGame();
