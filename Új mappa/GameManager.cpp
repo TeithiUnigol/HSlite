@@ -791,7 +791,6 @@ void GameManager::game()
     printGame();
     isJatek = true;
     int input = 0;
-    
     while (isJatek)
     {
         if (econio_kbhit())
