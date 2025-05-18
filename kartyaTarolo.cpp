@@ -3,6 +3,8 @@
 
 #include <time.h>
 
+#define CPORTA
+
 KartyaTarolo::KartyaTarolo() : tomb(nullptr), kapacitas(0), meret(0) {}
 
 KartyaTarolo::KartyaTarolo(size_t kapacitas) : kapacitas(kapacitas), meret(0)

@@ -516,58 +516,51 @@ void GameManager::printGame()
 }
 
 //------------Játéklogika--------------
+
+//TODO VALAMI ROSSZ ITT!!!
 void GameManager::kivalaszt()
 {
-    if (kurz.getSel1().pointer == nullptr)
-    {
+    if (kurz.getSel1().pointer == nullptr) {
+        // Első kiválasztás (támadó/kijátszandó kártya)
         kurz.getSel1().pointer = kurz.getMov().pointer;
-    }
-    else
-    {
+    } else {
+        // Már van kijelölve egy lap vagy karakter, most cselekvés történik
+        Jatekos* aktiv = JatekosKivalaszt(jatekos);
+        Jatekos* ellenfel = JatekosKivalaszt(1 - jatekos);
 
-        if (!JatekosKivalaszt(jatekos)->Kijatszas(kurz.getSel1().pointer, kurz.getMov().pointer))
-        {
+        if (!aktiv->Kijatszas(kurz.getSel1().pointer, kurz.getMov().pointer)) {
             econio_clrscr();
             changeTxt(red);
-            cout << "helytelen";
-        }
-        else
-        {
-            if (fazis == 1)
-            {
-                JatekosKivalaszt(jatekos)->getTarolo(TaroloTipus::Kez).kihuz(kurz.getSel1().index);
-            }
-            else
-            {
-                switch (kurz.getMov().szint)
-                {
-                case 0:
-                    if (j1.Getboss().getElet() == 0)
+            cout << "Helytelen";
+            econio_sleep(1);
+        } else {
+            if (fazis == 1) {
+                // Ha kézből játszottuk ki, távolítsuk el onnan
+                aktiv->getTarolo(TaroloTipus::Kez).kihuz(kurz.getSel1().index);
+            } else {
+                // Harci fázis, vizsgáljuk a célpontot
+                switch (kurz.getMov().szint) {
+                    case 0: // Boss támadás
+                        if (ellenfel->Getboss().getElet() == 0) {
+                            isJatek = false;
+                        }
+                        break;
+                    case 1: // Ellenfél minion támadása
                     {
-                        isJatek = false;
+                        Kartya* cel = ellenfel->getTarolo(TaroloTipus::Minionok)[kurz.getMov().index];
+                        if (cel && cel->getElet() == 0) {
+                            ellenfel->getTarolo(TaroloTipus::Minionok).kihuz(kurz.getMov().index);
+                        }
+                        break;
                     }
-
-                    break;
-                case 1:
-                    if (j1.getTarolo(TaroloTipus::Kez).kihuz(kurz.getSel1().index)->getElet() == 0)
-                    {
-                        JatekosKivalaszt(0)->getTarolo(TaroloTipus::Minionok).kihuz(kurz.getSel1().index);
-                    }
-                    break;
-                case 2:
-                    if (j1.getTarolo(TaroloTipus::Kez).kihuz(kurz.getSel1().index)->getElet() == 0)
-                    {
-                        JatekosKivalaszt(0)->getTarolo(TaroloTipus::Minionok).kihuz(kurz.getSel1().index);
-                    }
-                    break;
-                case 3:
-
-                    break;
-
-                default:
-                    break;
+                    case 2: // Ellenfél kézben lévő minion? ez valószínűleg logikai hiba
+                        break;
+                    case 3: // valami más?
+                        break;
                 }
             }
+
+            // Végén: reseteljük a kurzort
             kurz.getSel1().pointer = nullptr;
             kurz.getMov().pointer = nullptr;
         }

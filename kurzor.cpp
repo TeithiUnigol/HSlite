@@ -244,6 +244,10 @@ void Kurzor::gorgeto(T &gorgetendo, bool poz, T maxT)
 }
 
 
+bool Kurzor::kivalaszt(){
+    return false;
+}
+
 mozgo& Kurzor::getMov()
 {
     return mov_a;

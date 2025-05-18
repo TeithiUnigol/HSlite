@@ -183,7 +183,8 @@ int main()
         Karakter karakterL("Hos Lovag", 0, 'L', 1, 1, true);
         Minion kobold(karakterK, 3);
         Boss hosLovag(karakterL, 2000);
-        hosLovag.special(kobold);
+        int mana =10;
+        hosLovag.kijatszas(&mana,&kobold);
         std::stringstream strs;
         kobold.nevKiir(strs, kobold.nevMeret());
         EXPECT_STREQ(" ", strs.str().c_str());
@@ -191,6 +192,7 @@ int main()
         hosLovag.nevKiir(strs, hosLovag.nevMeret());
         EXPECT_STREQ(" Hos Lovag", strs.str().c_str());
         EXPECT_FALSE(hosLovag.getAktiv());
+        EXPECT_EQ(mana,10);
     }
     ENDM
 
@@ -277,28 +279,29 @@ int main()
     {
         csomag1.berak(&kobold, i1++);
     }
-    /*size_t kezmeret = 5;
+    size_t kezmeret = 5;
     Jatekos jteszt(hosLovag, 5, kezmeret, csomag1, 3);
-    std::cout << "\n=== Jatekos tesztek ===\n"<< std::endl;
+    std::cout << "\n=== Jatekos tesztek ===\n"
+              << std::endl;
     TEST(Jatekos, konstruktor)
     {
         EXPECT_EQ(3, jteszt.getMana());
         EXPECT_EQ(30, jteszt.Getboss().getElet());
-        }
-        ENDM*/
-    /*TEST(Jatekos, kezfeltolt&meret&kapacitas)
+    }
+    ENDM
+    TEST(Jatekos, kezfeltolt & meret & kapacitas)
     {
         EXPECT_EQ(0, jteszt.getTarolo(TaroloTipus::Kez).getMeret());
         jteszt.kezfeltolt();
         EXPECT_EQ(kezmeret, jteszt.getTarolo(TaroloTipus::Kez).getMeret());
-        }
-        ENDM*/
+    }
+    ENDM
 #endif
 
 #ifndef CPORTA
 
-GameManager gm(100, 15, 4, 4, "pakli.txt", "jatek.txt");
-gm.MenuSelect();
+        GameManager gm(100, 15, 4, 4, "pakli.txt", "jatek.txt");
+    gm.MenuSelect();
 
 #endif
 
