@@ -2,7 +2,8 @@
 #include <random>
 
 #include <time.h>
-#include "memtrace.h"
+
+#define CPORTA
 
 KartyaTarolo::KartyaTarolo() : tomb(nullptr), kapacitas(0), meret(0) {}
 
@@ -11,7 +12,7 @@ KartyaTarolo::KartyaTarolo(size_t kapacitas) : kapacitas(kapacitas), meret(0)
     tomb = new Kartya *[kapacitas];
     for (size_t i = 0; i < kapacitas; ++i)
     {
-        tomb[i] = new Kartya;
+        tomb[i] = nullptr;
     }
     #ifndef CPORTA
         srand(time(0));
@@ -58,7 +59,7 @@ void KartyaTarolo::randomBeszur(Kartya *kartya)
     }
 
     size_t index = rand() % (kapacitas);
-    while (tomb[index] != nullptr && tomb[index]->getIkon()!=' ')
+    while (tomb[index] != nullptr)
     {
         ++index;
         if (index == kapacitas)
@@ -66,7 +67,6 @@ void KartyaTarolo::randomBeszur(Kartya *kartya)
             index = 0;
         }
     }
-    delete tomb[index];
     tomb[index] = kartya->clone();
 
     ++meret;
@@ -79,10 +79,9 @@ void KartyaTarolo::berak(Kartya *kartya, size_t index)
         kiurites();
         throw "megtelt";
     }else{
-        delete tomb[index];
     tomb[index] = kartya->clone();
     //mivel klónozza, a forrás nem szabadul fel, amit viszont kihuzból kiszedtünk, így szivárogni fog
-    ++meret;
+    ++meret;    
     }
 }
 
@@ -120,7 +119,7 @@ void KartyaTarolo::kiurites()
         {
             delete tomb[i];
         }
-
+        
         tomb[i] = nullptr;
     }
     meret = 0;

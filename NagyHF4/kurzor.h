@@ -16,7 +16,6 @@
 #include "boss.h"
 #include "kartyaTarolo.h"
 #include "jatekos.h"
-#include "memtrace.h"
 
 enum irany
 {

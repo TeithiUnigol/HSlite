@@ -16,9 +16,7 @@ class KartyaTarolo{
     Kartya** tomb;
     size_t kapacitas;
     size_t meret;
-    public:
-    /// @brief tömb elemeinek nullpointeresítése
-    void tombTorol();
+public:
     /// @brief Tároló alapkonstruktora
     KartyaTarolo();
     /// @brief Kártya tároló kapacítás szerinti konstruktora.
@@ -53,7 +51,7 @@ class KartyaTarolo{
     /// @param index 
     /// @return 
     Kartya* operator[](size_t index);
-    /// @brief Tároló üres káryákkal való feltöltése
+    /// @brief Tároló ürítése
     void kiurites();
     /// @brief Tároló destruktora
     ~KartyaTarolo();

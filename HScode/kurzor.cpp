@@ -152,12 +152,12 @@ void Kurzor::fazis2Lepes(irany ir, int jatekos)
         switch (ir)
         {
         case jobbra:
-            gorgeto(mov_a.index, true, maxIndex-1);
+            gorgeto(mov_a.index, true, maxIndex);
             SzintDekoder();
             break;
 
         case balra:
-            gorgeto(mov_a.index, false, maxIndex-1);
+            gorgeto(mov_a.index, false, maxIndex);
             SzintDekoder();
             break;
         case fel:
@@ -257,7 +257,7 @@ bool Kurzor::kivalaszt(int fazis, Jatekos *aktJ, Jatekos *ellenfelJ, int jatekos
     if (sel1_a.pointer == nullptr)
     {
         // kiválasztottuk a Kártyát, amit szeretnénk végrehajtani
-        if (mov_a.pointer->getIkon()==' ') // mivel üres karakterrel nem lehet akciót végrehajtani
+        if (mov_a.pointer == nullptr) // mivel üres karakterrel nem lehet akciót végrehajtani
         {
             return false;
         }

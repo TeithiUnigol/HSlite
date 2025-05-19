@@ -22,7 +22,8 @@ enum irany
     jobbra,
     balra,
     fel,
-    le
+    le,
+    kivalaszt
 };
 
 /// @brief A kurzor pozícióját és az aktuálisan kijelölt kártyát tárolja.

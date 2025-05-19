@@ -20,7 +20,6 @@
 #include "boss.h"
 #include "kartyaTarolo.h"
 
-
 /// @brief A tároló kiválasztásában segít 
 enum class TaroloTipus {
   Kez,

@@ -105,12 +105,13 @@ int Jatekos::getMana() const
 // Jatekos(const Boss& boss,const KartyaTarolo& huzoPakli,const KartyaTarolo& kezPakli,const KartyaTarolo& MinionPakli,const KartyaTarolo& csomag,int maxMana,int mana);
 void Jatekos::mentes(std::ostream &os)
 {
-    os << csomag.getMeret() << " " << minionok.getKapacitas() << " " << kez.getKapacitas() << " " << mana << std::endl;
+    os << csomag.getMeret() << " " << minionok.getKapacitas() << " " << kez.getKapacitas() << " " << mana << " " << minionok.getKapacitas()<< std::endl;
     boss.mentes(os);
     for (size_t i = 0; i < csomag.getMeret(); i++)
     {
         csomag[i]->mentes(os);
     }
+    os<<"MTAR"<<std::endl;
 }
 Jatekos::~Jatekos()
 {

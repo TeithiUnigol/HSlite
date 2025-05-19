@@ -12,7 +12,6 @@
 #define BOSS_H
 #include "karakter.h"
 
-
 class Boss : public Karakter
 {
   int specialSebzes;

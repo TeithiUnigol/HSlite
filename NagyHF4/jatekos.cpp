@@ -41,7 +41,7 @@ void Jatekos::kezfeltolt()
     {
         Kartya* temp = huzo.kihuz(huzo.getMeret() - 1);
         kez.berak(temp, index);
-        delete temp;
+        //delete temp;
         ++index;
     }
 }
@@ -73,14 +73,7 @@ void Jatekos::huzopakliKever()
 
 bool Jatekos::Kijatszas(Kartya *k1, Kartya *k2)
 {
-    bool ret;
-    if (k1->isMinion())
-    {
-        
-    }else{
-        ret = k1->kijatszas(&mana, k2);
-    }
-    
+    bool ret = k1->kijatszas(&mana, k2);
     return ret;
 }
 

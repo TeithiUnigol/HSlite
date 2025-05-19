@@ -11,10 +11,7 @@
 #include "GameManager.h"
 #include <iostream>
 
-#ifndef CPORTA
-//#define CPORTA
-#endif
-
+#define CPORTA
 int main()
 {
 #ifdef CPORTA

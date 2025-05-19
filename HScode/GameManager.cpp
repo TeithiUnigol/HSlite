@@ -1,7 +1,5 @@
 #include "GameManager.h"
 
-#include "memtrace.h"
-
 using std::cout;
 void GameManager::changeBG(colors color)
 {
@@ -133,8 +131,6 @@ void GameManager::MenuSelect()
                     j2.kezfeltolt();
                     jatekos = 1;
                     kurz.getMov().szint=1;
-                    kurz.getMov().pointer = j1.getTarolo(TaroloTipus::Kez)[0];
-                    
                     isJatek = true;
 
                     game();
@@ -273,7 +269,85 @@ void GameManager::belsoFal(int behuzasX, int yKezd)
     econio_gotoxy(behuzasX + blokkW - 1, yKezd);
     cout << "|";
 }
+/*
+Korábbi próbálkozás, majd econiora váltottam
+void GameManager::printBoss(int jatekos)
+{
+    changeBG(black);
+    changeTxt(white);
+    size_t fal = (screenW - blokkW) / 2;
+    size_t falBelso;
 
+    // kártya teteje
+    bossvonal();
+
+    Jatekos *aktJ = JatekosKivalaszt(jatekos);
+
+    // boss ikon kiírása
+    falBelso = (blokkW - 3) / 2;
+    bossSzel(fal, falBelso);
+    aktJ->Getboss().ikonKiir(std::cout);
+    bossSzel(falBelso, fal);
+    cout << std::endl;
+
+    size_t nevM = aktJ->Getboss().nevMeret();
+    // boss nevének kiírása
+
+    if (nevM < (blokkW - 2))
+    {
+        bossSzel(fal, (blokkW - nevM - 2) / 2);
+        if (kurz.getMov().szint == jatekos * 3)
+        {
+            changeBG(green);
+        }
+        else if (kurz.getSel1().szint == jatekos * 3)
+        {
+            changeBG(yellow);
+        }
+        if (!aktJ->Getboss().getAktiv())
+        {
+            changeTxt(gray);
+        }
+        aktJ->Getboss().nevKiir(std::cout, blokkW - 2);
+        changeTxt(white);
+        changeBG(black);
+        bossSzel((blokkW - nevM - 2) / 2, fal);
+    }
+    else
+    {
+        bossSzel(fal, 0);
+        if (kurz.getMov().szint == jatekos * 3)
+        {
+            changeBG(green);
+        }
+        if (!aktJ->Getboss().getAktiv())
+        {
+            changeTxt(gray);
+        }
+        aktJ->Getboss().nevKiir(std::cout, blokkW - 2);
+        changeTxt(white);
+        changeBG(black);
+        bossSzel(0, fal);
+    }
+    cout << std::endl;
+
+    falBelso = (blokkW - 3) / 2;
+    bossSzel(fal, 0);
+    int n = aktJ->Getboss().getElet();
+    cout << "Hp:" << n;
+    // bossSzel(blokkW - 5 - intHossz(n), fal);
+    cout << std::endl;
+    bossvonal();
+    falBelso = (blokkW - 3) / 2;
+    bossSzel(fal, 0);
+    n = aktJ->Getboss().getSpecial();
+    cout << "Sp:" << n;
+    // bossSzel(blokkW - 5 - intHossz(n), fal);
+    cout << std::endl;
+    bossvonal();
+    cout << std::endl;
+}
+*/
 void GameManager::printTarolo(int yKezd, int yMeret, KartyaTarolo &tarolo, bool isKez, int melyikJatekose)
 {
     size_t kap = tarolo.getKapacitas();
@@ -313,7 +387,7 @@ void GameManager::printTarolo(int yKezd, int yMeret, KartyaTarolo &tarolo, bool 
                 }
             }
         }else{
-            if (!isKez)//szint 3 minion
+            if (isKez)//szint 3 minion
             {
                 if (kurz.getMov().szint==3&&kurz.getMov().index == i)
                 {
@@ -600,6 +674,114 @@ void GameManager::saveGame()
 }
 void GameManager::loadGame()
 {
+    /*std::ifstream File("jatek.txt");
+
+    std::string tipus;
+    File >> tipus;
+
+    if (tipus == "J1")
+    {
+        size_t csomagmeret;
+        size_t minionokMeret;
+        size_t kezMeret;
+        int MaxMana;
+        int mana;
+        size_t csomagindex = 0;
+        if (!(File >> csomagmeret >> minionokMeret >> kezMeret >> mana))
+        {
+            throw "Helytelen bemenetfile";
+        }
+        KartyaTarolo csomag(csomagmeret);
+        KartyaTarolo huzo(csomagmeret);
+        KartyaTarolo kez(csomagmeret);
+        KartyaTarolo minion(csomagmeret);
+
+
+
+
+        Boss tempBoss;
+
+        while (File >> tipus && tipus != "MTAR")
+        {
+            if (tipus == "MINION")
+            {
+                Minion *m = new Minion();
+                m->betoltes(File);
+                csomag.berak(m, csomagindex);
+                ++csomagindex;
+                delete m;
+            }
+            else if (tipus == "BOSS")
+            {
+                tempBoss.betoltes(File);
+            }
+            else if (tipus == "VARAZSLAT")
+            {
+                Varazslat *v = new Varazslat();
+                v->betoltes(File);
+                csomag.berak(v, csomagindex);
+                ++csomagindex;
+
+                delete v;
+            }
+        }
+        Jatekos::Jatekos(const Boss &boss, const KartyaTarolo &huzoPakli, const KartyaTarolo &kezPakli, const KartyaTarolo &MinionPakli, const KartyaTarolo &csomag, int maxMana, int mana) 
+        Jatekos tempJatekos1(tempBoss, minionokMeret, kezMeret, csomag, mana);
+        j1 = tempJatekos1;
+    }
+    else
+    {
+        throw "Helytelen bemenetfile";
+    }
+
+    if (tipus == "J2")
+    {
+        size_t csomagmeret;
+        size_t minionokMeret;
+        size_t kezMeret;
+        int mana;
+        size_t csomagindex = 0;
+        if (!(File >> csomagmeret >> minionokMeret >> kezMeret >> mana))
+        {
+            throw "Helytelen bemenetfile";
+        }
+        KartyaTarolo kt(csomagmeret);
+
+        Boss tempBoss;
+
+        while (File >> tipus && tipus != "END")
+        {
+            if (tipus == "MINION")
+            {
+                Minion *m = new Minion();
+                m->betoltes(File);
+                kt.berak(m, csomagindex);
+                ++csomagindex;
+                delete m;
+            }
+            else if (tipus == "BOSS")
+            {
+                tempBoss.betoltes(File);
+            }
+            else if (tipus == "VARAZSLAT")
+            {
+                Varazslat *v = new Varazslat();
+                v->betoltes(File);
+                kt.berak(v, csomagindex);
+                ++csomagindex;
+
+                delete v;
+            }
+        }
+        Jatekos tempJatekos2(tempBoss, minionokMeret, kezMeret, kt, mana);
+        j2 = tempJatekos2;
+    }
+    else
+    {
+        throw "Helytelen bemenetfile";
+    }
+
+    File.close();*/
 }
 
 void GameManager::loadPakli()

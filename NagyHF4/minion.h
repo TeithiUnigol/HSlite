@@ -11,7 +11,6 @@
 #define MINION_H
 
 #include "karakter.h"
-#include "memtrace.h"
 
 class Minion : public Karakter
 {

@@ -12,7 +12,6 @@
 
 #include "kartya.h"
 #include "karakter.h"
-#include "memtrace.h"
 
 class Varazslat : public Kartya
 {

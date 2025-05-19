@@ -11,7 +11,6 @@
 #define KARAKTER_H
 
 #include "kartya.h"
-#include "memtrace.h"
 
 class Karakter : public Kartya
 {

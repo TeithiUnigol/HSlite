@@ -48,11 +48,6 @@ void Kartya::ikonKiir(std::ostream &os) const
     os << ikon;
 }
 
-char Kartya::getIkon() const
-{
-    return ikon;
-}
-
 bool Kartya::isMinion()
 {
     return false;

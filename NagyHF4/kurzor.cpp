@@ -70,7 +70,7 @@ void Kurzor::fazis1Lepes(irany ir, int jatekos, Jatekos *aktJ)
                 SzintDekoder();
                 break;
             case fel:
-                if (mov_a.szint == 2 && mov_a.szint == 5)
+                if (mov_a.szint == 2 || mov_a.szint == 5)
                 {
                     gorgeto(mov_a.szint, true, 6);
                 }
@@ -79,7 +79,7 @@ void Kurzor::fazis1Lepes(irany ir, int jatekos, Jatekos *aktJ)
                 SzintDekoder();
                 break;
             case le:
-                if (mov_a.szint == 0 && mov_a.szint == 3)
+                if (mov_a.szint == 0 || mov_a.szint == 3)
                 {
                     gorgeto(mov_a.szint, false, 6);
                 }
@@ -152,12 +152,12 @@ void Kurzor::fazis2Lepes(irany ir, int jatekos)
         switch (ir)
         {
         case jobbra:
-            gorgeto(mov_a.index, true, maxIndex);
+            gorgeto(mov_a.index, true, maxIndex-1);
             SzintDekoder();
             break;
 
         case balra:
-            gorgeto(mov_a.index, false, maxIndex);
+            gorgeto(mov_a.index, false, maxIndex-1);
             SzintDekoder();
             break;
         case fel:
