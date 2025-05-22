@@ -139,6 +139,7 @@ void Jatekos::mentes(std::ostream &os)
 }
 Jatekos::~Jatekos()
 {
+    csomag.kiurites();
     huzo.kiurites();
     kez.kiurites();
 }

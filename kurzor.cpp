@@ -7,12 +7,13 @@ Kurzor::Kurzor(Jatekos *p1, Jatekos *p2)
 {
 }
 
-Kurzor& Kurzor::operator=(const Kurzor &kurz){
-        this->p1 = kurz.p1;
-        this->p2 = kurz.p2;
-        this->mov_a = kurz.mov_a;
-        this->sel1_a = kurz.sel1_a;
-        return *this;
+Kurzor &Kurzor::operator=(const Kurzor &kurz)
+{
+    this->p1 = kurz.p1;
+    this->p2 = kurz.p2;
+    this->mov_a = kurz.mov_a;
+    this->sel1_a = kurz.sel1_a;
+    return *this;
 }
 
 void Kurzor::lepes(irany ir, int fazis, int jatekos, Jatekos *aktJ)
@@ -170,15 +171,33 @@ void Kurzor::fazis2Lepes(irany ir, int jatekos)
             SzintDekoder();
             break;
         case fel:
-            mov_a.szint -= 2 * jatekos;
-            gorgeto(mov_a.szint, true, 1);
-            mov_a.szint += 2 * jatekos;
-            SzintDekoder();
-            break;
         case le:
-            mov_a.szint -= 2 * jatekos;
-            gorgeto(mov_a.szint, false, 1);
-            mov_a.szint += 2 * jatekos;
+            switch (mov_a.szint)
+            {
+            case 0:
+                mov_a.szint = 2;
+                mov_a.index =0;
+                mov_a.pointer = p1->getTarolo(TaroloTipus::Minionok)[mov_a.index];
+                break;
+            case 2:
+            mov_a.szint = 0;
+                mov_a.index =0;
+                mov_a.pointer = p1->Getboss();
+                break;
+                case 3:
+                mov_a.szint = 5;
+                mov_a.index =0;
+                mov_a.pointer = p2->Getboss();
+                break;
+            case 5:
+            mov_a.szint = 3;
+                mov_a.index =0;
+                mov_a.pointer = p2->getTarolo(TaroloTipus::Minionok)[mov_a.index];
+                break;
+            default:
+                break;
+            }
+            
             SzintDekoder();
             break;
         default:
@@ -199,41 +218,32 @@ void Kurzor::fazis2Lepes(irany ir, int jatekos)
             SzintDekoder();
             break;
         case fel:
-            if (jatekos == 0)
-            {
-                if (mov_a.szint > 2)
-                {
-                    mov_a.szint = 2;
-                }
-                else
-                {
-                    mov_a.szint = 3;
-                }
-            }
-            else
-            {
-                if (mov_a.szint > 0)
-                {
-                    mov_a.szint = 0;
-                }
-                else
-                {
-                    mov_a.szint = 1;
-                }
-            }
-
-            mov_a.szint -= 2 * jatekos;
-            gorgeto(mov_a.szint, false, 1);
-            mov_a.szint += 2 * jatekos;
-
-            SzintDekoder();
-            break;
         case le:
-            mov_a.szint -= 2 * jatekos;
-            gorgeto(mov_a.szint, true, 1);
-            mov_a.szint += 2 * jatekos;
-            SzintDekoder();
-            break;
+            switch (mov_a.szint)
+            {
+            case 0:
+                mov_a.szint = 2;
+                mov_a.index =0;
+                mov_a.pointer = p1->getTarolo(TaroloTipus::Minionok)[mov_a.index];
+                break;
+            case 2:
+            mov_a.szint = 0;
+                mov_a.index =0;
+                mov_a.pointer = p1->Getboss();
+                break;
+                case 3:
+                mov_a.szint = 5;
+                mov_a.index =0;
+                mov_a.pointer = p2->getTarolo(TaroloTipus::Minionok)[mov_a.index];
+                break;
+            case 5:
+            mov_a.szint = 3;
+                mov_a.index =0;
+                mov_a.pointer = p2->Getboss();
+                break;
+            default:
+                break;
+            }
         default:
             break;
         }
@@ -263,104 +273,77 @@ void Kurzor::gorgeto(T &gorgetendo, bool poz, T maxT)
 
 bool Kurzor::kivalaszt(int fazis, Jatekos *aktJ, Jatekos *ellenfelJ, int jatekos)
 {
+    bool siker = true;
     if (sel1_a.pointer == nullptr)
     {
         // kiválasztottuk a Kártyát, amit szeretnénk végrehajtani
         if (mov_a.pointer->getIkon() == ' ') // mivel üres karakterrel nem lehet akciót végrehajtani
         {
-            return false;
-        }
-        sel1_a.pointer = mov_a.pointer;
-        sel1_a.szint = mov_a.szint;
-        sel1_a.index = mov_a.index;
-
-        mov_a.index = 0;
-        mov_a.pointer = nullptr;
-        if (sel1_a.pointer->isMinion())
-        {
-            mov_a.szint = jatekos + 2;
-            mov_a.pointer = aktJ->getTarolo(TaroloTipus::Minionok)[0];
-            return true;
+            siker = false;
         }
         else
         {
-            mov_a.szint = jatekos * 5;
-            mov_a.pointer = aktJ->Getboss();
+
+            sel1_a.pointer = mov_a.pointer;
+            sel1_a.szint = mov_a.szint;
+            sel1_a.index = mov_a.index;
+
+            switch (fazis)
+            {
+            case 1:
+                mov_a.szint = jatekos == 0 ? 2 : 3;
+                mov_a.index = 0;
+                mov_a.pointer = jatekos == 0 ? p1->getTarolo(TaroloTipus::Minionok)[mov_a.index] : p2->getTarolo(TaroloTipus::Minionok)[mov_a.index];
+                break;
+            default:
+                mov_a.szint = jatekos == 0 ? 5 : 0;
+                mov_a.index = 0;
+                mov_a.pointer = jatekos == 0 ? p2->Getboss() : p1->Getboss();
+            break;
+            }
             return true;
         }
     }
     else
     {
-        if(aktJ->Kijatszas(sel1_a.pointer, sel1_a.index, mov_a.pointer, mov_a.index)){
-            
-        }
         // A mov most a célpontot határozza meg
-        if (mov_a.pointer->isMinion())
+        if (fazis == 1)
         {
-            aktJ->Kijatszas(sel1_a.pointer, sel1_a.index, mov_a.pointer, mov_a.index);
+            if (!aktJ->Kijatszas(sel1_a.pointer, sel1_a.index, mov_a.pointer, mov_a.index))
+            {
+                siker = false;
+            }
         }
         else
         {
-            if (aktJ->Kijatszas(sel1_a.pointer, sel1_a.index, mov_a.pointer, mov_a.index))
+            if (mov_a.pointer->getIkon() != ' ')
             {
-                if (fazis == 1)
-                {
-                    mov_a.pointer = aktJ->getTarolo(TaroloTipus::Kez)[0];
-                    mov_a.index = 0;
-                }
-                else
-                {
-                    sel1_a.pointer = nullptr;
-                    sel1_a.szint = -1;
-                    return false;
-                }
+                sel1_a.pointer->tamadas(mov_a.pointer);
             }
             else
             {
+                siker = false;
             }
-            /*if (!aktJ->Kijatszas(sel1_a.pointer, mov_a.pointer)) {
-                if (fazis == 1)
-            {
-                mov_a.pointer = aktJ->getTarolo(TaroloTipus::Kez)[0];
-                mov_a.index = 0;
-            }else{
-
-            }
-
-            return false; //Nem lehet kijátszani. Pl kevés a mana
-        } else {
-            if (fazis == 1) {
-                // Ha kézből játszottuk ki, távolítsuk el onnan
-                aktiv->getTarolo(TaroloTipus::Kez).kihuz(kurz.getSel1().index);
-            } else {
-                // Harci fázis, vizsgáljuk a célpontot
-                switch (kurz.getMov().szint) {
-                    case 0: // Boss támadás
-                        if (ellenfel->Getboss().getElet() == 0) {
-                            isJatek = false;
-                        }
-                        break;
-                    case 1: // Ellenfél minion támadása
-                    {
-                        Kartya* cel = ellenfel->getTarolo(TaroloTipus::Minionok)[kurz.getMov().index];
-                        if (cel && cel->getElet() == 0) {
-                            ellenfel->getTarolo(TaroloTipus::Minionok).kihuz(kurz.getMov().index);
-                        }
-                        break;
-                    }
-                    case 2: // Ellenfél kézben lévő minion? ez valószínűleg logikai hiba
-                        break;
-                    case 3: // valami más?
-                        break;
-                }
-            }*/
-
-            // Végén: reseteljük a kurzort
-            sel1_a.pointer = nullptr;
-            sel1_a.szint = -1;
         }
     }
-    return true;
+
+    sel1_a.pointer = nullptr;
+    sel1_a.szint = -1;
+    switch (fazis)
+    {
+    case 1:
+        mov_a.szint = jatekos == 0 ? 1 : 4;
+        mov_a.index = 0;
+        mov_a.pointer = jatekos == 0 ? p1->getTarolo(TaroloTipus::Kez)[mov_a.index] : p2->getTarolo(TaroloTipus::Kez)[mov_a.index];
+        break;
+        default:
+        mov_a.szint = jatekos == 0 ? 0 : 5;
+        mov_a.index = 0;
+        mov_a.pointer = jatekos == 0 ? p1->Getboss() : p2->Getboss();
+        break;
+    }
+
+    return siker;
 }
 
 mozgo &Kurzor::getMov()

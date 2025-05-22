@@ -47,7 +47,7 @@ public:
   /// @brief Karakter megtámadása
   /// Megtámadja a kiválasztott karaktert
   /// @param celpont A célpont
-  void tamadas(Karakter *celpont);
+  void tamadas(Kartya *celpont);
   /// @brief Védelem változtatása
   /// A támadások esetén először a védelem csökken és csak aztán az élets
   /// @param d a védelem megváltoztatásának mértéke

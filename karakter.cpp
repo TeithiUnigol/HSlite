@@ -8,9 +8,16 @@ Karakter::Karakter(const char *nev, int mana, char ikon, int hp, int maxhp, bool
     : Kartya(nev, mana, ikon), hp(maxhp), maxHp(maxhp), aktiv(true) {}
 
 
+void Karakter::tamadas(Kartya *celpont){}
+
 void Karakter::sebzodik(int sebzes, Kartya *tamado)
 {
     hp -= sebzes;
+    if (hp <= 0)
+    {
+        ures();
+    }
+    
 }
 
 bool Karakter::regen(int hp)

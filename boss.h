@@ -38,8 +38,8 @@ public:
 
   /// @brief Speciális támadás
   /// A megtámadott minion nem tud visszatámadni
-  /// @param k A célpont
-  bool kijatszas(int* mana,Kartya* kiv)override;
+  /// @param celpont A célpont
+  void tamadas(Kartya *celpont);
 
   void mentes(std::ostream &os) override;
   void betoltes(std::istream &is) override;

@@ -62,17 +62,18 @@ bool Kartya::isMinion()
 {
     return false;
 }
+
+void Kartya::sebzodik(int sebzes, Kartya *tamado){}
+void Kartya::tamadas(Kartya *celpont){}
+void Kartya::vedelemValt(int d){}
+bool Kartya::regen(int hp){return false;}
+
 void Kartya::ures()
 {
     ikon = ' ';
     nev = " ";
     manaKoltseg = 0;
 }
-
-void Kartya::sebzodik(int sebzes, Kartya *tamado){}
-void Kartya::vedelemValt(int d){}
-bool Kartya::regen(int hp){return false;}
-
 size_t Kartya::nevMeret(){
     return nev.size();
 }

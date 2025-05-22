@@ -109,7 +109,7 @@ void GameManager::MenuSelect()
                 isJatek = true;
                 break;
             case -20:
-            case 'w': 
+            case 'w':
                 --kiv;
                 kiv = kiv % 2;
                 break;
@@ -128,15 +128,25 @@ void GameManager::MenuSelect()
                 if (kiv == 0)
                 {
                     isKerdez = false;
-                    loadPakli();
+                    try
+                    {
+                        loadPakli();
+                    }
+                    catch (...)
+                    {
+                        econio_clrscr();
+                        changeTxt(red);
+                        cout << "Sikertelen beolvasas";
+                        econio_sleep(1.5);
+                        changeTxt(white);
+                    }
                     j1.kezfeltolt();
                     j2.kezfeltolt();
                     jatekos = 0;
-                    kurz.getMov().szint=1;
+                    kurz.getMov().szint = 1;
                     kurz.getMov().pointer = j1.getTarolo(TaroloTipus::Kez)[0];
                     kurz.getSel1().szint = -1;
                     isJatek = true;
-
                     game();
                 }
                 else
@@ -188,7 +198,7 @@ void GameManager::KartyaKiir(int xBehuz, int yKezd, Kartya *k, bool inkez, bool 
 
     printUresKartya(xBehuz, blokkH, yKezd);
     econio_gotoxy(xBehuz + blokkW / 2, ++y);
-    if (k->getIkon()!=' ')
+    if (k->getIkon() != ' ')
     {
         k->ikonKiir(cout);
 
@@ -217,11 +227,11 @@ void GameManager::KartyaKiir(int xBehuz, int yKezd, Kartya *k, bool inkez, bool 
         {
             econio_gotoxy(xBehuz + 1, ++y);
 
-            if (kurz.getMov().szint == jatekos * 3)
+            if (isMov)
             {
                 changeBG(green);
             }
-            else if (kurz.getSel1().szint == jatekos * 3)
+            else if (isSel)
             {
                 changeBG(yellow);
             }
@@ -280,13 +290,13 @@ void GameManager::printTarolo(int yKezd, int yMeret, KartyaTarolo &tarolo, bool 
     {
         if (melyikJatekose == 0)
         {
-            if (isKez)//szint 1 kez
+            if (isKez) // szint 1 kez
             {
-                if (kurz.getMov().szint==1&&kurz.getMov().index == i)
+                if (kurz.getMov().szint == 1 && kurz.getMov().index == i)
                 {
                     KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
                 }
-                else if (kurz.getSel1().szint==1&&kurz.getSel1().index == i)
+                else if (kurz.getSel1().szint == 1 && kurz.getSel1().index == i)
                 {
                     KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
                 }
@@ -295,13 +305,13 @@ void GameManager::printTarolo(int yKezd, int yMeret, KartyaTarolo &tarolo, bool 
                     KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
                 }
             }
-            else//szint 2 minion
+            else // szint 2 minion
             {
-                if (kurz.getMov().szint==2&&kurz.getMov().index == i)
+                if (kurz.getMov().szint == 2 && kurz.getMov().index == i)
                 {
                     KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
                 }
-                else if (kurz.getSel1().szint==2&&kurz.getSel1().index == i)
+                else if (kurz.getSel1().szint == 2 && kurz.getSel1().index == i)
                 {
                     KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
                 }
@@ -309,93 +319,41 @@ void GameManager::printTarolo(int yKezd, int yMeret, KartyaTarolo &tarolo, bool 
                 {
                     KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
                 }
-            }
-        }else{
-            if (!isKez)//szint 3 minion
-            {
-                if (kurz.getMov().szint==3&&kurz.getMov().index == i)
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
-                }
-                else if (kurz.getSel1().szint==3&&kurz.getSel1().index == i)
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
-                }
-                else
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
-                }
-            }
-            else//szint 4 kez
-            {
-                if (kurz.getMov().szint==4&&kurz.getMov().index == i)
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
-                }
-                else if (kurz.getSel1().szint==4&&kurz.getSel1().index == i)
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
-                }
-                else
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
-                }
-            }
-        }
-
-        /*if (fazis == 1 && isKez && melyikJatekose == jatekos)
-        {
-            if (kurz.getMov().index == i)
-            {
-                KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
-            }
-            else if (kurz.getSel1().pointer == tarolo[i])
-            {
-                KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
-            }
-            else
-            {
-                KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
-            }
-        }
-        else if (fazis == 1 && !isKez)
-        {
-            if (kurz.getSel1().pointer != nullptr)
-            {
-                if (kurz.getMov().index == i && kurz.getMov().szint == melyikJatekose + 1)
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
-                }
-                else
-                {
-                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
-                }
-            }
-            else
-            {
-                KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
-            }
-        }
-        else if (fazis == 2 && !isKez)
-        {
-            if (kurz.getMov().index == i && kurz.getMov().szint == melyikJatekose + 1)
-            {
-                KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
-            }
-            else if (kurz.getSel1().index == i && kurz.getSel1().szint == melyikJatekose + 1)
-            {
-                KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
-            }
-            else
-            {
-
-                KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
             }
         }
         else
         {
-            KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
-        }*/
+            if (!isKez) // szint 3 minion
+            {
+                if (kurz.getMov().szint == 3 && kurz.getMov().index == i)
+                {
+                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
+                }
+                else if (kurz.getSel1().szint == 3 && kurz.getSel1().index == i)
+                {
+                    KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
+                }
+                else
+                {
+                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
+                }
+            }
+            else // szint 4 kez
+            {
+                if (kurz.getMov().szint == 4 && kurz.getMov().index == i)
+                {
+                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, true);
+                }
+                else if (kurz.getSel1().szint == 4 && kurz.getSel1().index == i)
+                {
+                    KartyaKiir(fal, yKezd, tarolo[i], isKez, true, false);
+                }
+                else
+                {
+                    KartyaKiir(fal, yKezd, tarolo[i], isKez, false, false);
+                }
+            }
+        }
         fal += blokkW + separatorS;
     }
 }
@@ -406,6 +364,8 @@ void GameManager::printGame()
     changeBG(black);
     changeTxt(white);
     econio_clrscr();
+    econio_gotoxy(0, y++);
+    cout << "Fazis: " << fazis;
     if (jatekos == 0)
     {
         changeBG(green);
@@ -416,9 +376,8 @@ void GameManager::printGame()
     econio_gotoxy(0, y++);
     cout << "Mana: " << j1.getMana();
 
-    Kartya *b1 = j2.Getboss();
+    Kartya *b1 = j1.Getboss();
     KartyaKiir((screenW - blokkW) / 2, y, b1, false, kurz.getSel1().pointer == b1, kurz.getMov().szint == 0);
-    // KartyaKiir((screenW - blokkW) / 2, y, &j1.Getboss(), false, false, false);
 
     y += 3 + 2 + blokkH;
 
@@ -452,68 +411,22 @@ void GameManager::printGame()
 
     cout << "Jatekos 2";
     changeBG(black);
-    cout << "\nmovszint:" << kurz.getMov().szint << "\nindex:" << kurz.getMov().index<<"\n ikon:"<<kurz.getMov().pointer->getIkon();
+    cout << "\nmovszint:" << kurz.getMov().szint << "\nindex:" << kurz.getMov().index << "\n ikon:" << kurz.getMov().pointer->getIkon();
 }
 
 //------------Játéklogika--------------
-// TODO VALAMI ROSSZ ITT!!!
 void GameManager::kivalaszt()
 {
-    
+
     bool sikeres = kurz.kivalaszt(fazis, JatekosKivalaszt(jatekos), JatekosKivalaszt(1 - jatekos), jatekos);
     if (!sikeres)
     {
         econio_clrscr();
         changeTxt(red);
-        cout<<"Nem lehet a kivalasztott helyrol a kivalasztott helyre kartyat kijatszani vagy keves a rendelkezesre allo mana.";
-        econio_sleep(2);
+        cout << "Nem lehet a kivalasztott helyrol a kivalasztott helyre kartyat kijatszani vagy keves a rendelkezesre allo mana.";
+        econio_sleep(1.5);
         changeTxt(white);
     }
-    
-    /*if (kurz.getSel1().pointer == nullptr) {
-        kurz.getSel1().pointer = kurz.getMov().pointer;
-    } else {
-        // Már van kijelölve egy lap vagy karakter, most cselekvés történik
-        Jatekos* aktiv = JatekosKivalaszt(jatekos);
-        Jatekos* ellenfel = JatekosKivalaszt(1 - jatekos);
-
-        if (!aktiv->Kijatszas(kurz.getSel1().pointer, kurz.getMov().pointer)) {
-            econio_clrscr();
-            changeTxt(red);
-            cout << "Helytelen";
-            econio_sleep(1);
-        } else {
-            if (fazis == 1) {
-                // Ha kézből játszottuk ki, távolítsuk el onnan
-                aktiv->getTarolo(TaroloTipus::Kez).kihuz(kurz.getSel1().index);
-            } else {
-                // Harci fázis, vizsgáljuk a célpontot
-                switch (kurz.getMov().szint) {
-                    case 0: // Boss támadás
-                        if (ellenfel->Getboss().getElet() == 0) {
-                            isJatek = false;
-                        }
-                        break;
-                    case 1: // Ellenfél minion támadása
-                    {
-                        Kartya* cel = ellenfel->getTarolo(TaroloTipus::Minionok)[kurz.getMov().index];
-                        if (cel && cel->getElet() == 0) {
-                            ellenfel->getTarolo(TaroloTipus::Minionok).kihuz(kurz.getMov().index);
-                        }
-                        break;
-                    }
-                    case 2: // Ellenfél kézben lévő minion? ez valószínűleg logikai hiba
-                        break;
-                    case 3: // valami más?
-                        break;
-                }
-            }
-
-            // Végén: reseteljük a kurzort
-            kurz.getSel1().pointer = nullptr;
-            kurz.getMov().pointer = nullptr;
-        }
-    }*/
 }
 
 bool GameManager::endGameScreen(int gyoz)
@@ -558,30 +471,25 @@ void GameManager::kovFazis()
 {
     kurz.getSel1().pointer = nullptr;
     fazis += 1;
-    if (fazis == 3)
+    if (fazis == 1)
+    {
+        kurz.getMov().szint = jatekos == 0 ? 1 : 4;
+        kurz.getMov().pointer = jatekos == 0 ? j1.getTarolo(TaroloTipus::Kez)[0] : j2.getTarolo(TaroloTipus::Kez)[0];
+    }
+    else if (fazis == 2)
+    {
+        kurz.getMov().szint = jatekos == 0 ? 0 : 5;
+        kurz.getMov().index = 0;
+        kurz.getMov().pointer = jatekos == 0 ? j1.Getboss() : j2.Getboss();
+    }
+    else if (fazis == 3)
     {
         jatekos = (jatekos + 1) % 2;
-        if (jatekos == 0)
-        {
-            kurz.getMov().szint = 1;
-            kurz.getMov().pointer = j1.getTarolo(TaroloTipus::Kez)[0];
-            j1.ujKor();
-        }
-        else
-        {
-            kurz.getMov().szint = 4;
-            kurz.getMov().pointer = j2.getTarolo(TaroloTipus::Kez)[0];
-            j2.ujKor();
-        }
+        kurz.getMov().szint = jatekos == 0 ? 1 : 4;
+        kurz.getMov().pointer = jatekos == 0 ? j1.getTarolo(TaroloTipus::Kez)[0] : j2.getTarolo(TaroloTipus::Kez)[0];
+        jatekos==0?j1.ujKor():j2.ujKor();
+
         fazis = 1;
-    }else{
-        if (jatekos == 0)
-        {   
-            kurz.getMov().szint = 1-fazis;
-        }else{
-            kurz.getMov().szint = fazis+3;
-            kurz.getMov().pointer = fazis==1?j2.getTarolo(TaroloTipus::Kez)[0]:j2.getTarolo(TaroloTipus::Minionok)[0];
-        }
     }
 }
 
@@ -597,7 +505,7 @@ void GameManager::savePakli()
     File << "END";
     File.close();
 }*/
-
+/*
 void GameManager::saveGame()
 {
     std::ofstream File(mentesFile);
@@ -611,7 +519,7 @@ void GameManager::saveGame()
 }
 void GameManager::loadGame()
 {
-}
+}*/
 
 void GameManager::loadPakli()
 {
@@ -633,37 +541,45 @@ void GameManager::loadPakli()
         }
         KartyaTarolo kt(csomagmeret);
 
-        Boss tempBoss;
-
-        while (File >> tipus && tipus != "J2")
+        Boss tempBoss1;
+        try
         {
-            if (tipus == "MINION")
+            while (File >> tipus && tipus != "J2")
             {
-                Minion *m = new Minion();
-                m->betoltes(File);
-                kt.berak(m, csomagindex);
-                ++csomagindex;
-                delete m;
-            }
-            else if (tipus == "BOSS")
-            {
-                tempBoss.betoltes(File);
-            }
-            else if (tipus == "VARAZSLAT")
-            {
-                Varazslat *v = new Varazslat();
-                v->betoltes(File);
-                kt.berak(v, csomagindex);
-                ++csomagindex;
+                if (tipus == "MINION")
+                {
+                    Minion *m = new Minion();
+                    m->betoltes(File);
+                    kt.berak(m, csomagindex);
+                    ++csomagindex;
+                    delete m;
+                }
+                else if (tipus == "BOSS")
+                {
+                    tempBoss1.betoltes(File);
+                }
+                else if (tipus == "VARAZSLAT")
+                {
+                    Varazslat *v = new Varazslat();
+                    v->betoltes(File);
+                    kt.berak(v, csomagindex);
+                    ++csomagindex;
 
-                delete v;
+                    delete v;
+                }
             }
         }
-        Jatekos tempJatekos1(tempBoss, minionokMeret, kezMeret, kt, mana);
-        j1 = tempJatekos1;
+        catch (...)
+        {
+            File.close();
+            throw;
+        }
+        
+        j1 = Jatekos(tempBoss1, minionokMeret, kezMeret, kt, mana);
     }
     else
     {
+        File.close();
         throw "Helytelen bemenetfile";
     }
 
@@ -676,44 +592,54 @@ void GameManager::loadPakli()
         size_t csomagindex = 0;
         if (!(File >> csomagmeret >> minionokMeret >> kezMeret >> mana))
         {
+            File.close();
             throw "Helytelen bemenetfile";
         }
         KartyaTarolo kt(csomagmeret);
 
-        Boss tempBoss;
-
-        while (File >> tipus && tipus != "END")
+        Boss tempBoss2;
+        try
         {
-            if (tipus == "MINION")
+            while (File >> tipus && tipus != "END")
             {
-                Minion *m = new Minion();
-                m->betoltes(File);
-                kt.berak(m, csomagindex);
-                ++csomagindex;
-                delete m;
-            }
-            else if (tipus == "BOSS")
-            {
-                tempBoss.betoltes(File);
-            }
-            else if (tipus == "VARAZSLAT")
-            {
-                Varazslat *v = new Varazslat();
-                v->betoltes(File);
-                kt.berak(v, csomagindex);
-                ++csomagindex;
+                if (tipus == "MINION")
+                {
+                    Minion *m = new Minion();
+                    m->betoltes(File);
+                    kt.berak(m, csomagindex);
+                    ++csomagindex;
+                    delete m;
+                }
+                else if (tipus == "BOSS")
+                {
+                    tempBoss2.betoltes(File);
+                }
+                else if (tipus == "VARAZSLAT")
+                {
+                    Varazslat *v = new Varazslat();
+                    v->betoltes(File);
+                    kt.berak(v, csomagindex);
+                    ++csomagindex;
 
-                delete v;
+                    delete v;
+                }
             }
         }
-        Jatekos tempJatekos2(tempBoss, minionokMeret, kezMeret, kt, mana);
-        j2 = tempJatekos2;
+        catch (...)
+        {
+            File.close();
+            throw;
+        }
+        j2 = Jatekos(tempBoss2, minionokMeret, kezMeret, kt, mana);
+
     }
     else
     {
+        File.close();
         throw "Helytelen bemenetfile";
     }
-    kurz = Kurzor(&j1,&j2);
+    kurz = Kurzor(&j1, &j2);
+    
     File.close();
 }
 
@@ -744,7 +670,6 @@ void GameManager::game()
             case 27: // escape
             case 'x':
                 econio_normalmode();
-                saveGame();
                 isJatek = false;
                 break;
             case -20:

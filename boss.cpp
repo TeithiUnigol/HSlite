@@ -9,14 +9,11 @@ Boss::Boss(const Boss &boss):Karakter(boss),specialSebzes(boss.specialSebzes){}
 Boss::Boss(const char *nev, int mana, char ikon, int hp, int maxhp, bool aktiv, int special)
     : Karakter(nev,mana,ikon,hp,maxhp,aktiv),specialSebzes(special) {}
 
-bool Boss::kijatszas(int* mana,Kartya* kiv){
+void Boss::tamadas(Kartya *celpont){
     if (aktiv)
     {       
-        kiv->sebzodik(specialSebzes,nullptr);
+        celpont->sebzodik(specialSebzes,nullptr);
         this->aktiv = false;
-        return true;
-    }else{
-        return false;
     }
 }
 

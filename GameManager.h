@@ -115,8 +115,8 @@ class GameManager
     //------------Mentés logika--------------
     //void savePakli(); Csak a forrás pakli létrehozásához létezett
     void loadPakli();
-    void saveGame();
-    void loadGame();
+    /*void saveGame();
+    void loadGame();*/
     
     
     ~GameManager();

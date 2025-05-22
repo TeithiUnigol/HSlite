@@ -35,6 +35,11 @@ public:
   /// @param maxhp
   /// @param aktiv
   Karakter(const char *nev, int mana, char ikon, int hp, int maxhp, bool aktiv);
+
+  /// @brief Támadás
+  /// @param celpont Akit támadni szeretnénk 
+  virtual void tamadas(Kartya *celpont);
+
   /// @brief Támadás
   /// A karakterre meghatározott mértékű sebzést okoz. A minion védelemmel csökkentheti a sebződést, de a boss nem.
   /// @param sebzes a sebzés mértéke
