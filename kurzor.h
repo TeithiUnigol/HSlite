@@ -23,9 +23,9 @@ enum irany
     jobbra,
     balra,
     fel,
-    le,
-    kivalaszt
+    le
 };
+
 
 /// @brief A kurzor pozícióját és az aktuálisan kijelölt kártyát tárolja.
 /// A szint tag különböző játékszakaszokban (fázisokban) eltérő értelmezést kap.
@@ -33,12 +33,12 @@ struct mozgo
 {
     Kartya *pointer;
     size_t index;
-    int szint;
+    int szint;//TODO átírni
     mozgo()
     {
         pointer = nullptr;
         index = 0;
-        szint = 0;
+        szint = -1;
     }
     mozgo(mozgo& moz){
         pointer = moz.pointer;

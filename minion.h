@@ -53,9 +53,8 @@ public:
   /// @param d a védelem megváltoztatásának mértéke
   /// @return sikeres volt-e a védelem változtatása
   void vedelemValt(int d);
-  /// @brief Minion lehelyezése
-  /// @param mana
-  /// @param kiv Az az üres karakterlap, ahova
+  
+  //ezt a játékos kezeli
   bool kijatszas(int *mana, Kartya *kiv);
   /// @brief A minion reaktiválása
   /// A minion minden újraaktiválásnál elveszíti a védelmét is.

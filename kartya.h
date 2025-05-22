@@ -45,9 +45,8 @@ public:
     /// @return Aktuális objektum referencia
     Kartya &operator=(const Kartya &kartya);
 
-    /// @brief Mana kiírása
-    /// @param os Az output stream ahova kiírja
-    void manaKiir(std::ostream& os)const;
+    /// @brief Mana getters
+    int getMana()const;
 
     /// @brief Név kiírása
     /// @param os Az output stream ahova kiírja

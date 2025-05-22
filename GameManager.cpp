@@ -88,7 +88,7 @@ void GameManager::MenuSelect()
     changeBG(green);
     cout << "Uj Jatek\n";
     changeBG(black);
-    cout << "Betoltes\n";
+    cout << "Kilepes\n";
 
     int kiv = 0;
     while (isKerdez)
@@ -109,7 +109,7 @@ void GameManager::MenuSelect()
                 isJatek = true;
                 break;
             case -20:
-            case 'w':
+            case 'w': 
                 --kiv;
                 kiv = kiv % 2;
                 break;
@@ -122,7 +122,7 @@ void GameManager::MenuSelect()
                 }
 
                 break;
-            case 'E':
+            case 'e':
             case '\n':
             case '\r':
                 if (kiv == 0)
@@ -131,10 +131,10 @@ void GameManager::MenuSelect()
                     loadPakli();
                     j1.kezfeltolt();
                     j2.kezfeltolt();
-                    jatekos = 1;
+                    jatekos = 0;
                     kurz.getMov().szint=1;
                     kurz.getMov().pointer = j1.getTarolo(TaroloTipus::Kez)[0];
-                    
+                    kurz.getSel1().szint = -1;
                     isJatek = true;
 
                     game();
@@ -142,8 +142,6 @@ void GameManager::MenuSelect()
                 else
                 {
                     isKerdez = false;
-                    loadGame();
-                    // TODO
                 }
                 break;
             default:
@@ -155,14 +153,14 @@ void GameManager::MenuSelect()
                 changeBG(green);
                 cout << "Uj Jatek\n";
                 changeBG(black);
-                cout << "Betoltes\n";
+                cout << "Kilepes\n";
             }
             else
             {
                 changeBG(black);
                 cout << "Uj Jatek\n";
                 changeBG(green);
-                cout << "Betoltes\n";
+                cout << "Kilepes\n";
                 changeBG(black);
             }
         }
@@ -190,7 +188,7 @@ void GameManager::KartyaKiir(int xBehuz, int yKezd, Kartya *k, bool inkez, bool 
 
     printUresKartya(xBehuz, blokkH, yKezd);
     econio_gotoxy(xBehuz + blokkW / 2, ++y);
-    if (k != nullptr)
+    if (k->getIkon()!=' ')
     {
         k->ikonKiir(cout);
 

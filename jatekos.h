@@ -20,7 +20,6 @@
 #include "boss.h"
 #include "kartyaTarolo.h"
 
-
 /// @brief A tároló kiválasztásában segít 
 enum class TaroloTipus {
   Kez,
@@ -81,10 +80,10 @@ public:
     void huzopakliKever();
     
     /// @brief Kártya kijátszása
-    /// @param k1 kijátszandó kártya
-    /// @param k2 ahova kijátszák a kártyát
+    /// @param k1 kijátszandó kártya memória helye
+    /// @param k2 ahova kijátszák a kártyát 
     /// @return sikeres volt-e a kijátszás
-    bool Kijatszas(Kartya* k1,Kartya* k2);
+    bool Kijatszas(Kartya* k1,size_t index1,Kartya* k2,size_t index2);
 
   /// @brief Boss getter
   /// @return 

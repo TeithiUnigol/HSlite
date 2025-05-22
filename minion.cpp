@@ -56,12 +56,15 @@ void Minion::vedelemValt(int d)
     }
 }
 
+
+
 bool Minion::kijatszas(int* mana,Kartya* kiv){
-    if (this->manaKoltseg <= *mana&&kiv==nullptr)
+    if (this->manaKoltseg <= *mana)
     {
-        *kiv = *this;//Itt van egy baj
-        *mana-=manaKoltseg;
         return true;
+        /**kiv = *this;//Itt van egy baj mivel ez nem az eredetit kapja
+        *mana-=manaKoltseg;
+        return true;*/
     }
     
     return false;

@@ -89,7 +89,7 @@ void KartyaTarolo::berak(Kartya *kartya, size_t index)
 Kartya *KartyaTarolo::kihuz(size_t index)
 {
     Kartya *kartya = tomb[index];
-    tomb[index] = nullptr;
+    tomb[index] = new Kartya;
     --meret;
     return kartya;
 }

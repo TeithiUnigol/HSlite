@@ -31,11 +31,16 @@ Kartya &Kartya::operator=(const Kartya &kartya)
 int Kartya::getElet()const{
     return 0;
 }
-
+/*
 void Kartya::manaKiir(std::ostream &os) const
 {
     os << manaKoltseg;
+}*/
+
+int Kartya::getMana()const{
+    return manaKoltseg;
 }
+
 void Kartya::nevKiir(std::ostream &os,size_t maxW) const
 {
     if (nev.length() <= maxW)

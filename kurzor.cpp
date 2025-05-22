@@ -152,12 +152,12 @@ void Kurzor::fazis2Lepes(irany ir, int jatekos)
         switch (ir)
         {
         case jobbra:
-            gorgeto(mov_a.index, true, maxIndex-1);
+            gorgeto(mov_a.index, true, maxIndex - 1);
             SzintDekoder();
             break;
 
         case balra:
-            gorgeto(mov_a.index, false, maxIndex-1);
+            gorgeto(mov_a.index, false, maxIndex - 1);
             SzintDekoder();
             break;
         case fel:
@@ -257,7 +257,7 @@ bool Kurzor::kivalaszt(int fazis, Jatekos *aktJ, Jatekos *ellenfelJ, int jatekos
     if (sel1_a.pointer == nullptr)
     {
         // kiválasztottuk a Kártyát, amit szeretnénk végrehajtani
-        if (mov_a.pointer->getIkon()==' ') // mivel üres karakterrel nem lehet akciót végrehajtani
+        if (mov_a.pointer->getIkon() == ' ') // mivel üres karakterrel nem lehet akciót végrehajtani
         {
             return false;
         }
@@ -270,56 +270,80 @@ bool Kurzor::kivalaszt(int fazis, Jatekos *aktJ, Jatekos *ellenfelJ, int jatekos
         if (sel1_a.pointer->isMinion())
         {
             mov_a.szint = jatekos + 2;
-        }else{
-            mov_a.szint = jatekos *5;
+        }
+        else
+        {
+            mov_a.szint = jatekos * 5;
         }
     }
-    /*else
+    else
     {
         // A mov most a célpontot határozza meg
+        if (mov_a.pointer->isMinion())
+        {
+            std::cout<<"asd";
+            aktJ->Kijatszas(sel1_a.pointer,sel1_a.index,mov_a.pointer,mov_a.index);
+            //aktJ->getTarolo(TaroloTipus::Minionok).berak(aktJ->getTarolo(TaroloTipus::Kez).kihuz(sel1_a.index), mov_a.index);
+        }
+        else
+        {
+            std::cout<<"bsd";
 
-                if (!aktJ->Kijatszas(sel1_a.pointer, mov_a.pointer)) {
-                    if (fazis == 1)
-                    {
-                        mov_a.pointer = aktJ->getTarolo(TaroloTipus::Kez)[0];
-                        mov_a.index = 0;
-                    }else{
-
-                    }
-
-                    return false; //Nem lehet kijátszani. Pl kevés a mana
-                } else {
-                    if (fazis == 1) {
-                        // Ha kézből játszottuk ki, távolítsuk el onnan
-                        aktiv->getTarolo(TaroloTipus::Kez).kihuz(kurz.getSel1().index);
-                    } else {
-                        // Harci fázis, vizsgáljuk a célpontot
-                        switch (kurz.getMov().szint) {
-                            case 0: // Boss támadás
-                                if (ellenfel->Getboss().getElet() == 0) {
-                                    isJatek = false;
-                                }
-                                break;
-                            case 1: // Ellenfél minion támadása
-                            {
-                                Kartya* cel = ellenfel->getTarolo(TaroloTipus::Minionok)[kurz.getMov().index];
-                                if (cel && cel->getElet() == 0) {
-                                    ellenfel->getTarolo(TaroloTipus::Minionok).kihuz(kurz.getMov().index);
-                                }
-                                break;
-                            }
-                            case 2: // Ellenfél kézben lévő minion? ez valószínűleg logikai hiba
-                                break;
-                            case 3: // valami más?
-                                break;
-                        }
-                    }
-
-                    // Végén: reseteljük a kurzort
-                    kurz.getSel1().pointer = nullptr;
-                    kurz.getMov().pointer = nullptr;
+            if (!aktJ->Kijatszas(sel1_a.pointer,sel1_a.index, mov_a.pointer,mov_a.index))
+            {
+                if (fazis == 1)
+                {
+                    mov_a.pointer = aktJ->getTarolo(TaroloTipus::Kez)[0];
+                    mov_a.index = 0;
                 }
-    }*/
+                else
+                {
+                }
+            }
+            /*if (!aktJ->Kijatszas(sel1_a.pointer, mov_a.pointer)) {
+                if (fazis == 1)
+            {
+                mov_a.pointer = aktJ->getTarolo(TaroloTipus::Kez)[0];
+                mov_a.index = 0;
+            }else{
+
+            }
+
+            return false; //Nem lehet kijátszani. Pl kevés a mana
+        } else {
+            if (fazis == 1) {
+                // Ha kézből játszottuk ki, távolítsuk el onnan
+                aktiv->getTarolo(TaroloTipus::Kez).kihuz(kurz.getSel1().index);
+            } else {
+                // Harci fázis, vizsgáljuk a célpontot
+                switch (kurz.getMov().szint) {
+                    case 0: // Boss támadás
+                        if (ellenfel->Getboss().getElet() == 0) {
+                            isJatek = false;
+                        }
+                        break;
+                    case 1: // Ellenfél minion támadása
+                    {
+                        Kartya* cel = ellenfel->getTarolo(TaroloTipus::Minionok)[kurz.getMov().index];
+                        if (cel && cel->getElet() == 0) {
+                            ellenfel->getTarolo(TaroloTipus::Minionok).kihuz(kurz.getMov().index);
+                        }
+                        break;
+                    }
+                    case 2: // Ellenfél kézben lévő minion? ez valószínűleg logikai hiba
+                        break;
+                    case 3: // valami más?
+                        break;
+                }
+            }*/
+
+            // Végén: reseteljük a kurzort
+            sel1_a.pointer = nullptr;
+            sel1_a.szint = -1;
+            mov_a.pointer = nullptr;
+            mov_a.szint = -1;
+        }
+    }
     return false;
 }
 
