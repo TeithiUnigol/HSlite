@@ -56,8 +56,8 @@ class Kurzor
     mozgo sel1_a;
 
 
-
-public:
+    
+    public:
     /// @brief Kurzor alapkonstruktor
     Kurzor();
     /// @brief Kurzor konstruktor adattagokkal
@@ -68,7 +68,12 @@ public:
     /// A feladata vezérelni a fazis1Lepes és fazis2Lepes függvényt
     /// @param ir inputnak kapott lépés irány
     void lepes(irany ir,int fazis,int jatekos,Jatekos* aktJ);
-
+    
+    /// @brief kurzor értékadó operátora
+    /// @param kurz 
+    /// @return 
+    Kurzor& operator=(const Kurzor &kurz);
+    
     /// @brief Moz gettere
     /// @return moz
     mozgo& getMov();
@@ -79,9 +84,9 @@ public:
     /// @brief Kiválasztás
     /// @return 
     bool kivalaszt(int fazis,Jatekos* aktJ,Jatekos* ellenfelJ,int jatekos);
-private:
+    private:
     /// A privát segédfüggvények
-
+    
     /// @brief Első fázis mozgás
     /// Ekkor történik akártyák kijátszása a kézből.
     /// @param ir inputnak kapott lépés irány

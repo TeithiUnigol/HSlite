@@ -69,18 +69,9 @@ void Kartya::ures()
     manaKoltseg = 0;
 }
 
-void Kartya::sebzodik(int sebzes, Kartya *tamado)
-{
-    throw "nem tud ilyet";
-}
-void Kartya::vedelemValt(int d)
-{
-    throw "nem tud ilyet";
-}
-bool Kartya::regen(int hp)
-{
-    throw "nem tud ilyet";
-}
+void Kartya::sebzodik(int sebzes, Kartya *tamado){}
+void Kartya::vedelemValt(int d){}
+bool Kartya::regen(int hp){return false;}
 
 size_t Kartya::nevMeret(){
     return nev.size();

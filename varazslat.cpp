@@ -8,9 +8,9 @@ bool Varazslat::kijatszas(int *mana, Kartya *kiv)
     if (this->manaKoltseg <= *mana)
     {
         *mana -= manaKoltseg;
-        kiv->vedelemValt(this->vedelem);
-        kiv->sebzodik(this->sebzes, nullptr);
-        kiv->regen(this->gyogyitas);
+        kiv->vedelemValt(vedelem);
+        kiv->sebzodik(sebzes, nullptr);
+        kiv->regen(gyogyitas);
 
         return true;
     }

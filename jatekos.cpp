@@ -73,29 +73,37 @@ void Jatekos::huzopakliKever()
 
 bool Jatekos::Kijatszas(Kartya *k1, size_t index1, Kartya *k2, size_t index2)
 {
-        std::cout<<"f";
-
     if (k1->isMinion() && k2->getIkon() == ' ' && k1->getMana() <= mana)
     {
-        std::cout<<"a";
         mana -= k1->getMana();
-        std::cout<<"b";
-        minionok.berak(kez.kihuz(index1), index2);
-        std::cout<<"c";
 
-    }else{
-        //Mágia
-        // bool ret = k1->kijatszas(&mana, k2);
-        //return ret;
+        Kartya *kijatszott = kez.kihuz(index1);
+        try
+        {
+            minionok.berak(kijatszott, index2);
+            delete kijatszott;
+        }
+        catch (...)
+        {
+            return false;
+        }
+
+        return true;
+    }else if(!k1->isMinion()&& k2->getIkon() != ' ' && k1->getMana() <= mana){
+        if (k1->kijatszas(&mana,k2))
+        {
+            Kartya *kijatszott = kez.kihuz(index1);
+            delete kijatszott;
+            return true;
+        }
     }
-
 
     return false;
 }
 
-Boss &Jatekos::Getboss()
+Boss *Jatekos::Getboss()
 {
-    return this->boss;
+    return &boss;
 }
 
 KartyaTarolo &Jatekos::getTarolo(TaroloTipus tipus)

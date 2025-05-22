@@ -7,6 +7,14 @@ Kurzor::Kurzor(Jatekos *p1, Jatekos *p2)
 {
 }
 
+Kurzor& Kurzor::operator=(const Kurzor &kurz){
+        this->p1 = kurz.p1;
+        this->p2 = kurz.p2;
+        this->mov_a = kurz.mov_a;
+        this->sel1_a = kurz.sel1_a;
+        return *this;
+}
+
 void Kurzor::lepes(irany ir, int fazis, int jatekos, Jatekos *aktJ)
 {
     switch (fazis)
@@ -72,18 +80,19 @@ void Kurzor::fazis1Lepes(irany ir, int jatekos, Jatekos *aktJ)
             case fel:
                 if (mov_a.szint == 2 || mov_a.szint == 5)
                 {
-                    gorgeto(mov_a.szint, true, 6);
+                    gorgeto(mov_a.szint, false, 6);
                 }
-                gorgeto(mov_a.szint, true, 6);
+                gorgeto(mov_a.szint, false, 6);
 
                 SzintDekoder();
                 break;
             case le:
+                // itt van a lépéses hiba szintdekoder a ludas
                 if (mov_a.szint == 0 || mov_a.szint == 3)
                 {
-                    gorgeto(mov_a.szint, false, 6);
+                    gorgeto(mov_a.szint, true, 6);
                 }
-                gorgeto(mov_a.szint, false, 3);
+                gorgeto(mov_a.szint, true, 6);
                 SzintDekoder();
                 break;
             default:
@@ -117,7 +126,7 @@ void Kurzor::SzintDekoder()
     switch (mov_a.szint)
     {
     case 0:
-        mov_a.pointer = &p1->Getboss();
+        mov_a.pointer = p1->Getboss();
         break;
     case 1:
         mov_a.pointer = p1->getTarolo(TaroloTipus::Kez)[mov_a.index];
@@ -135,7 +144,7 @@ void Kurzor::SzintDekoder()
         break;
 
     case 5:
-        mov_a.pointer = &p2->Getboss();
+        mov_a.pointer = p2->Getboss();
         break;
 
     default:
@@ -214,14 +223,14 @@ void Kurzor::fazis2Lepes(irany ir, int jatekos)
             }
 
             mov_a.szint -= 2 * jatekos;
-            gorgeto(mov_a.szint, true, 1);
+            gorgeto(mov_a.szint, false, 1);
             mov_a.szint += 2 * jatekos;
 
             SzintDekoder();
             break;
         case le:
             mov_a.szint -= 2 * jatekos;
-            gorgeto(mov_a.szint, false, 1);
+            gorgeto(mov_a.szint, true, 1);
             mov_a.szint += 2 * jatekos;
             SzintDekoder();
             break;
@@ -270,26 +279,29 @@ bool Kurzor::kivalaszt(int fazis, Jatekos *aktJ, Jatekos *ellenfelJ, int jatekos
         if (sel1_a.pointer->isMinion())
         {
             mov_a.szint = jatekos + 2;
+            mov_a.pointer = aktJ->getTarolo(TaroloTipus::Minionok)[0];
+            return true;
         }
         else
         {
             mov_a.szint = jatekos * 5;
+            mov_a.pointer = aktJ->Getboss();
+            return true;
         }
     }
     else
     {
+        if(aktJ->Kijatszas(sel1_a.pointer, sel1_a.index, mov_a.pointer, mov_a.index)){
+            
+        }
         // A mov most a célpontot határozza meg
         if (mov_a.pointer->isMinion())
         {
-            std::cout<<"asd";
-            aktJ->Kijatszas(sel1_a.pointer,sel1_a.index,mov_a.pointer,mov_a.index);
-            //aktJ->getTarolo(TaroloTipus::Minionok).berak(aktJ->getTarolo(TaroloTipus::Kez).kihuz(sel1_a.index), mov_a.index);
+            aktJ->Kijatszas(sel1_a.pointer, sel1_a.index, mov_a.pointer, mov_a.index);
         }
         else
         {
-            std::cout<<"bsd";
-
-            if (!aktJ->Kijatszas(sel1_a.pointer,sel1_a.index, mov_a.pointer,mov_a.index))
+            if (aktJ->Kijatszas(sel1_a.pointer, sel1_a.index, mov_a.pointer, mov_a.index))
             {
                 if (fazis == 1)
                 {
@@ -298,7 +310,13 @@ bool Kurzor::kivalaszt(int fazis, Jatekos *aktJ, Jatekos *ellenfelJ, int jatekos
                 }
                 else
                 {
+                    sel1_a.pointer = nullptr;
+                    sel1_a.szint = -1;
+                    return false;
                 }
+            }
+            else
+            {
             }
             /*if (!aktJ->Kijatszas(sel1_a.pointer, mov_a.pointer)) {
                 if (fazis == 1)
@@ -340,11 +358,9 @@ bool Kurzor::kivalaszt(int fazis, Jatekos *aktJ, Jatekos *ellenfelJ, int jatekos
             // Végén: reseteljük a kurzort
             sel1_a.pointer = nullptr;
             sel1_a.szint = -1;
-            mov_a.pointer = nullptr;
-            mov_a.szint = -1;
         }
     }
-    return false;
+    return true;
 }
 
 mozgo &Kurzor::getMov()

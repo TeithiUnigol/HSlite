@@ -87,7 +87,7 @@ public:
 
   /// @brief Boss getter
   /// @return 
-  Boss& Getboss();
+  Boss* Getboss();
 
   /// @brief Tároló getter
   /// @param tipus 

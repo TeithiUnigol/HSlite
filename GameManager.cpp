@@ -416,7 +416,7 @@ void GameManager::printGame()
     econio_gotoxy(0, y++);
     cout << "Mana: " << j1.getMana();
 
-    Kartya *b1 = &j2.Getboss();
+    Kartya *b1 = j2.Getboss();
     KartyaKiir((screenW - blokkW) / 2, y, b1, false, kurz.getSel1().pointer == b1, kurz.getMov().szint == 0);
     // KartyaKiir((screenW - blokkW) / 2, y, &j1.Getboss(), false, false, false);
 
@@ -438,7 +438,7 @@ void GameManager::printGame()
     printTarolo(y, blokkH, j2.getTarolo(TaroloTipus::Kez), true, 1);
     y += 3 + 2 + blokkH;
 
-    Kartya *b2 = &j2.Getboss();
+    Kartya *b2 = j2.Getboss();
     KartyaKiir((screenW - blokkW) / 2, y, b2, false, kurz.getSel1().pointer == b2, kurz.getMov().szint == 5);
     y += 3 + 2 + blokkH;
     econio_gotoxy(0, y++);
@@ -452,7 +452,7 @@ void GameManager::printGame()
 
     cout << "Jatekos 2";
     changeBG(black);
-    cout << "movszint:" << kurz.getMov().szint << "\nindex:" << kurz.getMov().index;
+    cout << "\nmovszint:" << kurz.getMov().szint << "\nindex:" << kurz.getMov().index<<"\n ikon:"<<kurz.getMov().pointer->getIkon();
 }
 
 //------------Játéklogika--------------
@@ -460,11 +460,14 @@ void GameManager::printGame()
 void GameManager::kivalaszt()
 {
     
-    bool rossz = kurz.kivalaszt(fazis, JatekosKivalaszt(jatekos), JatekosKivalaszt(1 - jatekos), jatekos);
-    if (!rossz)
+    bool sikeres = kurz.kivalaszt(fazis, JatekosKivalaszt(jatekos), JatekosKivalaszt(1 - jatekos), jatekos);
+    if (!sikeres)
     {
         econio_clrscr();
+        changeTxt(red);
         cout<<"Nem lehet a kivalasztott helyrol a kivalasztott helyre kartyat kijatszani vagy keves a rendelkezesre allo mana.";
+        econio_sleep(2);
+        changeTxt(white);
     }
     
     /*if (kurz.getSel1().pointer == nullptr) {
@@ -561,14 +564,24 @@ void GameManager::kovFazis()
         if (jatekos == 0)
         {
             kurz.getMov().szint = 1;
+            kurz.getMov().pointer = j1.getTarolo(TaroloTipus::Kez)[0];
             j1.ujKor();
         }
         else
         {
             kurz.getMov().szint = 4;
+            kurz.getMov().pointer = j2.getTarolo(TaroloTipus::Kez)[0];
             j2.ujKor();
         }
-        fazis = 0;
+        fazis = 1;
+    }else{
+        if (jatekos == 0)
+        {   
+            kurz.getMov().szint = 1-fazis;
+        }else{
+            kurz.getMov().szint = fazis+3;
+            kurz.getMov().pointer = fazis==1?j2.getTarolo(TaroloTipus::Kez)[0]:j2.getTarolo(TaroloTipus::Minionok)[0];
+        }
     }
 }
 
@@ -700,7 +713,7 @@ void GameManager::loadPakli()
     {
         throw "Helytelen bemenetfile";
     }
-
+    kurz = Kurzor(&j1,&j2);
     File.close();
 }
 
