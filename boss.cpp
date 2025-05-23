@@ -33,7 +33,7 @@ void Boss::tartalomkiir(int xBehuz,int Ykezd,bool inKez){
     int y = Ykezd;
     if(inKez){econio_gotoxy(xBehuz,y++);std::cout << "Man: " << manaKoltseg;}
     econio_gotoxy(xBehuz,y++);
-    std::cout<<"HP: "<<hp;
+    std::cout<<"HP: "<<hp<<"/"<<maxHp;;
     econio_gotoxy(xBehuz,y++);
     std::cout<<"SPEC: "<<specialSebzes;
 

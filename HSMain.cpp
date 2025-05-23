@@ -12,7 +12,7 @@
 #include <iostream>
 
 #ifndef CPORTA
-//#define CPORTA
+#define CPORTA
 #endif
 
 int main()

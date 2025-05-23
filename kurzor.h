@@ -98,7 +98,7 @@ class Kurzor
     /// @brief Második fázis mozgás
     /// Ekkor történik a minionokkal illetve a bossal való támadás
     /// @param ir inputnak kapott lépés irány
-    void fazis2Lepes(irany ir,int jatekos);
+    void fazis2Lepes(irany ir,int jatekos,Jatekos* aktJ);
 
     /// @brief A megfelelő szinten levő kártya kiválasztása
     /// A meghatározott kártyára állítja a movot

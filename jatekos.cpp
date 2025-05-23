@@ -39,9 +39,13 @@ void Jatekos::kezfeltolt()
 
     while (kez.getMeret() != kez.getKapacitas() && huzo.getMeret() > 0)
     {
-        Kartya *temp = huzo.kihuz(huzo.getMeret() - 1);
-        kez.berak(temp, index);
-        delete temp;
+        if (kez[index]->getIkon() == ' ')
+        {
+            Kartya *temp = huzo.kihuz(huzo.getMeret() - 1);
+            kez.berak(temp, index);
+            delete temp;
+        }
+
         ++index;
     }
 }
@@ -51,12 +55,22 @@ void Jatekos::ujKor()
     boss.reaktiv();
     for (size_t i = 0; i < minionok.getKapacitas(); i++)
     {
-        Minion *M = dynamic_cast<Minion *>(minionok[i]);
-        if (M != nullptr)
-        {
-            M->reaktiv();
-        }
+        minionok[i]->reaktiv();
     }
+
+    /*if (huzo.getMeret()<kez.getKapacitas()-kez.getMeret())
+    {
+        try
+        {
+            huzopakliKever();
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+
+    }*/
+
     kezfeltolt();
     ++maxMana;
     mana = maxMana;
@@ -78,19 +92,14 @@ bool Jatekos::Kijatszas(Kartya *k1, size_t index1, Kartya *k2, size_t index2)
         mana -= k1->getMana();
 
         Kartya *kijatszott = kez.kihuz(index1);
-        try
-        {
-            minionok.berak(kijatszott, index2);
-            delete kijatszott;
-        }
-        catch (...)
-        {
-            return false;
-        }
+        minionok.berak(kijatszott, index2);
+        delete kijatszott;
 
         return true;
-    }else if(!k1->isMinion()&& k2->getIkon() != ' ' && k1->getMana() <= mana){
-        if (k1->kijatszas(&mana,k2))
+    }
+    else if (!k1->isMinion() && k2->getIkon() != ' ' && k1->getMana() <= mana)
+    {
+        if (k1->kijatszas(&mana, k2))
         {
             Kartya *kijatszott = kez.kihuz(index1);
             delete kijatszott;

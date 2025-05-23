@@ -123,7 +123,7 @@ void Minion::tartalomkiir(int xBehuz, int Ykezd, bool inKez)
         std::cout << "Man: " << manaKoltseg;
     }
     econio_gotoxy(xBehuz, y++);
-    std::cout << "HP: " << hp;
+    std::cout << "HP: " << hp<<"/"<<maxHp;
     econio_gotoxy(xBehuz, y++);
     std::cout << "ERO: " << ero;
     econio_gotoxy(xBehuz, y++);

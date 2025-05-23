@@ -411,7 +411,20 @@ void GameManager::printGame()
 
     cout << "Jatekos 2";
     changeBG(black);
-    cout << "\nmovszint:" << kurz.getMov().szint << "\nindex:" << kurz.getMov().index << "\n ikon:" << kurz.getMov().pointer->getIkon();
+
+
+    cout << "\nJ1Huzo:" <<j1.getTarolo(TaroloTipus::Huzo).getMeret()<<"/"<<j1.getTarolo(TaroloTipus::Huzo).getKapacitas()<<std::endl;
+    cout << "J2Huzo:" <<j2.getTarolo(TaroloTipus::Huzo).getMeret()<<"/"<<j2.getTarolo(TaroloTipus::Huzo).getKapacitas();
+
+    cout << "\nJ1Minion:" <<j1.getTarolo(TaroloTipus::Minionok).getMeret()<<"/"<<j1.getTarolo(TaroloTipus::Minionok).getKapacitas()<<std::endl;
+    cout << "J2Minion:" <<j2.getTarolo(TaroloTipus::Minionok).getMeret()<<"/"<<j2.getTarolo(TaroloTipus::Minionok).getKapacitas();
+
+    cout << "\nJ1Kez:" <<j1.getTarolo(TaroloTipus::Kez).getMeret()<<"/"<<j1.getTarolo(TaroloTipus::Kez).getKapacitas()<<std::endl;
+    cout << "J2Kez:" <<j2.getTarolo(TaroloTipus::Kez).getMeret()<<"/"<<j2.getTarolo(TaroloTipus::Kez).getKapacitas();
+    //cout << "\nselP:" <<kurz.getSel1().pointer->getIkon();
+
+
+
 }
 
 //------------Játéklogika--------------
@@ -427,6 +440,15 @@ void GameManager::kivalaszt()
         econio_sleep(1.5);
         changeTxt(white);
     }
+    if (j1.Getboss()->getIkon()==' ')
+    {
+        endGameScreen(1);
+    }else if (j2.Getboss()->getIkon() == ' ')
+    {
+        endGameScreen(0);
+    }
+    
+    
 }
 
 bool GameManager::endGameScreen(int gyoz)
@@ -443,25 +465,13 @@ bool GameManager::endGameScreen(int gyoz)
     {
         cout << "Jatekos 2 gyozott\n";
     }
-    cout << "Uj jatek inditasa: E gomb, Kilepes: X gomb";
+    cout << "Nyomj egy gombot a kilepeshez.";
     int isRunning = 1;
-    int input;
     while (isRunning)
     {
         if (econio_kbhit())
         {
-            input = econio_getch();
-            if (input == 'x')
-            {
-                isRunning = false;
-                econio_normalmode();
-                return false;
-            }
-            else if (input == 'e')
-            {
-                isRunning = false;
-                return true;
-            }
+            isRunning = false;
         }
     }
     return false;
@@ -470,6 +480,7 @@ bool GameManager::endGameScreen(int gyoz)
 void GameManager::kovFazis()
 {
     kurz.getSel1().pointer = nullptr;
+    kurz.getSel1().szint = -1;
     fazis += 1;
     if (fazis == 1)
     {
@@ -487,7 +498,8 @@ void GameManager::kovFazis()
         jatekos = (jatekos + 1) % 2;
         kurz.getMov().szint = jatekos == 0 ? 1 : 4;
         kurz.getMov().pointer = jatekos == 0 ? j1.getTarolo(TaroloTipus::Kez)[0] : j2.getTarolo(TaroloTipus::Kez)[0];
-        jatekos==0?j1.ujKor():j2.ujKor();
+        jatekos==1?j2.ujKor():j1.ujKor();
+
 
         fazis = 1;
     }

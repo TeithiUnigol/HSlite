@@ -87,6 +87,8 @@ bool Kartya::getAktiv(){
     return true;
 }
 
+void Kartya::reaktiv(){}
+
 
 void Kartya::mentes(std::ostream& os){
     os << "KARTYA \"" << nev << "\" " << manaKoltseg << " " << ikon << std::endl;

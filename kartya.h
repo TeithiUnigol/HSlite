@@ -86,7 +86,7 @@ public:
   /// @brief Betöltés
   /// @param os A megadott folyam, ahova menteni szeretnénk.
   virtual void betoltes(std::istream &is);
-
+  virtual void reaktiv();
   virtual void tartalomkiir(int xBehuz, int Ykezd, bool inKez);
 
   /// @brief Kártya destruktor
