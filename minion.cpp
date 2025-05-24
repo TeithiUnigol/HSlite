@@ -78,10 +78,10 @@ void Minion::tamadas(Kartya *celpont)
     }
 }
 
-void Minion::mentes(std::ostream &os)
+/*void Minion::mentes(std::ostream &os)
 {
     os << "MINION \"" << nev << "\" " << manaKoltseg << " " << ikon << " " << hp << " " << maxHp << " " << aktiv << " " << ero << " " << vedelem << std::endl;
-}
+}*/
 void Minion::betoltes(std::istream &is)
 {
     Karakter::betoltes(is);
@@ -97,16 +97,6 @@ void Minion::reaktiv()
 {
     this->aktiv = true;
     this->vedelem = 0;
-}
-
-int Minion::minionVedelem()
-{
-    return this->vedelem;
-}
-
-int Minion::minionhp()
-{
-    return this->hp;
 }
 
 bool Minion::isMinion()

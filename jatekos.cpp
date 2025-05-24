@@ -4,7 +4,7 @@
 Jatekos::Jatekos() : maxMana(0), mana(0), boss(), kez(0), huzo(0), minionok(0), csomag(0) {}
 
 Jatekos::Jatekos(const Boss &boss, const KartyaTarolo &huzoPakli, const KartyaTarolo &kezPakli, const KartyaTarolo &MinionPakli, const KartyaTarolo &csomag, int maxMana, int mana) : maxMana(maxMana), mana(mana), boss(boss), kez(kezPakli), huzo(huzoPakli), minionok(MinionPakli), csomag(csomag) {}
-Jatekos::Jatekos(const Boss &boss, size_t MinionPakliMeret, size_t kezMeret, const KartyaTarolo &csom, int maxMana) : maxMana(maxMana), mana(maxMana), boss(boss), kez(kezMeret), huzo(csom), minionok(MinionPakliMeret), csomag(csom)
+Jatekos::Jatekos(const Boss &boss, size_t MinionPakliMeret, size_t kezMeret, const KartyaTarolo &csom, int maxMana) : maxMana(maxMana), mana(maxMana), boss(boss), kez(kezMeret), huzo(csom.getMeret()), minionok(MinionPakliMeret), csomag(csom)
 {
     huzopakliKever();
 }
@@ -14,23 +14,6 @@ Jatekos::Jatekos(const Jatekos &j) : maxMana(j.maxMana), mana(j.mana), boss(j.bo
     huzo = j.huzo;
     minionok = j.minionok;
     csomag = j.csomag;
-}
-
-Jatekos &Jatekos::operator=(const Jatekos &forras)
-{
-    if (this == &forras)
-        return *this;
-
-    maxMana = forras.maxMana;
-    mana = forras.mana;
-    boss = forras.boss;
-
-    kez = forras.kez;
-    huzo = forras.huzo;
-    minionok = forras.minionok;
-    csomag = forras.csomag;
-
-    return *this;
 }
 
 void Jatekos::kezfeltolt()
@@ -58,19 +41,6 @@ void Jatekos::ujKor()
         minionok[i]->reaktiv();
     }
 
-    /*if (huzo.getMeret()<kez.getKapacitas()-kez.getMeret())
-    {
-        try
-        {
-            huzopakliKever();
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << '\n';
-        }
-
-    }*/
-
     kezfeltolt();
     ++maxMana;
     mana = maxMana;
@@ -79,6 +49,7 @@ void Jatekos::ujKor()
 void Jatekos::huzopakliKever()
 {
     huzo.kiurites();
+
     for (size_t i = 0; i < csomag.getMeret(); i++)
     {
         huzo.randomBeszur(csomag[i]);
@@ -87,7 +58,7 @@ void Jatekos::huzopakliKever()
 
 bool Jatekos::Kijatszas(Kartya *k1, size_t index1, Kartya *k2, size_t index2)
 {
-    if (k1->isMinion() && k2->getIkon() == ' ' && k1->getMana() <= mana)
+    if (k1!=nullptr&&k2!=nullptr&&k1->isMinion() && k2->getIkon() == ' ' && k1->getMana() <= mana)
     {
         mana -= k1->getMana();
 
@@ -95,6 +66,7 @@ bool Jatekos::Kijatszas(Kartya *k1, size_t index1, Kartya *k2, size_t index2)
         minionok.berak(kijatszott, index2);
         delete kijatszott;
 
+        
         return true;
     }
     else if (!k1->isMinion() && k2->getIkon() != ' ' && k1->getMana() <= mana)
@@ -136,7 +108,7 @@ int Jatekos::getMana() const
 }
 
 // Jatekos(const Boss& boss,const KartyaTarolo& huzoPakli,const KartyaTarolo& kezPakli,const KartyaTarolo& MinionPakli,const KartyaTarolo& csomag,int maxMana,int mana);
-void Jatekos::mentes(std::ostream &os)
+/*void Jatekos::mentes(std::ostream &os)
 {
     os << csomag.getMeret() << " " << minionok.getKapacitas() << " " << kez.getKapacitas() << " " << mana << " " << minionok.getKapacitas() << std::endl;
     boss.mentes(os);
@@ -145,7 +117,7 @@ void Jatekos::mentes(std::ostream &os)
         csomag[i]->mentes(os);
     }
     os << "MINION" << std::endl;
-}
+}*/
 Jatekos::~Jatekos()
 {
     csomag.kiurites();

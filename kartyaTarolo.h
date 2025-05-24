@@ -16,9 +16,9 @@ class KartyaTarolo{
     Kartya** tomb;
     size_t kapacitas;
     size_t meret;
-    public:
     /// @brief tömb elemeinek nullpointeresítése
     void tombTorol();
+    public:
     /// @brief Tároló alapkonstruktora
     KartyaTarolo();
     /// @brief Kártya tároló kapacítás szerinti konstruktora.
@@ -36,6 +36,7 @@ class KartyaTarolo{
     void randomBeszur(Kartya* kartya);
     /// @brief Soros feltöltés
     /// Csak sorba feltöltött tároló esetén működik (pl fájlbetöltésnél)
+    /// Nem ellenőrzi, hogy valóban üres kártya van ott, vagy van-e ott valami
     /// @param kartya A következő elem
     ///@param index A hely ahova berakja az adott elemet
     void berak(Kartya* kartya,size_t index);

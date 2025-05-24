@@ -90,9 +90,9 @@ bool Kartya::getAktiv(){
 void Kartya::reaktiv(){}
 
 
-void Kartya::mentes(std::ostream& os){
+/*void Kartya::mentes(std::ostream& os){
     os << "KARTYA \"" << nev << "\" " << manaKoltseg << " " << ikon << std::endl;
-}
+}*/
 
 void Kartya::betoltes(std::istream& is){
     is >> std::ws;

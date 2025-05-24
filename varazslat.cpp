@@ -23,10 +23,10 @@ Kartya *Varazslat::clone()
     return new Varazslat(*this);
 }
 
-void Varazslat::mentes(std::ostream &os)
+/*void Varazslat::mentes(std::ostream &os)
 {
     os << "VARAZSLAT \"" << nev << "\" " << manaKoltseg << " " << ikon << " " << sebzes << " " << gyogyitas << " " << vedelem << std::endl;
-}
+}*/
 
 void Varazslat::betoltes(std::istream &is)
 {

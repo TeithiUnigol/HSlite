@@ -33,7 +33,7 @@ struct mozgo
 {
     Kartya *pointer;
     size_t index;
-    int szint;//TODO átírni
+    int szint;
     mozgo()
     {
         pointer = nullptr;

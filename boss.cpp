@@ -18,9 +18,9 @@ void Boss::tamadas(Kartya *celpont){
 }
 
 
-void Boss::mentes(std::ostream& os){
+/*void Boss::mentes(std::ostream& os){
     os << "BOSS \"" << nev << "\" " << manaKoltseg << " " << ikon << " " << hp <<" " << maxHp << " " << aktiv << " " << specialSebzes<<std::endl;
-}
+}*/
 void Boss::betoltes(std::istream& is){
     Karakter::betoltes(is);
     is >> specialSebzes;

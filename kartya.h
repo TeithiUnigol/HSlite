@@ -55,13 +55,19 @@ public:
   /// @param os Az output stream ahova kiírja
   void ikonKiir(std::ostream &os) const;
 
+  /// @brief Visszaadja a karakter ikonját 
+  /// Ezzel ellenőrzi, hogy a karakter ténylegesen létezik. Ezt egy whitespace karakterrel jelöli.
   char getIkon() const;
+
+  /// @brief Virtuális függvények a karakterekhez 
   virtual int getElet() const;
-
+/// @brief Virtuális függvények a karakterekhez
   virtual void vedelemValt(int d);
+  /// @brief Virtuális függvények a karakterekhez
   virtual bool regen(int hp);
-
+/// @brief Virtuális függvények a karakterekhez
   virtual void sebzodik(int sebzes, Kartya *tamado);
+  /// @brief Virtuális függvények a karakterekhez
   virtual void tamadas(Kartya *celpont);
 /// @brief Tartalom ürítése
   void ures();
@@ -82,11 +88,13 @@ public:
 
   /// @brief Mentés
   /// @param os A megadott folyam, ahova menteni szeretnénk.
-  virtual void mentes(std::ostream &os);
+  //virtual void mentes(std::ostream &os);
   /// @brief Betöltés
   /// @param os A megadott folyam, ahova menteni szeretnénk.
   virtual void betoltes(std::istream &is);
+  /// @brief Virtuális függvények a karakterekhez
   virtual void reaktiv();
+  /// @brief Virtuális függvények a karakterek kiírásához
   virtual void tartalomkiir(int xBehuz, int Ykezd, bool inKez);
 
   /// @brief Kártya destruktor

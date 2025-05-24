@@ -15,7 +15,7 @@ void Karakter::sebzodik(int sebzes, Kartya *tamado)
     hp -= sebzes;
     if (hp <= 0)
     {
-        ures();
+        halal();
     }
     
 }
@@ -68,13 +68,9 @@ void Karakter::halal()
 }
 
 
-int Karakter::getElet()const{
-    return hp;
-}
-
-void Karakter::mentes(std::ostream& os){
+/*void Karakter::mentes(std::ostream& os){
     os << "KARAKTER \"" << nev << "\" " << manaKoltseg << " " << ikon << " " << hp <<" " << maxHp << " " << aktiv <<std::endl;
-}
+}*/
 
 void Karakter::betoltes(std::istream& is){
     Kartya::betoltes(is);

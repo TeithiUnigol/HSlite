@@ -60,19 +60,10 @@ public:
   /// A minion minden újraaktiválásnál elveszíti a védelmét is.
   void reaktiv();
 
-
-  /// @brief Védelem getter
-  /// Tesztekzez használt getter
-  /// @return védelem
-  int minionVedelem();
-  /// @brief élet getter
-  /// Tesztekzez használt getter
-  ///  @return minion élete
-  int minionhp();
   /// @brief Karakterből származó minion lekérő
   /// @return true, mivel minion
   bool isMinion();
-  void mentes(std::ostream& os) override;
+  //void mentes(std::ostream& os) override;
   void betoltes(std::istream &is) override;
   virtual void tartalomkiir(int xBehuz,int Ykezd,bool inKez);
   Kartya* clone() override;

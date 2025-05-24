@@ -65,8 +65,8 @@ Jatekos *GameManager::JatekosKivalaszt(int j)
     }
 }
 
-GameManager::GameManager(size_t screenW, size_t blokkW, size_t blokkH, size_t separatorS, std::string pakliforras, std::string GameForras)
-    : screenW(screenW), blokkW(blokkW), blokkH(blokkH), separatorS(separatorS) {}
+GameManager::GameManager(size_t screenW, size_t blokkW, size_t blokkH, size_t separatorS, std::string pakliforras)
+    : screenW(screenW), blokkW(blokkW), blokkH(blokkH), separatorS(separatorS),pakliFile(pakliforras) {}
 GameManager::GameManager(const Jatekos &jat1, const Jatekos &jat2, size_t screenW, size_t blokkW, size_t blokkH, size_t separatorS)
     : j1(jat1), j2(jat2), kurz(&j1, &j2), screenW(screenW), blokkW(blokkW), blokkH(blokkH), separatorS(separatorS) {}
 
@@ -139,6 +139,8 @@ void GameManager::MenuSelect()
                         cout << "Sikertelen beolvasas";
                         econio_sleep(1.5);
                         changeTxt(white);
+                        econio_clrscr();
+                        return;
                     }
                     j1.kezfeltolt();
                     j2.kezfeltolt();
@@ -421,7 +423,9 @@ void GameManager::printGame()
 
     cout << "\nJ1Kez:" <<j1.getTarolo(TaroloTipus::Kez).getMeret()<<"/"<<j1.getTarolo(TaroloTipus::Kez).getKapacitas()<<std::endl;
     cout << "J2Kez:" <<j2.getTarolo(TaroloTipus::Kez).getMeret()<<"/"<<j2.getTarolo(TaroloTipus::Kez).getKapacitas();
-    //cout << "\nselP:" <<kurz.getSel1().pointer->getIkon();
+    if(kurz.getSel1().pointer!=nullptr){
+        cout<< "\nselP:" <<kurz.getSel1().pointer->getIkon();
+    }
 
 
 
@@ -436,7 +440,7 @@ void GameManager::kivalaszt()
     {
         econio_clrscr();
         changeTxt(red);
-        cout << "Nem lehet a kivalasztott helyrol a kivalasztott helyre kartyat kijatszani vagy keves a rendelkezesre allo mana.";
+        cout << "Nem lehet a kivalasztott helyrol a kivalasztott helyre kartyat kijatszani vagy keves a rendelkezesre allo mana."<<std::endl;
         econio_sleep(1.5);
         changeTxt(white);
     }
@@ -496,46 +500,23 @@ void GameManager::kovFazis()
     else if (fazis == 3)
     {
         jatekos = (jatekos + 1) % 2;
+        jatekos==1?j2.ujKor():j1.ujKor();
         kurz.getMov().szint = jatekos == 0 ? 1 : 4;
         kurz.getMov().pointer = jatekos == 0 ? j1.getTarolo(TaroloTipus::Kez)[0] : j2.getTarolo(TaroloTipus::Kez)[0];
-        jatekos==1?j2.ujKor():j1.ujKor();
 
 
         fazis = 1;
     }
 }
 
-/*
-void GameManager::savePakli()
-{
-    std::ofstream File(pakliFile);
-    File << "J1 ";
-    j2->mentes(File);
-
-    File << "J2 ";
-    j1->mentes(File);
-    File << "END";
-    File.close();
-}*/
-/*
-void GameManager::saveGame()
-{
-    std::ofstream File(mentesFile);
-    File << "J1 ";
-    j2.mentes(File);
-
-    File << "J2 ";
-    j1.mentes(File);
-    File << "END";
-    File.close();
-}
-void GameManager::loadGame()
-{
-}*/
 
 void GameManager::loadPakli()
 {
-    std::ifstream File("pakli.txt");
+    std::ifstream File(pakliFile.c_str());
+
+    if (!File.is_open()) {
+        throw "Sikertelen filemegnyitas";
+    }
 
     std::string tipus;
     File >> tipus;
@@ -703,7 +684,7 @@ void GameManager::game()
             case 'l':
                 kovFazis();
                 break;
-            case 'E':
+            case 'e':
             case '\n':
             case '\r':
                 kivalaszt();

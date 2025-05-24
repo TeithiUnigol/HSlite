@@ -39,7 +39,7 @@ public:
   /// @param kiv a célpont
   /// @return skeres volt-e a kijátszás
   bool kijatszas(int *mana, Kartya *kiv);
-  void mentes(std::ostream &os) override;
+  //void mentes(std::ostream &os) override;
   void betoltes(std::istream &is) override;
   void tartalomkiir(int xBehuz, int Ykezd, bool inKez) override;
   Kartya *clone() override;

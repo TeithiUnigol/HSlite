@@ -15,7 +15,10 @@
 
 class Karakter : public Kartya
 {
-protected:
+  protected:
+  /// @brief Halál
+  /// Ha elfogyott az élete az adott karakternek, üres karakterré válik.
+  void halal();
   int hp;
   int maxHp;
   bool aktiv;
@@ -59,11 +62,9 @@ public:
   /// @param karakter Amelyik karakter adatait másolja
   /// @return Aktuális objektum referencia
   Karakter &operator=(const Karakter &karakter);
-  /// @brief Halál
-  /// Ha elfogyott az élete az adott karakternek, üres karakterré válik.
-  void halal();
   
-  virtual void mentes(std::ostream& os) override;
+  
+  //virtual void mentes(std::ostream& os) override;
   virtual void betoltes(std::istream& is)override;
 
   virtual void tartalomkiir(int xBehuz,int Ykezd,bool inKez)override;
@@ -72,7 +73,7 @@ public:
 
   /// @brief kiíráshoz szükséges élet lekérés
   /// @return 
-  int getElet()const;
+  //int getElet()const;
   
 };
 #endif

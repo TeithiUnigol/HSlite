@@ -41,7 +41,7 @@ public:
   /// @param celpont A célpont
   void tamadas(Kartya *celpont);
 
-  void mentes(std::ostream &os) override;
+  //void mentes(std::ostream &os) override;
   void betoltes(std::istream &is) override;
 
 void tartalomkiir(int xBehuz,int Ykezd,bool inKez);

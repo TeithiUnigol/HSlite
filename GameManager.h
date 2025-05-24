@@ -53,11 +53,7 @@ class GameManager
     /// megadja melyik az aktív játékos
     int jatekos;
     int fazis;
-    
-    
-    
-    std::string pakliFile;
-    std::string mentesFile;
+
     
     Jatekos j1;
     Jatekos j2;
@@ -76,6 +72,8 @@ class GameManager
     /// két blokk közti távolság
     const size_t separatorS;
     
+    /// @brief Forrásfile
+    std::string pakliFile;
     //------------Segédfüggvények--------------
     void changeBG(colors color);
     void changeTxt(colors color);
@@ -89,10 +87,15 @@ class GameManager
     
     
     private:
+    /// @brief Egy kártya kiírása
     void KartyaKiir(int xBehuz, int yKezd,Kartya* k,bool inkez,bool isSel,bool isMov);
+    /// @brief Egy egész sor tároló kiírása
     void printTarolo(int yKezd,int yMeret,KartyaTarolo& tarolo,bool isKez,int melyikJatekose);
+    /// @brief Játékvége üzenet
     bool endGameScreen(int gyoz);
+    /// @brief kártya vízszintes szegélye
     void felsoVonal(int xBehuz,int yKezd);
+    /// @brief Egy kártya horizontáslis szegélye
     void belsoFal(int behuzasX,int yKezd);
     /// @brief Üres kártya minta 
     /// @param xBehuz mennyivel legyen beljebb
@@ -108,17 +111,14 @@ class GameManager
     void kovFazis();
     
     public:
-    GameManager(size_t screenW, size_t blokkW,size_t blokkH, size_t separatorS,std::string pakliforras,std::string GameForras);
+    GameManager(size_t screenW, size_t blokkW,size_t blokkH, size_t separatorS,std::string pakliforras);
     GameManager(const Jatekos& jat1,const Jatekos &jat2, size_t screenW, size_t blokkW,size_t blokkH, size_t separatorS);
+    /// @brief Játékvezérlő logika
     void game();
+    /// @brief Játék grafikus megjelenítése
     void printGame();
-    //------------Mentés logika--------------
-    //void savePakli(); Csak a forrás pakli létrehozásához létezett
+    //------------filekezelés logika--------------
     void loadPakli();
-    /*void saveGame();
-    void loadGame();*/
-    
-    
     ~GameManager();
 };
 

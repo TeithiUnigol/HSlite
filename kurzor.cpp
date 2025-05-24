@@ -59,26 +59,20 @@ void Kurzor::fazis1Lepes(irany ir, int jatekos, Jatekos *aktJ)
         // Kártya elhelyezése
         /// Ha minion kártyáról beszélünk, azt kizárólag a saját minion kártyái közötti üres helyekre rakhatja
         ///  Egy minion esetén nincs értelme a fel és le mozgásnak
-        econio_clrscr();
-        std::cout<<"kijatszas 2";
-        std::cout<<sel1_a.pointer->getIkon();
         if (sel1_a.pointer->isMinion())
         {
-            std::cout << "minionLerak";
             try
             {
                 MinionLerakas(ir, mov_a.index, jatekos, aktJ);
             }
             catch (...)
-            {
+            {//bár be van védve
                 std::cout << "nullpointer";
                 econio_sleep(2);
             }
         }
         else // mágia
         {
-            std::cout << "magiaLerak";
-
             size_t maxIndex = aktJ->getTarolo(TaroloTipus::Minionok).getKapacitas();
             try
             {
@@ -357,8 +351,9 @@ bool Kurzor::kivalaszt(int fazis, Jatekos *aktJ, Jatekos *ellenfelJ, int jatekos
             if (!aktJ->Kijatszas(sel1_a.pointer, sel1_a.index, mov_a.pointer, mov_a.index))
             {
                 siker = false;
-            }
-            if (mov_a.pointer->getIkon()==' ')
+            }else {
+                SzintDekoder();
+                if (mov_a.pointer->getIkon()==' ')
                 {
                     if (mov_a.szint==2)
                     {
@@ -368,6 +363,7 @@ bool Kurzor::kivalaszt(int fazis, Jatekos *aktJ, Jatekos *ellenfelJ, int jatekos
                         delete p2->getTarolo(TaroloTipus::Minionok).kihuz(mov_a.index);
                     }
                 }
+            }
         }
         else
         {

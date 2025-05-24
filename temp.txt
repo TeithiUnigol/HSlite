@@ -1,0 +1,191 @@
+#include "memtrace.h"
+#include "gtest_lite.h"
+#include "kartya.h"
+#include "karakter.h"
+#include "minion.h"
+#include "boss.h"
+#include "kartyaTarolo.h"
+#include "jatekos.h"
+#include "kurzor.h"
+#include "varazslat.h"
+#include "GameManager.h"
+#include <iostream>
+
+#ifndef CPORTA
+#define CPORTA
+#endif
+
+int main()
+{
+#ifdef CPORTA
+     GTINIT(std::cout);
+
+     std::cout << "\n=== Kartya tesztek ===\n"
+               << std::endl;
+     TEST(Kartya, isminion)
+     {
+         Kartya kartya("kobold", 2, 'k');
+         EXPECT_FALSE(kartya.isMinion());
+     }
+     ENDM
+     TEST(Kartya, Konstruktorok)
+     {
+         std::stringstream strs;
+         Kartya kartya("Tuzgolyo", 3, 'f');
+         kartya.nevKiir(strs, kartya.nevMeret());
+         kartya.ikonKiir(strs);
+         EXPECT_STREQ("Tuzgolyo3f", strs.str().c_str());
+         Kartya l = kartya;
+         std::stringstream strs2;
+         l.nevKiir(strs2, l.nevMeret());
+         l.ikonKiir(strs2);
+         EXPECT_STREQ("Tuzgolyo3f", strs2.str().c_str());
+         Kartya m;
+         std::stringstream strs3;
+         m.nevKiir(strs3, m.nevMeret());
+         m.ikonKiir(strs3);
+         EXPECT_STREQ(" ", strs3.str().c_str());
+     }
+     ENDM
+
+     // --- Saját tesztek a KartyaTarolo-hoz ---
+     std::cout << "\n=== KartyaTarolo tesztek ===\n" << std::endl;
+
+     // 1. Üres inicializálás és kapacitás ellenőrzés
+     TEST(KartyaTarolo, UresInicializalas) {
+         KartyaTarolo t(5);
+         EXPECT_EQ(t.getMeret(), 0);
+         EXPECT_EQ(t.getKapacitas(), 5);
+     } ENDM
+
+     // 2. Beszúrás és kivétel, memóriaszivárgás ellenőrzés
+     TEST(KartyaTarolo, BeszurasKihuzas) {
+         KartyaTarolo t(3);
+         Kartya* k1 = new Kartya("Minion1", 1, 'M');
+         t.berak(k1, 0);
+         EXPECT_EQ(t.getMeret(), 1);
+         Kartya* k2 = new Kartya("Varazs", 2, 'V');
+         t.berak(k2, 1);
+         EXPECT_EQ(t.getMeret(), 2);
+         Kartya* kivett = t.kihuz(0);
+         EXPECT_EQ(kivett, k1);
+         delete kivett;
+         EXPECT_EQ(t.getMeret(), 1);
+         delete t.kihuz(0); // k2 felszabadítása
+         EXPECT_EQ(t.getMeret(), 0);
+     } ENDM
+
+     // 3. Kapacitás túllépés kezelése (hibakezelés)
+     TEST(KartyaTarolo, KapacitasTullepes) {
+         KartyaTarolo t(1);
+         Kartya* k1 = new Kartya("A", 1, 'A');
+         t.berak(k1, 0);
+         EXPECT_EQ(t.getMeret(), 1);
+         Kartya* k2 = new Kartya("B", 2, 'B');
+         // Helytelen beszúrás, hibát várunk (nem biztos, hogy kivételtdob, ezért nem EXPECT_THROW)
+         bool kiv = false;
+         try {
+             t.berak(k2, 1); // Hibás index
+         } catch(...) { kiv = true; }
+         EXPECT_EQ(kiv || t.getMeret() == 1, true);
+         delete t.kihuz(0);
+     } ENDM
+
+     // 4. "Zombi" helyek megszüntetése, helyfelszabadítás teszt
+     TEST(KartyaTarolo, ZombiHelyekEltavolitasa) {
+         KartyaTarolo t(2);
+         Kartya* m1 = new Kartya("M1", 1, 'M');
+         Kartya* m2 = new Kartya("M2", 1, 'M');
+         t.berak(m1, 0);
+         t.berak(m2, 1);
+         // m1 "meghal" -> egyszerűen kivesszük a tárolóból
+         Kartya* torolt = t.kihuz(0);
+         EXPECT_EQ(t.getMeret(), 1);
+         delete torolt;
+         Kartya* m3 = new Kartya("M3", 1, 'M');
+         t.berak(m3, 1); // Most már befér
+         EXPECT_EQ(t.getMeret(), 2);
+         delete t.kihuz(0);
+         delete t.kihuz(0);
+     } ENDM
+
+     // --- Saját tesztek a Kurzorhoz ---
+     std::cout << "\n=== Kurzor tesztek ===\n" << std::endl;
+
+     TEST(Kurzor, AlapKezdoAllapot) {
+         Kurzor k;
+         EXPECT_EQ(k.getMov().pointer, nullptr);
+         EXPECT_EQ(k.getMov().index, 0);
+         EXPECT_EQ(k.getMov().szint, -1);
+     } ENDM
+
+     TEST(Kurzor, LepesJobbraBalra) {
+         KartyaTarolo kez(3);
+         Kartya* k1 = new Kartya("K1", 1, 'M');
+         Kartya* k2 = new Kartya("K2", 2, 'M');
+         Kartya* k3 = new Kartya("K3", 3, 'M');
+         kez.berak(k1, 0);
+         kez.berak(k2, 1);
+         kez.berak(k3, 2);
+         Karakter b("boss",0,'b',10,10,true);
+         Boss boss1(b,10);
+         Jatekos j(boss1, 3, 3, kez, 10);
+         Kurzor kurz(&j, &j);
+         kurz.getMov().index = 0;
+         kurz.getMov().pointer = k1;
+         kurz.lepes(jobbra, 1, 0, &j);
+         EXPECT_EQ(kurz.getMov().pointer, k2);
+         kurz.lepes(jobbra, 1, 0, &j);
+         EXPECT_EQ(kurz.getMov().pointer, k3);
+         kurz.lepes(balra, 1, 0, &j);
+         EXPECT_EQ(kurz.getMov().pointer, k2);
+         kurz.lepes(balra, 1, 0, &j);
+         EXPECT_EQ(kurz.getMov().pointer, k1);
+         delete kez.kihuz(0);
+         delete kez.kihuz(0);
+         delete kez.kihuz(0);
+     } ENDM
+
+     TEST(Kurzor, MinionHalalMozgasUtan) {
+         KartyaTarolo minionok(2);
+         Kartya* m1 = new Kartya("M1", 1, 'M');
+         Kartya* m2 = new Kartya("M2", 2, 'M');
+         minionok.berak(m1, 0);
+         minionok.berak(m2, 1);
+         Karakter b("boss",0,'b',10,10,true);
+         Boss boss1(b,10);
+         Jatekos j(boss1, 2, 2, minionok, 10);
+         Kurzor kurz(&j, &j);
+         kurz.getMov().szint = 2;
+         kurz.getMov().index = 0;
+         kurz.getMov().pointer = m1;
+         Kartya* torolt = minionok.kihuz(0);
+         delete torolt;
+         kurz.lepes(jobbra, 1, 0, &j);
+         EXPECT_EQ(kurz.getMov().pointer, m2);
+         delete minionok.kihuz(0);
+     } ENDM
+
+     // --- További tesztek ---
+     TEST(KartyaTarolo, OutOfBounds) {
+         KartyaTarolo t(2);
+         Kartya* k = new Kartya("X", 1, 'X');
+         t.berak(k, 0);
+         bool hibadob = false;
+         try {
+             Kartya* rossz = t.kihuz(3); // rossz index
+             (void)rossz;
+         } catch(...) { hibadob = true; }
+         EXPECT_EQ(hibadob, true);
+         delete t.kihuz(0);
+     } ENDM
+
+     std::cout << "\n=== Tesztek vége ===\n" << std::endl;
+#endif
+
+#ifndef CPORTA
+     GameManager gm(100, 15, 4, 4, "pakli.txt", "jatek.txt");
+     gm.MenuSelect();
+#endif
+     return 0;
+}
